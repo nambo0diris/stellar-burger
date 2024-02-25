@@ -9,10 +9,14 @@ interface ModalProps {
 }
 const Modal:FC<ModalProps> = (props) => {
     const onESCCloseHandler = (event: KeyboardEvent) => {
-        if(event.key === "Escape"){
+        if (event.key === "Escape") {
             props.toCloseModal();
         }
     }
+    const onOverlayClick = () => {
+        props.toCloseModal();
+    }
+
     useEffect(() => {
         document.addEventListener('keydown', onESCCloseHandler);
         return () => {
@@ -21,7 +25,7 @@ const Modal:FC<ModalProps> = (props) => {
     },[]);
 
     return (
-        <ModalOverlay>
+        <ModalOverlay onOverlayClick={onOverlayClick}>
             <div className={`${styles.modal_wrapper} p-10`}>
                 <div className={`${styles.title_wrapper}`}>
                     {props.title && <h1 className={`text text_type_main-large`}>{props.title}</h1>}

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import './App.css';
-import data from "./utils/data";
 import {ParsedDataProps, Product} from "./interfaces/interfaces";
 import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
 import BurgerConstructor from "./components/burger-constructor/burger-constructor";
@@ -9,7 +8,7 @@ import {useGetIngredients} from "./hooks/useGetIngredients";
 
 
 function App() {
-  const {ingredients, isLoading, isError} = useGetIngredients();
+  const {ingredients} = useGetIngredients();
   const productList: Product[] = ingredients;
   const parsedData: ParsedDataProps = productList.reduce((acc, product) => {
     if(!acc[product.type]){

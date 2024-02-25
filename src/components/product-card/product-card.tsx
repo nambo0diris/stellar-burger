@@ -3,6 +3,7 @@ import {ProductCardProps} from "../../interfaces/interfaces";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./product-card.module.css"
 import IngredientDetails from "../modals/ingredient-details/ingredient-details";
+import Modal from "../modals/modal/modal";
 const ProductCard: FC<ProductCardProps> = ({product}) => {
         const [isOpen, setOpen] = useState<boolean>(false);
         const toOpenModal = () => {
@@ -20,7 +21,11 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
                     <div className={"text text_type_main-small"}>{product.name}</div>
                     <Counter count={233} size="small" />
                 </div>
-                {isOpen && <IngredientDetails toCloseModal={toCloseModal} product={product}/>}
+                {
+                    isOpen && <Modal title={"Детали ингрединта"} toCloseModal={toCloseModal}>
+                                <IngredientDetails product={product}/>
+                    </Modal>
+                }
             </>
         )
 }

@@ -33,4 +33,5 @@ export interface BurgerIngredientsProps {
 
 export interface ModalOverlayProps {
     children: ReactNode
+    onOverlayClick:()=>void
 }

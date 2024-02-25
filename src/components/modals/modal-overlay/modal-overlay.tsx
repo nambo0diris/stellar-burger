@@ -10,7 +10,7 @@ const ModalOverlay:FC<ModalOverlayProps> = (props) => {
             {
                 modalRoot &&
                 createPortal(
-                    <div className={styles.modal_overlay}>
+                    <div className={styles.modal_overlay} onClick={props.onOverlayClick}>
                         {props.children}
                     </div>,
                     modalRoot

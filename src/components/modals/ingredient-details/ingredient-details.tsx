@@ -1,16 +1,11 @@
 import React, {FC, SyntheticEvent} from 'react';
-import Modal from "../modal/modal";
 import {Product} from "../../../interfaces/interfaces";
 import styles from "./ingredient-details.module.css"
 interface IngredientDetailsProps {
     product: Product
-    toCloseModal: () => void
 }
-const IngredientDetails: FC<IngredientDetailsProps> = ({product, toCloseModal}) => {
-
-
+const IngredientDetails: FC<IngredientDetailsProps> = ({product}) => {
     return (
-        <Modal title={"Детали ингрединта"} toCloseModal={toCloseModal}>
             <>
                 <img src={product.image_large} alt={product.name} className={styles.ingredient_pic}/>
                 <h1 className={`mt-4 mb-8 text text_type_main-medium`}>{product.name}</h1>
@@ -33,7 +28,6 @@ const IngredientDetails: FC<IngredientDetailsProps> = ({product, toCloseModal}) 
                     </div>
                 </div>
             </>
-        </Modal>
     );
 };
 
