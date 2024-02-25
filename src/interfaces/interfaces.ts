@@ -1,3 +1,5 @@
+import {ReactNode} from "react";
+
 export interface Product {
     calories: number
     carbohydrates: number
@@ -13,18 +15,7 @@ export interface Product {
     _id: string
 }
 export interface ProductCardProps {
-    calories: number
-    carbohydrates: number
-    fat: number
-    image: string
-    image_large: string
-    image_mobile: string
-    name: string
-    price: number
-    proteins: number
-    type: string
-    __v:number
-    _id: string
+    product: Product
     addProduct:(id:string)=>void
 }
 export interface CategoryWrapperProps {
@@ -38,4 +29,8 @@ export interface ParsedDataProps {
 export interface BurgerIngredientsProps {
     data: ParsedDataProps,
     addProduct:(id:string)=>void
+}
+
+export interface ModalOverlayProps {
+    children: ReactNode
 }

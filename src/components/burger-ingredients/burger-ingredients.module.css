@@ -1,0 +1,7 @@
+.tabs_wrapper {
+    display: flex;
+}
+.categories {
+    overflow-y: scroll;
+    height: 490px;
+}

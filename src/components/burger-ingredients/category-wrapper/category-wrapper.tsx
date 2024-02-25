@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {CategoryWrapperProps, Product} from "../../../interfaces/interfaces";
 import ProductCard from "../../product-card/product-card";
-
+import styles from "./category-wrapper.module.css"
 const CategoryWrapper: FC<CategoryWrapperProps> = ({type, products, addProduct}) => {
     const dict = {
         bun: "Булка",
@@ -13,11 +13,11 @@ const CategoryWrapper: FC<CategoryWrapperProps> = ({type, products, addProduct})
     return (
         <div className={"mb-10"}>
             <div className={"text text_type_main-medium"}>{title}</div>
-            <div style={{display: "flex", gap:"24px", flexWrap:"wrap", justifyContent:"center"}}>
+            <div className={`${styles.products_card_wrapper}`}>
                 {
                     products.map((product:Product)=>{
                         return (
-                            <ProductCard key={product._id} {...product} addProduct={addProduct}/>
+                            <ProductCard key={product._id} product={product} addProduct={addProduct}/>
                         )
                     })
                 }
