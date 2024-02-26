@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, SyntheticEvent, useEffect} from 'react';
+import React, {FC, MouseEventHandler, ReactNode, SyntheticEvent, useEffect} from 'react';
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import styles from "./modal.module.css"
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
@@ -13,8 +13,12 @@ const Modal:FC<ModalProps> = (props) => {
             props.toCloseModal();
         }
     }
-    const onOverlayClick = () => {
-        props.toCloseModal();
+    const onOverlayClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        const targetElement = event.target as HTMLDivElement;
+        const className = targetElement.className;
+        if (className.includes('modal_overlay')){
+            props.toCloseModal();
+        }
     }
 
     useEffect(() => {

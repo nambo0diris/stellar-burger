@@ -1,7 +1,11 @@
 
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-A
-src/utils/data.ts,6\7\670de4db04a390bbdf8c42d3a545e70d37894b3a
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
+\
+,src/components/modals/modal/modal.module.css,5\b\5bf46b6738ed86c095ab9b5d08a96e085d107c8f
+;
+src/App.tsx,8\3\835da56f32df714aaed6285a5b7fc3a7807851e4
+N
+src/hooks/useGetIngredients.ts,c\a\ca70866958e8b7d99812623fd76688b9ca4ea2c2

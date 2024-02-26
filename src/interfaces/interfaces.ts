@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import React, {MouseEventHandler, ReactNode, SyntheticEvent} from "react";
 
 export interface Product {
     calories: number
@@ -33,5 +33,5 @@ export interface BurgerIngredientsProps {
 
 export interface ModalOverlayProps {
     children: ReactNode
-    onOverlayClick:()=>void
+    onOverlayClick:(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
