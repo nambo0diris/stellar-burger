@@ -16,10 +16,13 @@ const Modal:FC<ModalProps> = (props) => {
     const onOverlayClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         const targetElement = event.target as HTMLDivElement;
         const className = targetElement.className;
-        if (className.includes('modal_overlay')){
-            props.toCloseModal();
+        if (typeof className !== "object"){
+            if (className.includes('modal_overlay')){
+                props.toCloseModal();
+            }
         }
     }
+
 
     useEffect(() => {
         document.addEventListener('keydown', onESCCloseHandler);
