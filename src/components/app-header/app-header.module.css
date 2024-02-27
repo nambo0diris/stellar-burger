@@ -1,0 +1,50 @@
+.container {
+    max-width: 1240px;
+    display: flex;
+    position: relative;
+    margin: auto;
+}
+.burger {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    background: transparent;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px
+}
+.orders {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    background: transparent;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: auto
+}
+.logo {
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.personal {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    background: transparent;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
