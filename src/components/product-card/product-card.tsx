@@ -1,13 +1,14 @@
-import React, {FC, SyntheticEvent, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {ProductCardProps} from "../../interfaces/interfaces";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./product-card.module.css"
 import IngredientDetails from "../modals/ingredient-details/ingredient-details";
 import Modal from "../modals/modal/modal";
-const ProductCard: FC<ProductCardProps> = ({product}) => {
+const ProductCard: FC<ProductCardProps> = ({product, addProduct}) => {
         const [isOpen, setOpen] = useState<boolean>(false);
         const toOpenModal = () => {
-            setOpen(true)
+            addProduct(product._id);
+            setOpen(true);
         }
         const toCloseModal = () => {
             setOpen(false)
@@ -23,7 +24,7 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
                 </div>
                 {
                     isOpen && <Modal title={"Детали ингрединта"} toCloseModal={toCloseModal}>
-                                <IngredientDetails product={product}/>
+                        <IngredientDetails product={product}/>
                     </Modal>
                 }
             </>

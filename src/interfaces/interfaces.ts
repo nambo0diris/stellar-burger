@@ -14,6 +14,14 @@ export interface Product {
     __v:number
     _id: string
 }
+export interface ProductWithUUID extends Product {
+    uuid: string
+}
+
+export interface SelectedIngredients {
+    bun: ProductWithUUID [],
+    ingredients: ProductWithUUID []
+}
 export interface ProductCardProps {
     product: Product
     addProduct:(id:string)=>void
@@ -27,7 +35,6 @@ export interface ParsedDataProps {
     [key: string]: Product[]
 }
 export interface BurgerIngredientsProps {
-    data: ParsedDataProps,
     addProduct:(id:string)=>void
 }
 

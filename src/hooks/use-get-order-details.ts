@@ -1,17 +1,16 @@
 import {useEffect, useState} from "react";
-import {fetchIngredients} from "../utils/fetchIngredients";
-import {config} from "../config";
+import {fetchData} from "../utils/fetch-data";
 
-export const useGetIngredients = () => {
-    const [ingredients, setIngredients] = useState([]);
+export const useGetIngredients = (url: string, body?:any) => {
+    const [data, setData] = useState([]);
     const [isLoading, setLoading] = useState(false);
     const [isError, setError] = useState(false);
-    const fetchData = async () => {
+    const makeFetch = async () => {
         setLoading(true);
         setError(false);
         try {
-            const result = await fetchIngredients(config.apiURL);
-            setIngredients(result);
+            const result = await fetchData(url, body);
+            setData(result);
             setLoading(false);
         } catch (e) {
             setError(true);
@@ -21,11 +20,12 @@ export const useGetIngredients = () => {
     }
 
     useEffect(() => {
-        fetchData();
+
+        makeFetch();
     },[]);
 
     return {
-        ingredients,
+        data,
         isLoading,
         isError
     }
