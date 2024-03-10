@@ -1,51 +1,64 @@
-import React, {FC, useContext, useEffect, useState} from 'react';
+import React, {Key, useEffect, useRef, useState} from 'react';
 import {Button, ConstructorElement, CurrencyIcon, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import {SelectedIngredients} from "../../interfaces/interfaces";
 import styles from "./burger-constructor.module.css"
 import OrderDetails from "../modals/order-details/order-details";
 import BurgerLayer from "./burger-layer";
-import {fetchData} from "../../utils/fetch-data";
-import {config} from "../../config";
-import {OrderDetailsContext, OrderDetailsInterface} from "../context/order-details-context";
-interface BurgerConstructorProps {
-    selectedIngredients: SelectedIngredients
+import {useDispatch, useSelector} from "react-redux";
+import {getOrder} from "../../services/actions/order-action";
+import {useDrag, useDrop} from "react-dnd";
+import {ADD_SELECTED_INGREDIENTS} from "../../services/actions/constructor-action";
+import {getProductWithUUID} from "../../utils/utils";
+import {ProductWithUUID} from "../../interfaces/interfaces";
+import FillingElement from "./filling-element";
 
-    removeProduct: (id: string) => void
-}
-const BurgerConstructor:FC<BurgerConstructorProps> = ({ selectedIngredients, removeProduct }) => {
+const BurgerConstructor = () => {
+    // @ts-ignore
+    const {selectedIngredients} = useSelector(state => state.constructorReducer);
+    // @ts-ignore
+    const {getOrderSuccess, getOrderFailed, name, success, order} = useSelector(state => state.orderReducer);
     const [isOpen, setOpen] = useState<boolean>(false);
     const [totalAmount, setTotalAmount] = useState(0);
-    const [orderContent, setOrderContent] = useState<OrderDetailsInterface>({ name: null,
-        success: null,
-        order: {
-            number:null
-        }});
-    console.log(orderContent)
+    const dispatch = useDispatch();
+    const [, dropTarget] = useDrop({
+        accept: "ingredients",
+        drop(item) {
+            // @ts-ignore
+            if (item.type === 'bun') {
+                // @ts-ignore
+                const top = getProductWithUUID(item)
+                // @ts-ignore
+                const bottom = getProductWithUUID(item)
+                dispatch({type:ADD_SELECTED_INGREDIENTS, selectedIngredients: {ingredients:[...selectedIngredients.ingredients], bun: [top, bottom]}});
+            } else {
+                // @ts-ignore
+                const withUUID = getProductWithUUID(item)
+                dispatch({type:ADD_SELECTED_INGREDIENTS, selectedIngredients: {ingredients:[...selectedIngredients.ingredients, withUUID], bun: [...selectedIngredients.bun]}});
+            }
+        },
+    });
     const toCloseModal = () => {
         setOpen(false)
     }
 
-    useEffect(()=>{
-        console.log(orderContent)
-    },[orderContent])
+
 
     const makeOderHandler = async () => {
-        const ingredients = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients=>ingredients._id)
-        const orderDetails = await fetchData(config.orderDetails, {ingredients})
-        setOrderContent(orderDetails);
+        const ingredients = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients => ingredients._id)
+        // @ts-ignore
+        dispatch(getOrder(ingredients))
         setOpen(true)
     }
-
     useEffect(() => {
         const ingredients = [...selectedIngredients.bun, ...selectedIngredients.ingredients]
         const amount = ingredients.reduce((acc, currentValue) => {
             return acc + currentValue.price;
         },0)
         setTotalAmount(amount);
-    },[selectedIngredients])
+    },[selectedIngredients]);
+
     return (
         <>
-            <div className={`${styles.constructor_wrapper}`}>
+            <div ref={dropTarget} className={`${styles.constructor_wrapper}`}>
                 {
                     selectedIngredients.bun.length ?
                     <div className={`${styles.constructor_line}`}>
@@ -67,16 +80,9 @@ const BurgerConstructor:FC<BurgerConstructorProps> = ({ selectedIngredients, rem
                 <div style={{maxHeight:"464px", overflowY:"scroll", display:"flex", flexDirection:"column", gap:"16px",marginRight:"-16px"}}>
                     {
                         selectedIngredients.ingredients.length ?
-                        selectedIngredients.ingredients.map((ingredient, id)=>{
+                        selectedIngredients.ingredients.map((ingredient:ProductWithUUID, id: any)=>{
                             return(
-                                <div key={ingredient.uuid} className={`${styles.constructor_line}`}>
-                                    <DragIcon type="primary" />
-                                    <ConstructorElement
-                                        text={ingredient.name}
-                                        price={50}
-                                        thumbnail={ingredient.image}
-                                    />
-                                </div>
+                                <FillingElement ingredient={ingredient} key={ingredient.uuid} index={id}/>
                             )
                         }) :
                             <div className={`${styles.constructor_line}`}>
@@ -112,11 +118,10 @@ const BurgerConstructor:FC<BurgerConstructorProps> = ({ selectedIngredients, rem
                     Оформить заказ
                 </Button>
             </div>
-            {isOpen &&
-                <OrderDetailsContext.Provider value={orderContent}>
-                    <OrderDetails toCloseModal={toCloseModal}/>
-                </OrderDetailsContext.Provider>
-                }
+            {
+                success && isOpen &&
+                <OrderDetails toCloseModal={toCloseModal}/>
+            }
         </>
     );
 };

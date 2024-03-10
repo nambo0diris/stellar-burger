@@ -1,15 +1,16 @@
-import React, {FC, useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
-import {BurgerIngredientsProps, ParsedDataProps, Product} from "../../interfaces/interfaces";
+import {ParsedDataProps, Product} from "../../interfaces/interfaces";
 import CategoryWrapper from "./category-wrapper/category-wrapper";
 import styles from "./burger-ingredients.module.css";
-import {DataContext} from "../context/data-context";
+import {useSelector} from "react-redux";
 
-const BurgerIngredients: FC<BurgerIngredientsProps> = ({addProduct}) => {
+const BurgerIngredients = () => {
     const [current, setCurrent] = useState('one');
-    const data:Product[] = useContext(DataContext);
-
-    const productList: ParsedDataProps = data.reduce((acc, product) => {
+    // @ts-ignore
+    const {ingredients} = useSelector(state => state.dataReducer)
+    // @ts-ignore
+    const productList: ParsedDataProps = ingredients.reduce((acc, product) => {
         if (!acc[product.type]){
             acc[product.type] = [];
         }
@@ -32,7 +33,7 @@ const BurgerIngredients: FC<BurgerIngredientsProps> = ({addProduct}) => {
             </div>
             <div className={`${styles.categories} mt-10`}>
                 {Object.entries(productList).map((product, index) => {
-                    return <CategoryWrapper key={index} type={product[0]} products={product[1]} addProduct={addProduct}/>;
+                    return <CategoryWrapper key={index} type={product[0]} products={product[1]}/>;
                 })}
             </div>
         </div>

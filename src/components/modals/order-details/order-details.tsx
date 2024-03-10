@@ -1,18 +1,19 @@
-import React, {FC, useContext} from 'react';
+import React, {FC} from 'react';
 import Modal from "../modal/modal";
 import done from "../../../asssets/images/done.png"
 import styles from "./order-details.module.css"
-import {OrderDetailsContext} from "../../context/order-details-context";
+import {useSelector} from "react-redux";
 interface OrderDetailsProps {
     toCloseModal:()=>void
 }
 const OrderDetails: FC<OrderDetailsProps> = ({toCloseModal}) => {
-    const orderDetailContext = useContext(OrderDetailsContext);
 
+    // @ts-ignore
+    const {getOrderSuccess, getOrderFailed, name, success, order} = useSelector(state => state.orderReducer);
     return (
         <Modal  toCloseModal={toCloseModal}>
             <>
-                <div className={`text text_type_digits-large mb-8`}>{orderDetailContext.order?.number}</div>
+                <div className={`text text_type_digits-large mb-8`}>{order.number}</div>
                 <div className={`text text_type_main-medium`}>идентификатор заказа</div>
                 <img src={done} className={`mt-15 mb-15 ${styles.done_img}`}/>
                 <div className={`text text_type_main-small mb-2`}>Ваш заказ начали готовить</div>
