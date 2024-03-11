@@ -16,7 +16,7 @@ export const constructorReducer = (state= initialState, action) => {
         case REMOVE_SELECTED_INGREDIENTS:
             return {
                 ...state,
-                selectedIngredients: action.selectedIngredients
+                selectedIngredients: {bun: [], ingredients:[]}
 
             }
         case INGREDIENT_MOVE:

@@ -1,10 +1,10 @@
 import React, {FC, Key, useRef} from 'react';
-import styles from "./burger-constructor.module.css";
+import styles from "../burger-constructor.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import {ProductWithUUID} from "../../interfaces/interfaces";
-import {ADD_SELECTED_INGREDIENTS, INGREDIENT_MOVE} from "../../services/actions/constructor-action";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrag, useDrop} from "react-dnd";
+import {ProductWithUUID} from "../../../interfaces/interfaces";
+import {ADD_SELECTED_INGREDIENTS, INGREDIENT_MOVE} from "../../../services/actions/constructor-action";
 
 interface FillingElementProps {
     ingredient: ProductWithUUID,

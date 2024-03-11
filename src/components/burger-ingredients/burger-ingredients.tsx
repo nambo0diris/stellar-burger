@@ -6,7 +6,7 @@ import styles from "./burger-ingredients.module.css";
 import {useSelector} from "react-redux";
 
 const BurgerIngredients = () => {
-    const [current, setCurrent] = useState('one');
+    const [current, setCurrent] = useState('bun');
     // @ts-ignore
     const {ingredients} = useSelector(state => state.dataReducer)
     // @ts-ignore
@@ -18,17 +18,23 @@ const BurgerIngredients = () => {
         return acc;
     }, {} as { [key: string]: Product[] });
 
+    const tabClickHandler = (tab:string) => {
+        setCurrent(tab);
+        const element = document.getElementById(tab);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+    }
+
     return (
         <div>
             <div className={`${styles.tabs_wrapper }`}>
-                <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
+                <Tab value="bun" active={current === 'bun'} onClick={()=>{tabClickHandler("bun")}}>
                     Булки
                 </Tab>
-                <Tab value="sauce" active={current === 'sauce'} onClick={setCurrent}>
-                    Соусы
-                </Tab>
-                <Tab value="main" active={current === 'main'} onClick={setCurrent}>
+                <Tab value="main" active={current === 'main'} onClick={()=>{tabClickHandler("main")}}>
                     Начинки
+                </Tab>
+                <Tab value="sauce" active={current === 'sauce'} onClick={()=>{tabClickHandler("sauce")}}>
+                    Соусы
                 </Tab>
             </div>
             <div className={`${styles.categories} mt-10`}>

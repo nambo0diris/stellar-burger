@@ -9,9 +9,8 @@ const CategoryWrapper: FC<CategoryWrapperProps> = ({type, products}) => {
         sauce: "Соус"
     }
     const title: string = dict[type as keyof typeof dict];
-
     return (
-        <div className={"mb-10"}>
+        <div className={"mb-10"} id={type}>
             <div className={"text text_type_main-medium"}>{title}</div>
             <div className={`${styles.products_card_wrapper}`}>
                 {

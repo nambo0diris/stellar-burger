@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
-import './App.css';
-import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
-import BurgerConstructor from "./components/burger-constructor/burger-constructor";
-import AppHeader from "./components/app-header/app-header";
-import {getIngredients} from "./services/actions/data-action";
+import styles from './app.module.css';
+
 import {useDispatch} from "react-redux";
 import { DndProvider } from 'react-dnd';
 import {HTML5Backend} from "react-dnd-html5-backend";
+import BurgerIngredients from "./burger-ingredients/burger-ingredients";
+import BurgerConstructor from "./burger-constructor/burger-constructor";
+import AppHeader from "./app-header/app-header";
+import {getIngredients} from "../services/actions/data-action";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,10 +18,10 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className={styles.App}>
       <AppHeader />
       <main className="pl-4 pr-4">
-        <div className="container">
+        <div className={styles.container}>
           <DndProvider backend={HTML5Backend}>
             <section>
               <h1 className={"text text_type_main-large  mt-10 mb-5"}>Соберите бургер</h1>

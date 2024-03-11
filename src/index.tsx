@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
 import { compose, createStore, applyMiddleware } from 'redux';
 import {thunk} from 'redux-thunk';
 import {Provider} from "react-redux";
 import {rootReducer} from "./services/reducers";
+import App from "./components/app";
 
 declare global {
     interface Window {

@@ -17,9 +17,7 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
             isDrag: monitor.isDragging()
         })
     });
-    useEffect(()=>{
-        console.log(product.type)
-    },[isDrag])
+
     const [isOpen, setOpen] = useState<boolean>(false);
     const dispatch = useDispatch();
     // @ts-ignore
@@ -56,7 +54,7 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
         <>
             {
                 <div className={`${styles.product_card} mb-3`} onClick={toOpenModal} ref={dragRef}>
-                    <img src={product.image} alt="" className={"ml-4 mr-4"}/>
+                    <img src={product.image} alt={product.name} className={"ml-4 mr-4"}/>
                     <div className={"text text_type_digits-default mt-1 mb-1"} >{product.price}</div>
                     <div className={"text text_type_main-small"}>{product.name}</div>
                     <Counter count={233} size="small" />

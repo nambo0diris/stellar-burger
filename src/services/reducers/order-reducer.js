@@ -1,4 +1,4 @@
-import {GET_ORDER_FAILED, GET_ORDER_REQUEST, GET_ORDER_SUCCESS} from "../actions/order-action";
+import {GET_ORDER_FAILED, GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_RESET} from "../actions/order-action";
 
 const initialState = {
     getOrderRequest: false,
@@ -31,6 +31,15 @@ export const orderReducer = (state= initialState, action) => {
                 name: action.name,
                 success: action.success,
                 order: action.order,
+            }
+        case GET_ORDER_RESET:
+            return {
+               ...state,
+                name: null,
+                success: null,
+                order: {
+                   number: null
+                }
             }
         default:
             return state

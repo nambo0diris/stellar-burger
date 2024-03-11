@@ -1,21 +1,22 @@
-import React, {Key, useEffect, useRef, useState} from 'react';
-import {Button, ConstructorElement, CurrencyIcon, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import React, {useEffect, useState} from 'react';
+import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css"
 import OrderDetails from "../modals/order-details/order-details";
 import BurgerLayer from "./burger-layer";
 import {useDispatch, useSelector} from "react-redux";
-import {getOrder} from "../../services/actions/order-action";
-import {useDrag, useDrop} from "react-dnd";
-import {ADD_SELECTED_INGREDIENTS} from "../../services/actions/constructor-action";
+import {GET_ORDER_RESET, getOrder} from "../../services/actions/order-action";
+import {useDrop} from "react-dnd";
+import {ADD_SELECTED_INGREDIENTS, REMOVE_SELECTED_INGREDIENTS} from "../../services/actions/constructor-action";
 import {getProductWithUUID} from "../../utils/utils";
 import {ProductWithUUID} from "../../interfaces/interfaces";
-import FillingElement from "./filling-element";
+import FillingElement from "./filling-element/filling-element";
+import BunElement from "./bun-element/bun-element";
 
 const BurgerConstructor = () => {
     // @ts-ignore
     const {selectedIngredients} = useSelector(state => state.constructorReducer);
     // @ts-ignore
-    const {getOrderSuccess, getOrderFailed, name, success, order} = useSelector(state => state.orderReducer);
+    const {success} = useSelector(state => state.orderReducer);
     const [isOpen, setOpen] = useState<boolean>(false);
     const [totalAmount, setTotalAmount] = useState(0);
     const dispatch = useDispatch();
@@ -38,15 +39,18 @@ const BurgerConstructor = () => {
     });
     const toCloseModal = () => {
         setOpen(false)
+        dispatch({type: GET_ORDER_RESET})
     }
 
-
-
     const makeOderHandler = async () => {
-        const ingredients = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients => ingredients._id)
-        // @ts-ignore
-        dispatch(getOrder(ingredients))
-        setOpen(true)
+        if(selectedIngredients.bun.length){
+            const ingredients = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients => ingredients._id)
+            // @ts-ignore
+            dispatch(getOrder(ingredients));
+            dispatch({type: REMOVE_SELECTED_INGREDIENTS})
+            setOpen(true)
+        }
+
     }
     useEffect(() => {
         const ingredients = [...selectedIngredients.bun, ...selectedIngredients.ingredients]
@@ -59,55 +63,21 @@ const BurgerConstructor = () => {
     return (
         <>
             <div ref={dropTarget} className={`${styles.constructor_wrapper}`}>
-                {
-                    selectedIngredients.bun.length ?
-                    <div className={`${styles.constructor_line}`}>
-                        <DragIcon type="primary"/>
-                        <ConstructorElement
-                            type="top"
-                            isLocked={true}
-                            text={selectedIngredients.bun[0].name}
-                            price={200}
-                            thumbnail={selectedIngredients.bun[0].image}
-                        />
-                    </div>
-                        :
-                    <div className={`${styles.constructor_line}`}>
-                        <BurgerLayer position={"top"}/>
-                    </div>
-                }
-
-                <div style={{maxHeight:"464px", overflowY:"scroll", display:"flex", flexDirection:"column", gap:"16px",marginRight:"-16px"}}>
+                <BunElement type={"top"}/>
+                <div className={styles.filling_element_wrapper}>
                     {
-                        selectedIngredients.ingredients.length ?
-                        selectedIngredients.ingredients.map((ingredient:ProductWithUUID, id: any)=>{
-                            return(
-                                <FillingElement ingredient={ingredient} key={ingredient.uuid} index={id}/>
-                            )
-                        }) :
+                        selectedIngredients.ingredients.length
+                            ?
+                        selectedIngredients.ingredients.map((ingredient:ProductWithUUID, id: number) =>
+                            <FillingElement ingredient={ingredient} key={ingredient.uuid} index={id}/>)
+                            :
                             <div className={`${styles.constructor_line}`}>
                                 <BurgerLayer position={"between"}/>
                             </div>
                     }
 
                 </div>
-                {
-                    selectedIngredients.bun.length ?
-                        <div className={`${styles.constructor_line}`}>
-                            <DragIcon type="primary"/>
-                            <ConstructorElement
-                                type="bottom"
-                                isLocked={true}
-                                text={selectedIngredients.bun[0].name}
-                                price={200}
-                                thumbnail={selectedIngredients.bun[0].image}
-                            />
-                        </div>
-                        :
-                        <div className={`${styles.constructor_line}`}>
-                            <BurgerLayer position={"bottom"}/>
-                        </div>
-                }
+                <BunElement type={"bottom"}/>
             </div>
             <div className={`${styles.constructor_footer} mt-10 mb-10`}>
                 <div className={`${styles.total}`}>
