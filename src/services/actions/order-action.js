@@ -27,7 +27,7 @@ export function getOrder(ingredients){
                 })
             }
         }).catch(error => {
-            throw error;
+            console.log(error)
         })
     }
 }

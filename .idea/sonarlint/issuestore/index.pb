@@ -7,8 +7,6 @@ X
 (src/components/app-header/app-header.tsx,2\7\27af3c90695294e5776169887a33e0c4573240d0
 b
 2src/components/burger-constructor/burger-layer.tsx,6\9\69617df8896efce0e2c9a128bf9aae1a4d604bf9
-R
-"src/hooks/use-get-order-details.ts,e\b\eb908ce508f5f016728904e82268fe6d1f1bb503
 U
 %src/services/reducers/data-reducer.js,6\7\678cc9d384e35c9c05b1e91e44e8d9b3611e1e1c
 S

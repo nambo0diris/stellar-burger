@@ -22,7 +22,7 @@ export function getIngredients () {
                 })
             }
         }).catch(error => {
-            throw error;
+            console.log(error)
         })
     }
 }

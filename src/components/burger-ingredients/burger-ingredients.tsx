@@ -52,9 +52,14 @@ const BurgerIngredients = () => {
                 </Tab>
             </div>
             <div className={`${styles.categories} mt-10`}>
-                <CategoryWrapper innerRef={bunsRef} type={"bun"} products={productList.bun}/>
-                <CategoryWrapper innerRef={mainRef} type={"main"} products={productList.main}/>
-                <CategoryWrapper innerRef={saucesRef} type={"sauce"} products={productList.sauce}/>
+                {
+                    Object.entries(productList).length &&
+                        <>
+                            <CategoryWrapper innerRef={bunsRef} type={"bun"} products={productList.bun}/>
+                            <CategoryWrapper innerRef={mainRef} type={"main"} products={productList.main}/>
+                            <CategoryWrapper innerRef={saucesRef} type={"sauce"} products={productList.sauce}/>
+                        </>
+                }
             </div>
         </div>
     );

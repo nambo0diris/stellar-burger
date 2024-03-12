@@ -5,8 +5,6 @@
 ,src/components/modals/modal/modal.module.css,5\b\5bf46b6738ed86c095ab9b5d08a96e085d107c8f
 X
 (src/components/app-header/app-header.tsx,2\7\27af3c90695294e5776169887a33e0c4573240d0
-R
-"src/hooks/use-get-order-details.ts,e\b\eb908ce508f5f016728904e82268fe6d1f1bb503
 b
 2src/components/burger-constructor/burger-layer.tsx,6\9\69617df8896efce0e2c9a128bf9aae1a4d604bf9
 S
