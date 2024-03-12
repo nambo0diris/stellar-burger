@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {ParsedDataProps, Product} from "../../interfaces/interfaces";
 import CategoryWrapper from "./category-wrapper/category-wrapper";
 import styles from "./burger-ingredients.module.css";
 import {useSelector} from "react-redux";
+import { useInView } from 'react-intersection-observer';
 
 const BurgerIngredients = () => {
     const [current, setCurrent] = useState('bun');
@@ -17,12 +18,25 @@ const BurgerIngredients = () => {
         acc[product.type].push(product);
         return acc;
     }, {} as { [key: string]: Product[] });
-
+    console.log(productList)
     const tabClickHandler = (tab:string) => {
         setCurrent(tab);
         const element = document.getElementById(tab);
         if (element) element.scrollIntoView({ behavior: "smooth" });
     }
+    const [bunsRef, bunsInView] = useInView({ threshold: 0 });
+    const [saucesRef, saucesInView] = useInView({ threshold: 0 });
+    const [mainRef, mainInView] = useInView({ threshold: 0 });
+
+    useEffect(() => {
+        if (bunsInView) {
+            setCurrent("bun");
+        } else if (saucesInView) {
+            setCurrent("sauce");
+        } else if (mainInView) {
+            setCurrent("main");
+        }
+    }, [bunsInView, saucesInView, mainInView]);
 
     return (
         <div>
@@ -38,9 +52,9 @@ const BurgerIngredients = () => {
                 </Tab>
             </div>
             <div className={`${styles.categories} mt-10`}>
-                {Object.entries(productList).map((product, index) => {
-                    return <CategoryWrapper key={index} type={product[0]} products={product[1]}/>;
-                })}
+                <CategoryWrapper innerRef={bunsRef} type={"bun"} products={productList.bun}/>
+                <CategoryWrapper innerRef={mainRef} type={"main"} products={productList.main}/>
+                <CategoryWrapper innerRef={saucesRef} type={"sauce"} products={productList.sauce}/>
             </div>
         </div>
     );

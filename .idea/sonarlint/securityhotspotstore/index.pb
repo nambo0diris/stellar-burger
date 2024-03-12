@@ -25,8 +25,6 @@ o
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 B
 src/utils/utils.ts,2\6\26e16b204ba8ad4c67e11d09140657471b3f3dea
-L
-src/interfaces/interfaces.ts,a\6\a6a573ec85c3f2bf06757b861ec63b204b2fbc1f
 A
 public/index.html,f\4\f43ecdf8d666ee908aacce037b4cd72159e4741b
 =
@@ -37,14 +35,10 @@ A
 src/setupTests.ts,3\9\39129446b425a1d640160c068e4194e96639eedf
 Z
 *src/services/actions/constructor-action.js,5\1\514a5bb8d97a9510db712f0abf3c99962d97ccc8
-T
-$src/services/actions/order-action.js,d\b\dbef9c8a8f3dfdfc7d7299b62b8916729cb814b4
 V
 &src/services/reducers/order-reducer.js,8\5\85d42994394e3a14e91fb9807a2f752e0435dbf5
 m
 =src/components/burger-constructor/bun-element/bun-element.tsx,5\0\5044c9d67fa79d36b50314a3278a7a05216320b3
-G
-src/utils/fetch-data.ts,0\4\0471d5bc2488c3595d9fc2e7751ec1a2d3a9b0e0
 e
 5src/components/modals/modal-overlay/modal-overlay.tsx,6\a\6a87319d323dc1c9c93de09317548061e74bb6e1
 F

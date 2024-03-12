@@ -10,6 +10,7 @@ import {getProductById, getProductWithUUID, isBun} from "../../utils/utils";
 import {SET_CURRENT_INGREDIENT} from "../../services/actions/ingredient-details-action";
 import { useDrag } from "react-dnd";
 const ProductCard: FC<ProductCardProps> = ({product}) => {
+    const [count, setCount] = useState(0)
     const [{isDrag}, dragRef] = useDrag({
         type: "ingredients",
         item: product,
@@ -49,6 +50,14 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
     const toCloseModal = () => {
         setOpen(false)
     }
+    useEffect(()=> {
+        // @ts-ignore
+        const allIngredients = [...selectedIngredients.ingredients, ...selectedIngredients.bun];
+        const counter = allIngredients.reduce((acc, current) => {
+            return product._id === current._id ? acc + 1 : acc;
+        },0)
+        setCount(counter)
+    },[selectedIngredients])
 
     return (
         <>
@@ -57,7 +66,7 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
                     <img src={product.image} alt={product.name} className={"ml-4 mr-4"}/>
                     <div className={"text text_type_digits-default mt-1 mb-1"} >{product.price}</div>
                     <div className={"text text_type_main-small"}>{product.name}</div>
-                    <Counter count={233} size="small" />
+                    <Counter count={count} size="small" />
                 </div>
             }
             {

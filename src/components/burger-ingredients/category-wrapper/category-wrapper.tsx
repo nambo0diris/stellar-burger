@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import {CategoryWrapperProps, Product} from "../../../interfaces/interfaces";
 import ProductCard from "../../product-card/product-card";
 import styles from "./category-wrapper.module.css"
-const CategoryWrapper: FC<CategoryWrapperProps> = ({type, products}) => {
+const CategoryWrapper: FC<CategoryWrapperProps> = ({innerRef, type, products}) => {
     const dict = {
         bun: "Булка",
         main: "Начинка",
@@ -10,7 +10,7 @@ const CategoryWrapper: FC<CategoryWrapperProps> = ({type, products}) => {
     }
     const title: string = dict[type as keyof typeof dict];
     return (
-        <div className={"mb-10"} id={type}>
+        <div className={"mb-10"} id={type} ref={innerRef}>
             <div className={"text text_type_main-medium"}>{title}</div>
             <div className={`${styles.products_card_wrapper}`}>
                 {

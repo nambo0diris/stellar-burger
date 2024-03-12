@@ -26,6 +26,8 @@ export function getOrder(ingredients){
                     type: GET_ORDER_FAILED
                 })
             }
+        }).catch(error => {
+            throw error;
         })
     }
 }

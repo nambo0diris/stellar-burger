@@ -28,6 +28,7 @@ export interface ProductCardProps {
 export interface CategoryWrapperProps {
     type: string,
     products: Product[]
+    innerRef: (node?: (Element | null | undefined)) => void
 }
 export interface ParsedDataProps {
     [key: string]: Product[]
