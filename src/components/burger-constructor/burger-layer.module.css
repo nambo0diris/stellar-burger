@@ -1,0 +1,17 @@
+.burger_layer {
+    background-color:#1C1C21;
+    width:536px;
+    height:88px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+.top {
+    border-radius: 88px 88px 40px 40px;
+}
+.between {
+    border-radius: 40px;
+}
+.bottom {
+    border-radius: 40px 40px 88px 88px ;
+}

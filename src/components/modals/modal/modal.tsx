@@ -1,4 +1,4 @@
-import React, {FC, MouseEventHandler, ReactNode, SyntheticEvent, useEffect} from 'react';
+import React, {FC, ReactNode, useEffect} from 'react';
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import styles from "./modal.module.css"
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
