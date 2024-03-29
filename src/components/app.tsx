@@ -1,39 +1,50 @@
 import React, {useEffect} from 'react';
-import styles from './app.module.css';
 
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {Home, Profile, Login, Register, NotFound, Ingredient, ForgotPassword, ResetPassword} from "../pages/pages";
+import Layout from "./layout/layout";
+import Modal from "./modals/modal/modal";
+import {ForAuthUser, ForUnAuthUser} from "./protected-route/protected-route";
 import {useDispatch} from "react-redux";
-import { DndProvider } from 'react-dnd';
-import {HTML5Backend} from "react-dnd-html5-backend";
-import BurgerIngredients from "./burger-ingredients/burger-ingredients";
-import BurgerConstructor from "./burger-constructor/burger-constructor";
-import AppHeader from "./app-header/app-header";
-import {getIngredients} from "../services/actions/data-action";
+import {checkUserAuth} from "../services/actions/user-action";
+
 
 function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const background = location.state && location.state.background;
   const dispatch = useDispatch();
-  useEffect(()=>{
-    // @ts-ignore
-    dispatch(getIngredients())
-  },[dispatch])
 
-
+  useEffect(() => {
+      // @ts-ignore
+      dispatch(checkUserAuth())
+  },[])
+  const toCloseModal = () => {
+      navigate(-1);
+  }
   return (
-    <div className={styles.App}>
-      <AppHeader />
-      <main className="pl-4 pr-4">
-        <div className={styles.container}>
-          <DndProvider backend={HTML5Backend}>
-            <section>
-              <h1 className={"text text_type_main-large  mt-10 mb-5"}>Соберите бургер</h1>
-              <BurgerIngredients/>
-            </section>
-            <section className={"pt-25 pl-4 pr-4"}>
-              <BurgerConstructor />
-            </section>
-          </DndProvider>
-        </div>
-      </main>
-    </div>
+      <Layout>
+          <Routes>
+              <Route path={'/'} element={<Home/>}/>
+              <Route path={'/profile'} element={<ForAuthUser component={<Profile/>}/>}/>
+              <Route path={'/ingredient/:id'} element={<Ingredient/>}/>
+              <Route path={'/login'} element={<ForUnAuthUser component={<Login/>}/>}/>
+              <Route path={'/register'} element={<ForUnAuthUser component={<Register/>}/>}/>
+              <Route path={'/forgot-password'} element={<ForUnAuthUser component={<ForgotPassword/>}/>}/>
+              <Route path={'/reset-password'} element={<ForUnAuthUser component={<ResetPassword/>} />}/>
+              <Route path={'*'} element={<NotFound/>}/>
+          </Routes>
+          { background &&
+              <Routes>
+                  <Route path={'/ingredient/:id'} element={
+                      <Modal toCloseModal={toCloseModal}>
+                          <Ingredient/>
+                      </Modal>
+                  }/>
+              </Routes>
+          }
+      </Layout>
+
   );
 }
 

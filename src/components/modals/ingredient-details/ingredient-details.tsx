@@ -5,7 +5,7 @@ const IngredientDetails = () => {
     // @ts-ignore
     const {currentIngredient} = useSelector(state => state.ingredientDetailsReducer)
     return (
-        <>
+        <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", margin:"auto"}}>
             <img src={currentIngredient.image_large} alt={currentIngredient.name} className={styles.ingredient_pic}/>
             <h1 className={`mt-4 mb-8 text text_type_main-medium`}>{currentIngredient.name}</h1>
             <div className={`text text_type_main-small ${styles.nutritional_values}`}>
@@ -26,7 +26,7 @@ const IngredientDetails = () => {
                     <div className={`text text_type_digits-default ${styles.nutritional_value_numb}`}>{currentIngredient.carbohydrates}</div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

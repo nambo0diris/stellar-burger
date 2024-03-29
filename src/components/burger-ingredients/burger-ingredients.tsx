@@ -18,7 +18,6 @@ const BurgerIngredients = () => {
         acc[product.type].push(product);
         return acc;
     }, {} as { [key: string]: Product[] });
-    console.log(productList)
     const tabClickHandler = (tab:string) => {
         setCurrent(tab);
         const element = document.getElementById(tab);

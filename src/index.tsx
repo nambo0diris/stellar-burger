@@ -8,6 +8,7 @@ import {thunk} from 'redux-thunk';
 import {Provider} from "react-redux";
 import {rootReducer} from "./services/reducers";
 import App from "./components/app";
+import {BrowserRouter} from "react-router-dom";
 
 declare global {
     interface Window {
@@ -30,9 +31,11 @@ const store = createStore(rootReducer, enhancer);
 
 root.render(
   <React.StrictMode>
-      <Provider store={store}>
-          <App />
-      </Provider>
+      <BrowserRouter>
+          <Provider store={store}>
+              <App />
+          </Provider>
+      </BrowserRouter>
   </React.StrictMode>
 );
 

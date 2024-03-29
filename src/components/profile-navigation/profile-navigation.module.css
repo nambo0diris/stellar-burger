@@ -1,0 +1,11 @@
+.active_link {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+.link {
+    color: #8585AD;
+    text-decoration: none;
+    cursor: pointer;
+}

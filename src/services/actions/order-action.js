@@ -13,7 +13,6 @@ export function getOrder(ingredients){
             type: GET_ORDER_REQUEST
         })
         fetchData(config.orderDetails, {ingredients}).then(res => {
-            console.log(res)
             if (res && res.success) {
                 dispatch({
                     type: GET_ORDER_SUCCESS,

@@ -11,7 +11,7 @@ export function getIngredients () {
             type: GET_INGREDIENTS_REQUEST
         })
         fetchData(config.productsAPI).then(res => {
-            if (res && res.success) {
+            if (res?.success) {
                 dispatch({
                     type: GET_INGREDIENTS_SUCCESS,
                     ingredients: res.data
