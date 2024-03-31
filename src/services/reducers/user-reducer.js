@@ -19,7 +19,12 @@ import {
 
     SAVE_PASSWORD_FAILED,
     SAVE_PASSWORD_REQUEST,
-    SAVE_PASSWORD_SUCCESS, USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, USER_UPDATE_FAILED,
+    SAVE_PASSWORD_SUCCESS,
+    USER_UPDATE_REQUEST,
+    USER_UPDATE_SUCCESS,
+    USER_UPDATE_FAILED,
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS, GET_USER_FAILED,
 
 } from "../actions/user-action";
 
@@ -134,6 +139,24 @@ export const userReducer = (state = initialState, action) => {
                 save_password_success: true
             }
 
+        case GET_USER_REQUEST:
+            return {
+                ...state,
+                getUserRequest:true,
+            }
+        case GET_USER_SUCCESS:
+            return {
+               ...state,
+                getUserRequest: false,
+                getUserSuccess: true,
+                user: action.user
+            }
+        case GET_USER_FAILED:
+            return {
+                ...state,
+                getUserRequest: false,
+                getUserFailed: true,
+            }
         case LOGIN_REQUEST:
             return {
                 ...state,

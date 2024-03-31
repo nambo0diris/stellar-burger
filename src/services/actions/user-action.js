@@ -67,6 +67,7 @@ export const getUser = () => {
             dispatch({type: GET_USER_REQUEST});
             return await getUserRequest()
                 .then(res => {
+                    console.log(res)
                     dispatch({type: GET_USER_SUCCESS, user: res?.user})
                 }).catch(error => {
                     dispatch({type: GET_USER_FAILED})
