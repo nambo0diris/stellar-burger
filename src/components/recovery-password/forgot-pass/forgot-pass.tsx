@@ -19,14 +19,14 @@ const ForgotPass = () => {
 
     useEffect(() => {
         if (resetPasswordSuccess){
-            navigate("/reset-password", {replace: true})
+            navigate("/reset-password", { state: { resetRequested: true } })
         }
     },[resetPasswordSuccess])
     return (
-        <div style={{display:"flex", flexDirection:"column", gap:"24px", margin:"auto", marginTop:"120px"}}>
-            <div className={"text text_type_main-default"} style={{textAlign:"center"}}>Восстановление пароля</div>
 
-            <form style={{display:"flex", flexDirection:"column", gap:"24px"}} onSubmit={onSubmitHandler}>
+        <div className={styles.wrapper}>
+            <form onSubmit={onSubmitHandler} className={styles.form}>
+                <div className={`text text_type_main-default ${styles.form_title}`} >Восстановление пароля</div>
                 <Input
                     placeholder={"email"}
                     type={'text'}
@@ -45,7 +45,7 @@ const ForgotPass = () => {
             </form>
 
             <div>
-                <div className={"text text_type_main-small"} style={{textAlign:"center"}}>Вспомнили пароль? <NavLink to={'/login'}>Войти</NavLink></div>
+                <div className={`text text_type_main-small ${styles.underform_text}`}>Вспомнили пароль? <NavLink to={'/login'}>Войти</NavLink></div>
             </div>
         </div>
     );

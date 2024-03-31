@@ -10,19 +10,25 @@ const ProfileNavigation = () => {
         dispatch(logout())
     }
     return (
-        <nav className={"mb-20"} style={{width:"320px"}}>
-            <ul style={{listStyleType:"none", padding:0, margin:0}}>
-                <li className={"text text_type_main-medium"} style={{height:"64px", display:"flex", alignItems:"center"}}>
-                    <NavLink className={({isActive}) => isActive ? styles.active_link : styles.link} to={"/profile"} >Профиль</NavLink>
-                </li>
-                <li className={"text text_type_main-medium"} style={{height:"64px", display:"flex", alignItems:"center"}}>
-                    <NavLink className={({isActive}) => isActive ? styles.active_link : styles.link} to={"/profile/orders/:number"} >История заказов</NavLink>
-                </li>
-                <li className={`text text_type_main-medium ${styles.link}`} style={{height:"64px", display:"flex", alignItems:"center"}} onClick={onLogoutHandler}>
-                    Выход
-                </li>
-            </ul>
-        </nav>
+        <div className={styles.nav_wrapper} >
+            <nav className={`mb-20 ${styles.nav}`} >
+                <ul className={styles.nav_list}>
+                    <li className={`text text_type_main-medium ${styles.nav_item}`}>
+                        <NavLink className={({isActive}) => isActive ? styles.active_link : styles.link} to={"/profile"} >Профиль</NavLink>
+                    </li>
+                    <li className={`text text_type_main-medium ${styles.nav_item}`}>
+                        <NavLink className={({isActive}) => isActive ? styles.active_link : styles.link} to={"/profile/orders/:number"} >История заказов</NavLink>
+                    </li>
+                    <li className={`text text_type_main-medium ${styles.nav_item}`} onClick={onLogoutHandler}>
+                        Выход
+                    </li>
+                </ul>
+            </nav>
+            <div className={"text text_type_main-small"}>
+                В этом разделе вы можете изменить свои персональные данные
+            </div>
+        </div>
+
     );
 };
 

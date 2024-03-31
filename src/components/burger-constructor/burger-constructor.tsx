@@ -4,19 +4,25 @@ import styles from "./burger-constructor.module.css"
 import OrderDetails from "../modals/order-details/order-details";
 import BurgerLayer from "./burger-layer";
 import {useDispatch, useSelector} from "react-redux";
-import {GET_ORDER_RESET, getOrder} from "../../services/actions/order-action";
+import {MAKE_ORDER_RESET, makeOrder} from "../../services/actions/order-action";
 import {useDrop} from "react-dnd";
 import {ADD_SELECTED_INGREDIENTS, REMOVE_SELECTED_INGREDIENTS} from "../../services/actions/constructor-action";
 import {getProductWithUUID} from "../../utils/utils";
 import {ProductWithUUID} from "../../interfaces/interfaces";
 import FillingElement from "./filling-element/filling-element";
 import BunElement from "./bun-element/bun-element";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const BurgerConstructor = () => {
+    const navigate = useNavigate();
+    const { state, pathname } = useLocation();
+    const url = window.location.href;
+    // @ts-ignore
+    const {user, isAuthChecked} = useSelector(state => state.userReducer)
     // @ts-ignore
     const {selectedIngredients} = useSelector(state => state.constructorReducer);
     // @ts-ignore
-    const {success} = useSelector(state => state.orderReducer);
+    const {success, makeOrderRequest} = useSelector(state => state.orderReducer);
     const [isOpen, setOpen] = useState<boolean>(false);
     const [totalAmount, setTotalAmount] = useState(0);
     const dispatch = useDispatch();
@@ -29,27 +35,43 @@ const BurgerConstructor = () => {
                 const top = getProductWithUUID(item)
                 // @ts-ignore
                 const bottom = getProductWithUUID(item)
-                dispatch({type:ADD_SELECTED_INGREDIENTS, selectedIngredients: {ingredients:[...selectedIngredients.ingredients], bun: [top, bottom]}});
+                dispatch({
+                    type:ADD_SELECTED_INGREDIENTS,
+                    selectedIngredients: {
+                        ingredients:[...selectedIngredients.ingredients],
+                        bun: [top, bottom]}
+                });
             } else {
                 // @ts-ignore
                 const withUUID = getProductWithUUID(item)
-                dispatch({type:ADD_SELECTED_INGREDIENTS, selectedIngredients: {ingredients:[...selectedIngredients.ingredients, withUUID], bun: [...selectedIngredients.bun]}});
+                dispatch({
+                    type:ADD_SELECTED_INGREDIENTS,
+                    selectedIngredients: {
+                        ingredients:[...selectedIngredients.ingredients, withUUID],
+                        bun: [...selectedIngredients.bun]}
+                });
             }
         },
     });
     const toCloseModal = () => {
         setOpen(false)
-        dispatch({type: GET_ORDER_RESET})
+        dispatch({type: MAKE_ORDER_RESET})
     }
 
     const makeOderHandler = async () => {
-        if(selectedIngredients.bun.length){
-            const ingredients = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients => ingredients._id)
-            // @ts-ignore
-            dispatch(getOrder(ingredients));
-            dispatch({type: REMOVE_SELECTED_INGREDIENTS})
-            setOpen(true)
+        if (!user) {
+            navigate('/login', { state: [{ path: pathname, url, title: 'Login' }], replace: false });
+        } else {
+            if (selectedIngredients.bun.length) {
+                const ingredients = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients => ingredients._id)
+                // @ts-ignore
+                dispatch(makeOrder(ingredients));
+                dispatch({type: REMOVE_SELECTED_INGREDIENTS})
+                setOpen(true)
+            }
         }
+
+
 
     }
     useEffect(() => {
@@ -59,6 +81,7 @@ const BurgerConstructor = () => {
         },0)
         setTotalAmount(amount);
     },[selectedIngredients]);
+
 
     return (
         <>

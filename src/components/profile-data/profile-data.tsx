@@ -1,10 +1,16 @@
 import React, {SyntheticEvent, useEffect, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import styles from "./profile-data.module.css";
+import {updateUser} from "../../services/actions/user-action";
 
+interface IUserData {
+    name:string
+    email:string
+    password?:string
+}
 const ProfileData = () => {
-
+    const dispatch = useDispatch()
     // @ts-ignore
     const {user} = useSelector(state => state.userReducer)
 
@@ -46,7 +52,15 @@ const ProfileData = () => {
 
     const onSaveHandler = (e:SyntheticEvent) => {
         e.preventDefault()
-
+        const userData:IUserData = {
+            name: nameValue ? nameValue : user.name,
+            email: emailValue ? emailValue : user.email,
+        }
+        if (passwordValue) {
+            userData.password = passwordValue
+        }
+        // @ts-ignore
+        dispatch(updateUser(userData))
     }
 
     const onCanceledHandler = () => {
@@ -59,7 +73,7 @@ const ProfileData = () => {
     }
 
     return (
-        <form action="" style={{display:"flex", flexDirection:"column", gap:"24px"}}>
+        <form className={styles.form} onSubmit={onSaveHandler}>
             <Input
                 type={'text'}
                 placeholder={'Имя'}

@@ -12,3 +12,8 @@
     gap:20px;
     margin-bottom: 80px;
 }
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}

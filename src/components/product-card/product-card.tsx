@@ -38,7 +38,7 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
     },[selectedIngredients])
 
     return (
-        <Link className={`${styles.product_card} mb-3`} key={ingredientId} to={`/ingredient/${ingredientId}`} state={{background: location}} style={{display:"block"}}>
+        <Link className={`${styles.product_card} mb-3`} key={ingredientId} to={`/ingredient/${ingredientId}`} state={{background: location}}>
             <div className={`${styles.product_card} mb-3`} onClick={toOpenModal} ref={dragRef}>
                 <img src={product.image} alt={product.name} className={"ml-4 mr-4"}/>
                 <div className={"text text_type_digits-default mt-1 mb-1"} >{product.price}</div>

@@ -1,5 +1,5 @@
-import React, {FC, ReactElement} from 'react';
-import {useSelector} from "react-redux";
+import React, {FC, ReactElement, useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import {Navigate, useLocation} from "react-router-dom";
 
 interface ProtectedRouteProps {
@@ -11,16 +11,16 @@ interface ForUnAuthUserProps {
 }
 
 const ProtectedRoute:FC<ProtectedRouteProps> = ({unAuth= false, component}): any => {
-
     const location = useLocation();
     // @ts-ignore
     const { user, isAuthChecked } = useSelector(state => state.userReducer);
 
+
     if (!isAuthChecked) {
         return null;
     }
-
     if (unAuth && user) {
+
         const {from} = location.state || {from: {pathname: "/"}};
         return <Navigate to={from}/>
     }

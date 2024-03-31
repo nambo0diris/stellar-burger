@@ -2,11 +2,8 @@ import React, {SyntheticEvent, useEffect, useRef, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./registration-form.module.css";
 import {registration} from "../../services/actions/user-action";
-import {useDispatch} from "react-redux";
-import {NavLink} from "react-router-dom";
 
 const RegistrationForm = () => {
-    const dispatch = useDispatch();
     const [nameValue, setNameValue] = useState('');
     const inputNameRef = useRef<HTMLInputElement>(null);
 
@@ -23,8 +20,7 @@ const RegistrationForm = () => {
 
     const onSubmitHandler = (evt:SyntheticEvent) => {
         evt.preventDefault();
-        // @ts-ignore
-        dispatch(registration({name: nameValue, password: passwordValue, email: emailValue}))
+        registration({name: nameValue, password: passwordValue, email: emailValue})
     }
     const onNameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNameValue(event.target.value);
@@ -82,7 +78,7 @@ const RegistrationForm = () => {
                 </Button>
             </form>
             <div>
-                <div className={"text text_type_main-small"} style={{textAlign:"center"}}>Уже зарегистрированы? <NavLink to={'/login'}>Войти</NavLink></div>
+                <div className={"text text_type_main-small"} style={{textAlign:"center"}}>Уже зарегистрированы? Войти</div>
             </div>
         </div>
     );

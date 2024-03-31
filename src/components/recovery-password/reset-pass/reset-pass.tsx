@@ -1,7 +1,7 @@
-import React, {SyntheticEvent, useState} from 'react';
+import React, {SyntheticEvent, useEffect, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./reset-pass.module.css";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {savePassword} from "../../../services/actions/user-action";
 
@@ -12,6 +12,18 @@ const ResetPass = () => {
     const [codeValue, setCodeValue] = React.useState('')
     const passwordRef = React.useRef<HTMLInputElement>(null)
     const codedRef = React.useRef<HTMLInputElement>(null)
+
+    const location = useLocation();
+    const resetRequested = location.state?.resetRequested;
+    const navigate = useNavigate();
+
+    // @ts-ignore
+    useEffect(()=>{
+        if (!resetRequested) {
+            navigate('/forgot-password');
+        }
+    },[])
+
     const onIconClick = () => {
         setHiddenPassword(!isHiddenPassword)
     }
@@ -21,9 +33,9 @@ const ResetPass = () => {
         dispatch(savePassword({password:passwordValue, token:codeValue}))
     }
     return (
-        <div style={{display:"flex", flexDirection:"column", gap:"24px", margin:"auto", marginTop:"120px"}}>
-            <form onSubmit={onSubmitHandler} style={{display:"flex", flexDirection:"column", gap:"24px"}}>
-                <div className={"text text_type_main-default"} style={{textAlign:"center"}}>Восстановление пароля</div>
+        <div className={styles.wrapper}>
+            <form onSubmit={onSubmitHandler} className={styles.form}>
+                <div className={`text text_type_main-default ${styles.form_title}`} >Восстановление пароля</div>
                 <Input
                     placeholder={"Введите новый пароль"}
                     type={isHiddenPassword ? 'password' : 'text'}
@@ -56,7 +68,7 @@ const ResetPass = () => {
                 </Button>
             </form>
             <div>
-                <div className={"text text_type_main-small"} style={{textAlign:"center"}}>Вспомнили пароль? <NavLink to={'/login'}>Войти</NavLink></div>
+                <div className={`text text_type_main-small ${styles.underform_text}`}>Вспомнили пароль? <NavLink to={'/login'}>Войти</NavLink></div>
             </div>
         </div>
     );

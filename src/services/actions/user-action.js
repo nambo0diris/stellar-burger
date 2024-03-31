@@ -4,7 +4,7 @@ import {
     loginRequest,
     logoutRequest,
     registrationRequest,
-    savePasswordRequest
+    savePasswordRequest, updateUserRequest
 } from "../../utils/api";
 import {deleteCookie, getCookie, setCookie} from "../../utils/utils";
 
@@ -44,44 +44,60 @@ const setUser = (user) => ({
     type: SET_USER,
     user
 })
-
+export const login = ({email, password}) => {
+    return function (dispatch) {
+        dispatch({type: LOGIN_REQUEST})
+        loginRequest(email, password)
+            .then(res => {
+                dispatch({type: LOGIN_SUCCESS})
+                const authToken = res.accessToken.split('Bearer ')[1];
+                const refreshToken = res.refreshToken
+                setCookie("accessToken", authToken, {expires: 20});
+                window.localStorage.setItem('refreshToken', refreshToken);
+                dispatch(setUser(res.user))
+            }).catch(error => {
+                dispatch({type: LOGIN_FAILED})
+                console.log(error)
+            })
+    }
+}
 export const getUser = () => {
     return async function (dispatch) {
         if (getCookie("accessToken")) {
             dispatch({type: GET_USER_REQUEST});
             return await getUserRequest()
                 .then(res => {
-                   if(res.ok){
-                       return res
-                   }
-                })
-                .then(res => res.json())
-                .then(res => {
-                    dispatch({type: GET_USER_SUCCESS, user: res.user})
+                    dispatch({type: GET_USER_SUCCESS, user: res?.user})
+                }).catch(error => {
+                    dispatch({type: GET_USER_FAILED})
+                    console.log(error)
                 })
         }
     }
 }
 
-export const updateUser = () => {
-    return function (dispatch) {
-        dispatch()
-        updateUser()
-    }
-}
 export const checkUserAuth = () => {
     return function (dispatch) {
         if (localStorage.getItem("refreshToken")) {
-            dispatch(getUser()).catch(() => {
-                localStorage.removeItem("refreshToken")
-                deleteCookie("accessToken")
-                dispatch({type: SET_USER, user: null})
-            }).finally(()=>{
-                dispatch({type:IS_AUTH_CHECKED, isAuthChecked: true})
-            })
+            dispatch(getUser())
+                .catch(() => {
+                    localStorage.removeItem("refreshToken")
+                    deleteCookie("accessToken")
+                    dispatch({type: SET_USER, user: null})
+                }).finally(() => {
+                    dispatch({type:IS_AUTH_CHECKED, isAuthChecked: true})
+                })
         } else {
             dispatch({type:IS_AUTH_CHECKED, isAuthChecked: true})
         }
+    }
+}
+
+export const updateUser = (userData) => {
+    return function (dispatch) {
+        updateUserRequest(userData).then(res => {
+            dispatch()
+        })
     }
 }
 
@@ -105,76 +121,45 @@ export const registration = (form) => {
             })
     }
 }
+
+const refreshToken = () => {
+    return function (dispatch) {
+        refreshToken()
+            .then(res => {
+                const {accessToken, refreshToken} = res;
+                const authToken = accessToken.split('Bearer ')[1];
+                setCookie("accessToken", authToken, {expires: 20});
+                window.localStorage.setItem('refreshToken', refreshToken);
+            })
+    }
+}
 export const logout = () => {
     return function (dispatch) {
-        dispatch({type: LOGIN_REQUEST})
+        dispatch({type: LOGOUT_REQUEST})
         logoutRequest()
-            .then(res => {
-                if (res.ok) {
-                    return res
-                }
-            })
-            .then(res => res.json())
-            .then(res => {
-                if(res.success){
-                    dispatch({type: LOGIN_SUCCESS})
-                    localStorage.removeItem('refreshToken')
-                    deleteCookie('accessToken')
-                    dispatch({type: SET_USER, user: null})
-                } else {
-                    dispatch({type: LOGIN_FAILED})
-                }
+            .then(() => {
+                dispatch({type: LOGIN_SUCCESS})
+                localStorage.removeItem('refreshToken')
+                deleteCookie('accessToken')
+                dispatch({type: SET_USER, user: null})
             })
             .catch(error => {
+                dispatch({type: LOGIN_FAILED})
                 console.log(error)
             })
     }
 }
 
-export const login = ({email, password}) => {
-    return function (dispatch) {
-        dispatch({type: LOGIN_REQUEST})
-        loginRequest(email, password)
-            .then(res=> {
-                if (res.ok) {
-                    return res
-                }
-            })
-            .then((res) => res.json())
-            .then(res => {
-                if (res.success) {
-                    dispatch({type: LOGIN_SUCCESS})
-                    const authToken = res.accessToken.split('Bearer ')[1];
-                    const refreshToken = res.refreshToken
-                    setCookie("accessToken", authToken, {expires: 20});
-                    window.localStorage.setItem('refreshToken', refreshToken);
-                    dispatch(setUser(res.user))
 
-                } else {
-                    dispatch({type: LOGIN_FAILED})
-                }
-            }).catch(error => {
-                console.log(error)
-        })
-    }
-}
 export const forgotPassword = (email) => {
-    return async function (dispatch) {
+    return function (dispatch) {
         dispatch({type: RESET_PASSWORD_REQUEST})
-        await forgotPasswordRequest(email)
-            .then(res => {
-               if (res.ok) {
-                   return res
-               }
+        forgotPasswordRequest(email)
+            .then(() => {
+                dispatch({type: RESET_PASSWORD_SUCCESS})
             })
-            .then(res => res?.json())
-            .then(res => {
-                if (res.success) {
-                    dispatch({type: RESET_PASSWORD_SUCCESS})
-                } else {
-                    dispatch({type: RESET_PASSWORD_FAILED})
-                }
-            }).catch(error => {
+            .catch(error => {
+                dispatch({type: RESET_PASSWORD_FAILED})
                 console.log(error)
             })
     }
@@ -184,12 +169,13 @@ export const savePassword = (data) => {
     return function (dispatch) {
         dispatch({type: SAVE_PASSWORD_REQUEST})
         savePasswordRequest(data)
-            .then(res=>{
-                if (res.ok) {
-                    return res
-                }
+            .then(res => {
+                dispatch({type: SAVE_PASSWORD_SUCCESS})
             })
-            .then(res=>res.json())
+            .catch(error => {
+                dispatch({type: SAVE_PASSWORD_FAILED})
+                console.log(error)
+            })
 
     }
 }

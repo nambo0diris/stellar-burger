@@ -14,7 +14,7 @@ export const setCookie = (name, value, props) => {
     let exp = props.expires;
     if (typeof exp == 'number' && exp) {
         const d = new Date();
-        d.setTime(d.getTime() + exp * 1000);
+        d.setTime(d.getTime() + exp * 10000);
         exp = props.expires = d;
     }
     if (exp && exp.toUTCString) {
@@ -42,4 +42,11 @@ export const getCookie = (name:string) => {
 // @ts-ignore
 export const deleteCookie = (name) => {
     setCookie(name, null, {expires: -1});
+}
+
+export const checkResponse = (res:any) => {
+    return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`)
+}
+export const checkSuccess = (res:any) => {
+    return res?.success ? res : Promise.reject(`Ответ не success: ${res}`);
 }

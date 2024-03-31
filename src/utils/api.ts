@@ -1,5 +1,7 @@
 import {config} from "../config";
-import {getCookie} from "./utils";
+import {checkResponse, checkSuccess, getCookie} from "./utils";
+
+
 
 interface IRegRequest {
     name: string,
@@ -7,36 +9,23 @@ interface IRegRequest {
     password: string
 }
 
-export const registrationRequest = async (form: IRegRequest): Promise<void | Response> => {
-    return await fetch(config.registerAPI, {
+export const registrationRequest = (form: IRegRequest): Promise<void | Response> => {
+    const options = {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
         body: JSON.stringify(form)
-    }).then(res => {
-        if (res.ok) {
-            return res
-        }
-    }).then(res => res?.json())
-        .catch(error => {
-        console.log(error)
-    });
+    }
+    return request(config.registerEndpoint, options)
 }
 
-export const getUserRequest = async (): Promise<Response> => {
-    return await fetch(config.getUserAPI, {
+export const getUserRequest = (): Promise<Response> => {
+    const options = {
         method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + getCookie('accessToken')
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer'
-    });
+        }
+    }
+    return request(config.getUserEndpoint, options)
 }
 
 
@@ -45,27 +34,21 @@ interface IPatchUser {
     name?:string
     password?:string
 }
-export const updateUser = async (user:IPatchUser) => {
-    return await fetch("", {
+export const updateUserRequest = (user:IPatchUser) => {
+    const options = {
         method: 'PATCH',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + getCookie('accessToken')
         },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
         body: JSON.stringify(user),
-    })
+    }
+    return request(config.getUserEndpoint, options)
+
 }
-export const loginRequest = async (email:string, password:string) => {
-    return await fetch(config.loginAPI, {
+export const loginRequest = (email:string, password:string) => {
+    const options = {
         method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + getCookie('accessToken')
@@ -74,69 +57,67 @@ export const loginRequest = async (email:string, password:string) => {
             email: email,
             password: password
         }),
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer'
-    })
+    }
+    return request(config.loginEndpoint, options)
 }
-export const logoutRequest = async () => {
-    return await fetch(config.logoutAPI, {
+export const logoutRequest = () => {
+    const options = {
         method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
         },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
         body: JSON.stringify({token: localStorage.getItem("refreshToken")})
-    })
+    }
+    return request(config.logoutEndpoint, options)
 }
-export const refreshToken = async () => {
-    return await fetch(config.refreshTokenAPI, {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
+export const refreshTokenRequest = () => {
+    const options = {
         body: JSON.stringify({token: localStorage.getItem("refreshToken")})
-    });
+    }
+    return request(config.refreshTokenEndpoint, options)
 }
-export const forgotPasswordRequest = async (email: string) => {
-    return await fetch(`${config.resetPasswordAPI}`, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+export const forgotPasswordRequest = (email: string) => {
+    const options = {
+        method:'POST',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + getCookie('accessToken')
         },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
         body: JSON.stringify({ email }),
-    })
+    }
+    return request(config.resetPasswordEndpoint, options)
 }
 
 interface ISavePasswordData {
     email: string,
     code: string
 }
-export const savePasswordRequest = async (data: ISavePasswordData) => {
-    return await fetch(config.savePasswordAPI, {
+export const savePasswordRequest = (data: ISavePasswordData) => {
+    const options = {
         method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
         body: JSON.stringify(data)
-    })
+    }
+    return request(config.savePasswordEndpoint, options)
 }
+
+export const getIngredientsRequest = () => {
+    return request(config.productsEndpoint, null)
+}
+export const makeOrderRequest = (ingredients:any) => {
+    const options = {
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(ingredients)
+    }
+    return request(config.orderDetailsEndpoint, options)
+}
+
+export const request = (endpoint:string, options:any) => {
+    return fetch(`${config.baseAPIUrl}${endpoint}`, options)
+        .then(checkResponse)
+        .then(checkSuccess)
+}
+
+

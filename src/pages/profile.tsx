@@ -20,12 +20,7 @@ const Profile = () => {
     }
     return (
         <>
-            <div className="nav-wrapper" style={{width:"320px"}}>
-                <ProfileNavigation />
-                <div className={"text text_type_main-small"}>
-                    В этом разделе вы можете изменить свои персональные данные
-                </div>
-            </div>
+            <ProfileNavigation />
             <ProfileData />
         </>
     );

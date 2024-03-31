@@ -1,5 +1,4 @@
-import {fetchData} from "../../utils/fetch-data";
-import {config} from "../../config";
+import {getIngredientsRequest} from "../../utils/api";
 
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
@@ -10,19 +9,16 @@ export function getIngredients () {
         dispatch({
             type: GET_INGREDIENTS_REQUEST
         })
-        fetchData(config.productsAPI).then(res => {
-            if (res?.success) {
+        getIngredientsRequest()
+            .then(res=> {
                 dispatch({
                     type: GET_INGREDIENTS_SUCCESS,
                     ingredients: res.data
                 })
-            } else {
-                dispatch({
-                    type: GET_INGREDIENTS_FAILED
-                })
-            }
-        }).catch(error => {
-            console.log(error)
-        })
+            })
+            .catch(error => {
+                dispatch({type: GET_INGREDIENTS_FAILED})
+                console.log(error)
+            })
     }
 }

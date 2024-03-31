@@ -25,9 +25,9 @@ const SignInForm = () => {
     }
 
     return (
-        <div style={{margin:"auto", marginTop:"120px"}}>
-            <form onSubmit={onSubmitHandler} style={{display:"flex", flexDirection:"column", gap:"24px"}}>
-                <div className={"text text_type_main-default"} style={{textAlign:"center"}}>Вход</div>
+        <div className={styles.wrapper}>
+            <form onSubmit={onSubmitHandler} className={styles.form}>
+                <div className={`text text_type_main-default ${styles.form_title}`} >Вход</div>
                 <Input
                     placeholder={"email"}
                     type={'text'}
@@ -60,8 +60,8 @@ const SignInForm = () => {
                 </Button>
             </form>
             <div>
-                <div className={"text text_type_main-small"} style={{textAlign:"center"}}>Вы — новый пользователь? <NavLink to={'/register'}>Зарегистрироваться</NavLink>  </div>
-                <div className={"text text_type_main-small"} style={{textAlign:"center"}}>Забыли пароль? <NavLink to={"/forgot-password"}>Восстановить пароль</NavLink></div>
+                <div className={`text text_type_main-small ${styles.underform_text}`} >Вы — новый пользователь? <NavLink to={'/register'}>Зарегистрироваться</NavLink>  </div>
+                <div className={`text text_type_main-small ${styles.underform_text}`} >Забыли пароль? <NavLink to={"/forgot-password"}>Восстановить пароль</NavLink></div>
             </div>
         </div>
     )
