@@ -10,7 +10,11 @@ interface IRegRequest {
 }
 
 export const registrationRequest = (form: IRegRequest): Promise<void | Response> => {
+    console.log(form)
     const options = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
         method: 'POST',
         body: JSON.stringify(form)
     }

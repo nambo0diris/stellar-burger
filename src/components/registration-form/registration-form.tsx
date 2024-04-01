@@ -2,8 +2,10 @@ import React, {SyntheticEvent, useEffect, useRef, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./registration-form.module.css";
 import {registration} from "../../services/actions/user-action";
+import {useDispatch} from "react-redux";
 
 const RegistrationForm = () => {
+    const dispatch = useDispatch();
     const [nameValue, setNameValue] = useState('');
     const inputNameRef = useRef<HTMLInputElement>(null);
 
@@ -20,7 +22,9 @@ const RegistrationForm = () => {
 
     const onSubmitHandler = (evt:SyntheticEvent) => {
         evt.preventDefault();
-        registration({name: nameValue, password: passwordValue, email: emailValue})
+        // @ts-ignore
+        dispatch(registration({name: nameValue, password: passwordValue, email: emailValue}))
+
     }
     const onNameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNameValue(event.target.value);
@@ -32,9 +36,9 @@ const RegistrationForm = () => {
         setPasswordValue(event.target.value);
     }
     return (
-        <div style={{display:"flex", flexDirection:"column", gap:"24px", margin:"auto", marginTop:"120px"}}>
-            <form style={{display:"flex", flexDirection:"column", gap:"24px"}} onSubmit={onSubmitHandler}>
-                <div className={"text text_type_main-default"} style={{textAlign:"center"}}>Регистрация</div>
+        <div className={styles.wrapper}>
+            <form onSubmit={onSubmitHandler} className={styles.form}>
+                <div className={`text text_type_main-default ${styles.form_title}`} >Регистрация</div>
                 <Input
                     placeholder={"Имя"}
                     type={'text'}
@@ -78,7 +82,7 @@ const RegistrationForm = () => {
                 </Button>
             </form>
             <div>
-                <div className={"text text_type_main-small"} style={{textAlign:"center"}}>Уже зарегистрированы? Войти</div>
+                <div className={`text text_type_main-small ${styles.underform_text}`}>Уже зарегистрированы? Войти</div>
             </div>
         </div>
     );

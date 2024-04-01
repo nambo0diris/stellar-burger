@@ -96,8 +96,12 @@ export const checkUserAuth = () => {
 
 export const updateUser = (userData) => {
     return function (dispatch) {
+        dispatch({type: USER_UPDATE_REQUEST})
         updateUserRequest(userData).then(res => {
-            dispatch()
+            dispatch({type: USER_UPDATE_SUCCESS, user: res.user})
+        }).catch(error=>{
+            console.log(error)
+            dispatch({type: USER_UPDATE_FAILED})
         })
     }
 }
