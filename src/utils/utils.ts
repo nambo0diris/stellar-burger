@@ -1,35 +1,52 @@
 import {Product, ProductWithUUID} from "../interfaces/interfaces";
 import {v4 as uuidv4} from "uuid";
 
-export const isBun = (product: Product):boolean => {
-    return product.type === "bun";
-}
-
-const accInitialValue: Product = {
-    calories: 0,
-    carbohydrates: 0,
-    fat: 0,
-    image: '',
-    image_large: '',
-    image_mobile: '',
-    name: '',
-    price: 0,
-    proteins: 0,
-    type: '',
-    __v:0,
-    _id: ''
-}
-export const getProductById = (ingredients: Product[], id: string): Product => {
-    return  ingredients.reduce((acc, currentValue) => {
-        if (currentValue._id === id) {
-            return currentValue;
-        }
-        return acc;
-    },accInitialValue)
-}
 export const getProductWithUUID = (product: Product): ProductWithUUID => {
     return {
         ...product,
         uuid: uuidv4()
     }
+}
+
+// @ts-ignore
+export const setCookie = (name, value, props) => {
+    props = props || {};
+    let exp = props.expires;
+    if (typeof exp == 'number' && exp) {
+        const d = new Date();
+        d.setTime(d.getTime() + exp * 10000);
+        exp = props.expires = d;
+    }
+    if (exp && exp.toUTCString) {
+        props.expires = exp.toUTCString();
+    }
+    value = encodeURIComponent(value);
+    let updatedCookie = name + '=' + value;
+    for (const propName in props) {
+        updatedCookie += '; ' + propName;
+        const propValue = props[propName];
+        if (propValue !== true) {
+            updatedCookie += '=' + propValue;
+        }
+    }
+
+    document.cookie = updatedCookie;
+}
+export const getCookie = (name:string) => {
+    const matches = document.cookie.match(
+        new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
+    );
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+// @ts-ignore
+export const deleteCookie = (name) => {
+    setCookie(name, null, {expires: -1});
+}
+
+export const checkResponse = (res:any) => {
+    return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`)
+}
+export const checkSuccess = (res:any) => {
+    return res?.success ? res : Promise.reject(`Ответ не success: ${res}`);
 }

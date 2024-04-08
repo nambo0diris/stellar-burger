@@ -1,9 +1,9 @@
-import {GET_ORDER_FAILED, GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_RESET} from "../actions/order-action";
+import {MAKE_ORDER_FAILED, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_RESET} from "../actions/order-action";
 
 const initialState = {
-    getOrderRequest: false,
-    getOrderSuccess: false,
-    getOrderFailed: false,
+    makeOrderRequest: false,
+    makeOrderSuccess: false,
+    makeOrderFailed: false,
     name: null,
     success: null,
     order: {
@@ -12,27 +12,28 @@ const initialState = {
 }
 export const orderReducer = (state= initialState, action) => {
     switch (action.type) {
-        case GET_ORDER_REQUEST:
+        case MAKE_ORDER_REQUEST:
             return {
                 ...state,
-                getIngredientsRequest: true,
+                makeOrderRequest: true,
             }
-        case GET_ORDER_FAILED:
+        case MAKE_ORDER_FAILED:
             return {
                 ...state,
-                getIngredientsRequest: false,
-                getIngredientsFailed: true
+                makeOrderRequest: false,
+                makeOrderFailed: true
             }
-        case GET_ORDER_SUCCESS:
+        case MAKE_ORDER_SUCCESS:
             return {
                 ...state,
-                getIngredientsFailed: false,
-                getIngredientsRequest: false,
+                makeOrderSuccess: true,
+                makeOrderFailed: false,
+                makeOrderRequest: false,
                 name: action.name,
                 success: action.success,
                 order: action.order,
             }
-        case GET_ORDER_RESET:
+        case MAKE_ORDER_RESET:
             return {
                ...state,
                 name: null,

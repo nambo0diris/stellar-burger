@@ -1,0 +1,27 @@
+.active_link {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+.link {
+    color: #8585AD;
+    text-decoration: none;
+    cursor: pointer;
+}
+.nav_wrapper {
+    width: 320px;
+}
+.nav {
+    width: 320px;
+}
+.nav_list {
+    list-style-type: none;
+    padding:0;
+    margin:0
+}
+.nav_item {
+    height:64px;
+    display:flex;
+    align-items:center;
+}

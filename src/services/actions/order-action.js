@@ -1,33 +1,26 @@
-import {fetchData} from "../../utils/fetch-data";
-import {config} from "../../config";
+import {makeOrderRequest} from "../../utils/api";
 
-export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
-export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
-export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
-export const GET_ORDER_RESET = 'GET_ORDER_RESET';
+export const MAKE_ORDER_REQUEST = 'MAKE_ORDER_REQUEST';
+export const MAKE_ORDER_FAILED = 'MAKE_ORDER_FAILED';
+export const MAKE_ORDER_SUCCESS = 'MAKE_ORDER_SUCCESS';
+export const MAKE_ORDER_RESET = 'MAKE_ORDER_RESET';
 
 
-export function getOrder(ingredients){
+export function makeOrder(ingredients){
     return function (dispatch) {
-        dispatch({
-            type: GET_ORDER_REQUEST
-        })
-        fetchData(config.orderDetails, {ingredients}).then(res => {
-            console.log(res)
-            if (res && res.success) {
+        dispatch({type: MAKE_ORDER_REQUEST})
+        makeOrderRequest({ingredients})
+            .then(res => {
                 dispatch({
-                    type: GET_ORDER_SUCCESS,
+                    type: MAKE_ORDER_SUCCESS,
                     name: res.name,
                     success: res.success,
                     order: res.order,
                 })
-            } else {
-                dispatch({
-                    type: GET_ORDER_FAILED
-                })
-            }
-        }).catch(error => {
-            console.log(error)
-        })
+            })
+            .catch(error => {
+                console.log(error)
+                dispatch({type: MAKE_ORDER_FAILED})
+            })
     }
 }

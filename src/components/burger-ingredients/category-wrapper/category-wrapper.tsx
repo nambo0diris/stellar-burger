@@ -3,7 +3,6 @@ import {CategoryWrapperProps, Product} from "../../../interfaces/interfaces";
 import ProductCard from "../../product-card/product-card";
 import styles from "./category-wrapper.module.css"
 const CategoryWrapper: FC<CategoryWrapperProps> = ({innerRef, type, products}) => {
-    console.log(products)
     const dict = {
         bun: "Булка",
         main: "Начинка",

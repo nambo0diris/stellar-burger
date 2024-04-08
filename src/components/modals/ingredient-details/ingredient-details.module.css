@@ -1,4 +1,16 @@
-
+.ingredient_wrapper {
+    margin:auto
+}
+.ingredient_data_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+.ingredient_title {
+    text-align: center;
+}
 .ingredient_pic {
     width: 520px;
 }
