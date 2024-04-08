@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FormEvent, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./sign-in-form.module.css"
 import {NavLink} from "react-router-dom";
@@ -7,18 +7,18 @@ import {login} from "../../services/actions/user-action";
 const SignInForm = () => {
     const dispatch = useDispatch();
 
-    const [emailValue, setEmailValue] = useState('');
+    const [emailValue, setEmailValue] = useState<string>('');
     const emailInputRef = React.useRef<HTMLInputElement>(null);
-    const [passwordValue, setPasswordValue] = useState('');
+    const [passwordValue, setPasswordValue] = useState<string>('');
     const passwordInputRef = React.useRef<HTMLInputElement>(null);
 
-    const [isHiddenPassword, setHiddenPassword] = useState(true);
+    const [isHiddenPassword, setHiddenPassword] = useState<boolean>(true);
 
-    const onIconClick = () => {
+    const onIconClick: () => void = () => {
         setHiddenPassword(!isHiddenPassword);
     }
 
-    const onSubmitHandler = (e:any) => {
+    const onSubmitHandler: (e: FormEvent<HTMLFormElement>) => void = (e) => {
         e.preventDefault();
         // @ts-ignore
         dispatch(login({email:emailValue, password: passwordValue}))

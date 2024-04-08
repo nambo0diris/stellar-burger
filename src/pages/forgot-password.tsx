@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import ForgotPass from "../components/recovery-password/forgot-pass/forgot-pass";
 
-const ForgotPassword = () => {
+
+const ForgotPassword:FC = () => {
     return (
         <ForgotPass/>
     );

@@ -8,33 +8,31 @@ import {MAKE_ORDER_RESET, makeOrder} from "../../services/actions/order-action";
 import {useDrop} from "react-dnd";
 import {ADD_SELECTED_INGREDIENTS, REMOVE_SELECTED_INGREDIENTS} from "../../services/actions/constructor-action";
 import {getProductWithUUID} from "../../utils/utils";
-import {ProductWithUUID} from "../../interfaces/interfaces";
+import {Product, ProductWithUUID} from "../../interfaces/interfaces";
 import FillingElement from "./filling-element/filling-element";
 import BunElement from "./bun-element/bun-element";
 import {useLocation, useNavigate} from "react-router-dom";
 
 const BurgerConstructor = () => {
     const navigate = useNavigate();
-    const { state, pathname } = useLocation();
-    const url = window.location.href;
+    const { pathname } = useLocation();
+    const url:string = window.location.href;
     // @ts-ignore
-    const {user, isAuthChecked} = useSelector(state => state.userReducer)
+    const {user} = useSelector(state => state.userReducer);
     // @ts-ignore
     const {selectedIngredients} = useSelector(state => state.constructorReducer);
     // @ts-ignore
-    const {success, makeOrderRequest} = useSelector(state => state.orderReducer);
+    const {success} = useSelector(state => state.orderReducer);
     const [isOpen, setOpen] = useState<boolean>(false);
-    const [totalAmount, setTotalAmount] = useState(0);
+    const [totalAmount, setTotalAmount] = useState<number>(0);
     const dispatch = useDispatch();
     const [, dropTarget] = useDrop({
         accept: "ingredients",
-        drop(item) {
-            // @ts-ignore
+        drop(item: Product) {
             if (item.type === 'bun') {
-                // @ts-ignore
-                const top = getProductWithUUID(item)
-                // @ts-ignore
-                const bottom = getProductWithUUID(item)
+                const top:ProductWithUUID = getProductWithUUID(item)
+                const bottom:ProductWithUUID = getProductWithUUID(item)
+
                 dispatch({
                     type:ADD_SELECTED_INGREDIENTS,
                     selectedIngredients: {
@@ -42,8 +40,8 @@ const BurgerConstructor = () => {
                         bun: [top, bottom]}
                 });
             } else {
-                // @ts-ignore
-                const withUUID = getProductWithUUID(item)
+                const withUUID:ProductWithUUID = getProductWithUUID(item)
+
                 dispatch({
                     type:ADD_SELECTED_INGREDIENTS,
                     selectedIngredients: {
@@ -53,17 +51,17 @@ const BurgerConstructor = () => {
             }
         },
     });
-    const toCloseModal = () => {
+    const toCloseModal:() => void = () => {
         setOpen(false)
         dispatch({type: MAKE_ORDER_RESET})
     }
 
-    const makeOderHandler = async () => {
+    const makeOderHandler: () => void = () => {
         if (!user) {
             navigate('/login', { state: [{ path: pathname, url, title: 'Login' }], replace: false });
         } else {
             if (selectedIngredients.bun.length) {
-                const ingredients = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients => ingredients._id)
+                const ingredients: Product[] = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients => ingredients._id)
                 // @ts-ignore
                 dispatch(makeOrder(ingredients));
                 dispatch({type: REMOVE_SELECTED_INGREDIENTS})
@@ -75,7 +73,7 @@ const BurgerConstructor = () => {
 
     }
     useEffect(() => {
-        const ingredients = [...selectedIngredients.bun, ...selectedIngredients.ingredients]
+        const ingredients: Product[] = [...selectedIngredients.bun, ...selectedIngredients.ingredients]
         const amount = ingredients.reduce((acc, currentValue) => {
             return acc + currentValue.price;
         },0)

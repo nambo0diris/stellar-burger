@@ -7,18 +7,18 @@ interface ModalProps {
     title?: string
     toCloseModal: () => void
 }
-const Modal:FC<ModalProps> = (props) => {
-    const onESCCloseHandler = (event: KeyboardEvent) => {
+const Modal:FC<ModalProps> = ({children, title, toCloseModal}) => {
+    const onESCCloseHandler:(event: KeyboardEvent) => void = (event) => {
         if (event.key === "Escape") {
-            props.toCloseModal();
+            toCloseModal();
         }
     }
-    const onOverlayClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const onOverlayClick:(event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>void = (event) => {
         const targetElement = event.target as HTMLDivElement;
         const className = targetElement.className;
         if (typeof className !== "object"){
             if (className.includes('modal_overlay')){
-                props.toCloseModal();
+                toCloseModal();
             }
         }
     }
@@ -35,13 +35,13 @@ const Modal:FC<ModalProps> = (props) => {
         <ModalOverlay onOverlayClick={onOverlayClick}>
             <div className={`${styles.modal_wrapper} p-10`}>
                 <div className={`${styles.title_wrapper}`}>
-                    {props.title && <h1 className={`text text_type_main-large`}>{props.title}</h1>}
-                    <button className={`${styles.close_button}`} onClick={props.toCloseModal}>
+                    {title && <h1 className={`text text_type_main-large`}>{title}</h1>}
+                    <button className={`${styles.close_button}`} onClick={toCloseModal}>
                         <CloseIcon type="primary" />
                     </button>
                 </div>
                 <div className={styles.modal_content}>
-                    {props.children}
+                    {children}
                 </div>
             </div>
         </ModalOverlay>

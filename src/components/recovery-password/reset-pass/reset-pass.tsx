@@ -1,21 +1,22 @@
 import React, {SyntheticEvent, useEffect, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./reset-pass.module.css";
-import {NavLink, useLocation, useNavigate} from "react-router-dom";
+import {Location, NavigateFunction, NavLink, useLocation, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {savePassword} from "../../../services/actions/user-action";
+import {Dispatch} from "redux";
 
 const ResetPass = () => {
-    const dispatch = useDispatch();
-    const [passwordValue, setPasswordValue] = React.useState('')
-    const [isHiddenPassword, setHiddenPassword] = useState(true)
-    const [codeValue, setCodeValue] = React.useState('')
+    const dispatch: Dispatch = useDispatch();
+    const [passwordValue, setPasswordValue] = React.useState<string>('')
+    const [isHiddenPassword, setHiddenPassword] = useState<boolean>(true)
+    const [codeValue, setCodeValue] = React.useState<string>('')
     const passwordRef = React.useRef<HTMLInputElement>(null)
     const codedRef = React.useRef<HTMLInputElement>(null)
 
-    const location = useLocation();
-    const resetRequested = location.state?.resetRequested;
-    const navigate = useNavigate();
+    const location: Location = useLocation();
+    const resetRequested: true | undefined = location.state?.resetRequested;
+    const navigate:NavigateFunction = useNavigate();
 
     // @ts-ignore
     useEffect(()=>{
@@ -24,10 +25,10 @@ const ResetPass = () => {
         }
     },[])
 
-    const onIconClick = () => {
+    const onIconClick: () => void = () => {
         setHiddenPassword(!isHiddenPassword)
     }
-    const onSubmitHandler = (e:SyntheticEvent) => {
+    const onSubmitHandler: (e:SyntheticEvent) => void = (e) => {
         e.preventDefault()
         // @ts-ignore
         dispatch(savePassword({password:passwordValue, token:codeValue}))

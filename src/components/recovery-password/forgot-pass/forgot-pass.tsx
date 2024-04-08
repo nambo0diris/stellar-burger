@@ -1,17 +1,18 @@
 import React, {SyntheticEvent, useEffect, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./forgot-pass.module.css"
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavigateFunction, NavLink, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {forgotPassword} from "../../../services/actions/user-action";
+import {Dispatch} from "redux";
 const ForgotPass = () => {
     // @ts-ignore
     const {resetPasswordSuccess} = useSelector(state => state.userReducer)
-    const navigate = useNavigate();
-    const [emailValue, setEmailValue] = React.useState('')
+    const navigate: NavigateFunction = useNavigate();
+    const [emailValue, setEmailValue] = React.useState<string>('')
     const emailInputRef = React.useRef<HTMLInputElement>(null)
-    const dispatch = useDispatch();
-    const onSubmitHandler = (evt:SyntheticEvent) => {
+    const dispatch: Dispatch = useDispatch();
+    const onSubmitHandler:(evt:SyntheticEvent) => void = (evt) => {
         evt.preventDefault();
         // @ts-ignore
         dispatch(forgotPassword(emailValue));

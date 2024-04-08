@@ -47,7 +47,7 @@ const setUser = (user) => ({
 export const login = ({email, password}) => {
     return function (dispatch) {
         dispatch({type: LOGIN_REQUEST})
-        loginRequest(email, password)
+        loginRequest({email, password})
             .then(res => {
                 dispatch({type: LOGIN_SUCCESS})
                 const authToken = res.accessToken.split('Bearer ')[1];

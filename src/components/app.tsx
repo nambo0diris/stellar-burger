@@ -1,26 +1,28 @@
 import React, {useEffect} from 'react';
 
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {Location, NavigateFunction, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {Home, Profile, Login, Register, NotFound, Ingredient, ForgotPassword, ResetPassword} from "../pages/pages";
 import Layout from "./layout/layout";
 import Modal from "./modals/modal/modal";
 import {ForAuthUser, ForUnAuthUser} from "./protected-route/protected-route";
 import {useDispatch} from "react-redux";
 import {checkUserAuth} from "../services/actions/user-action";
+import {Dispatch} from "redux";
 
 
 function App() {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const location: Location = useLocation();
+  const navigate: NavigateFunction = useNavigate();
   const background = location.state?.background;
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
 
-  useEffect(() => {
+
+  useEffect((): void => {
       // @ts-ignore
       dispatch(checkUserAuth())
   },[])
 
-  const toCloseModal = () => {
+  const toCloseModal: () => void = () => {
       navigate(-1);
   }
   return (

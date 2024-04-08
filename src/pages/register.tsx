@@ -1,8 +1,7 @@
-import React from 'react';
-import Layout from "../components/layout/layout";
+import React, {FC} from 'react';
 import RegistrationForm from "../components/registration-form/registration-form";
 
-const Register = () => {
+const Register: FC = () => {
     return (
         <RegistrationForm/>
     );
