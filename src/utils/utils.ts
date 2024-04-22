@@ -44,9 +44,15 @@ export const deleteCookie = (name) => {
     setCookie(name, null, {expires: -1});
 }
 
-export const checkResponse = (res:any) => {
+
+export const checkResponse = <T>(res:Response):Promise<T> => {
     return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`)
 }
-export const checkSuccess = (res:any) => {
+
+export type TCheckSuccess<T> = {
+    success: boolean;
+} & T
+
+export const checkSuccess = <T>(res:any):TCheckSuccess<T> => {
     return res?.success ? res : Promise.reject(`Ответ не success: ${res}`);
 }

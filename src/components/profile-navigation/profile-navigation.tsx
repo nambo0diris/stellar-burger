@@ -3,9 +3,10 @@ import {useDispatch} from "react-redux";
 import {logout} from "../../services/actions/user-action";
 import {NavLink} from "react-router-dom";
 import styles from "./profile-navigation.module.css"
+import {Dispatch} from "redux";
 const ProfileNavigation = () => {
-    const dispatch = useDispatch();
-    const onLogoutHandler = () => {
+    const dispatch: Dispatch = useDispatch();
+    const onLogoutHandler:() => void = () => {
         // @ts-ignore
         dispatch(logout())
     }

@@ -7,7 +7,7 @@ interface BurgerLayerProps {
 const cx = classNames.bind(styles);
 
 const BurgerLayer: FC<BurgerLayerProps> = ({position}) => {
-    const className = cx("text text_type_main-small",{
+    const className: string = cx("text text_type_main-small", {
         burger_layer: true,
         top: position==="top",
         between: position==="between",

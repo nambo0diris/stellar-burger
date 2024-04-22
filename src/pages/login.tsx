@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {FC} from 'react';
 import SignInForm from "../components/sign-in-form/sign-in-form";
-import Layout from "../components/layout/layout";
 
-const Login = () => {
+const Login: FC = () => {
     return (
         <SignInForm />
     );

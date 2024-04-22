@@ -3,6 +3,7 @@ import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components"
 import {useDispatch, useSelector} from "react-redux";
 import styles from "./profile-data.module.css";
 import {updateUser} from "../../services/actions/user-action";
+import {Dispatch} from "redux";
 
 interface IUserData {
     name:string
@@ -10,39 +11,39 @@ interface IUserData {
     password?:string
 }
 const ProfileData = () => {
-    const dispatch = useDispatch()
+    const dispatch: Dispatch = useDispatch()
     // @ts-ignore
     const {user} = useSelector(state => state.userReducer)
 
-    const [nameValue, setNameValue] = React.useState('')
+    const [nameValue, setNameValue] = React.useState<string>('')
     const inputNameRef = React.useRef<HTMLInputElement>(null)
-    const [nameReadOnly, setNameReadOnly] = useState(true)
+    const [nameReadOnly, setNameReadOnly] = useState<boolean>(true)
 
-    const [passwordValue, setPasswordValue] = React.useState('')
+    const [passwordValue, setPasswordValue] = React.useState<string>('')
     const inputPasswordRef = React.useRef<HTMLInputElement>(null)
-    const [passwordReadOnly, setPasswordReadOnly] = useState(true)
-    const [isHiddenPassword, setHiddenPassword] = useState(true)
+    const [passwordReadOnly, setPasswordReadOnly] = useState<boolean>(true)
+    const [isHiddenPassword, setHiddenPassword] = useState<boolean>(true)
 
-    const [emailValue, setEmailValue] = React.useState('')
+    const [emailValue, setEmailValue] = React.useState<string>('')
     const inputEmailRef = React.useRef<HTMLInputElement>(null)
-    const [emailReadOnly, setEmailReadOnly] = useState(true)
+    const [emailReadOnly, setEmailReadOnly] = useState<boolean>(true)
 
 
-    const onInputNameIconClick = () => {
+    const onInputNameIconClick: () => void = () => {
         if (inputNameRef.current !== null){
             setNameReadOnly(!nameReadOnly)
             inputNameRef.current.focus()
         }
 
     };
-    const onInputEmailIconClick = () => {
+    const onInputEmailIconClick: () => void = () => {
         if (inputEmailRef.current !== null){
             setEmailReadOnly(!emailReadOnly)
             inputEmailRef.current.focus()
         }
 
     }
-    const onInputPasswordIconClick = () => {
+    const onInputPasswordIconClick: () => void = () => {
         if (inputPasswordRef.current !== null){
             inputPasswordRef.current.focus()
             setHiddenPassword(!isHiddenPassword)
@@ -50,9 +51,9 @@ const ProfileData = () => {
         }
     }
 
-    const onSaveHandler = (e:SyntheticEvent) => {
+    const onSaveHandler:(e:SyntheticEvent) => void = (e) => {
         e.preventDefault()
-        const userData:IUserData = {
+        const userData: IUserData = {
             name: nameValue ? nameValue : user.name,
             email: emailValue ? emailValue : user.email,
         }
@@ -63,7 +64,7 @@ const ProfileData = () => {
         dispatch(updateUser(userData))
     }
 
-    const onCanceledHandler = () => {
+    const onCanceledHandler:() => void = () => {
         setNameValue("")
         setEmailValue("")
         setPasswordValue("")

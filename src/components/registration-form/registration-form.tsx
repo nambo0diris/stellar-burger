@@ -1,38 +1,39 @@
-import React, {SyntheticEvent, useEffect, useRef, useState} from 'react';
+import React, {SyntheticEvent, useRef, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./registration-form.module.css";
 import {registration} from "../../services/actions/user-action";
 import {useDispatch} from "react-redux";
+import {Dispatch} from "redux";
 
 const RegistrationForm = () => {
-    const dispatch = useDispatch();
-    const [nameValue, setNameValue] = useState('');
+    const dispatch: Dispatch = useDispatch();
+    const [nameValue, setNameValue] = useState<string>('');
     const inputNameRef = useRef<HTMLInputElement>(null);
 
-    const [emailValue, setEmailValue] = useState('');
+    const [emailValue, setEmailValue] = useState<string>('');
     const inputEmailRef = useRef<HTMLInputElement>(null);
 
-    const [passwordValue, setPasswordValue] = useState('');
-    const [isHiddenPassword, setIsHiddenPassword] = useState(true);
+    const [passwordValue, setPasswordValue] = useState<string>('');
+    const [isHiddenPassword, setIsHiddenPassword] = useState<boolean>(true);
     const inputPasswordRef = useRef<HTMLInputElement>(null);
 
-    const onIconClick = () => {
+    const onIconClick: () => void = () => {
         setIsHiddenPassword(!isHiddenPassword);
     }
 
-    const onSubmitHandler = (evt:SyntheticEvent) => {
+    const onSubmitHandler: (evt:SyntheticEvent) => void = (evt) => {
         evt.preventDefault();
         // @ts-ignore
         dispatch(registration({name: nameValue, password: passwordValue, email: emailValue}))
 
     }
-    const onNameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onNameChangeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void = (event) => {
         setNameValue(event.target.value);
     }
-    const onEmailChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onEmailChangeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void = (event) => {
         setEmailValue(event.target.value);
     }
-    const onPassChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onPassChangeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void = (event) => {
         setPasswordValue(event.target.value);
     }
     return (

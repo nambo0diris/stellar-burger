@@ -1,16 +1,21 @@
 import {config} from "../config";
-import {checkResponse, checkSuccess, getCookie} from "./utils";
+import {checkResponse, checkSuccess, getCookie, TCheckSuccess} from "./utils";
 
 
 
-interface IRegRequest {
-    name: string,
-    email: string,
-    password: string
+export const request = <T>(endpoint:string, options:any): Promise<T> => {
+    return fetch(`${config.baseAPIUrl}${endpoint}`, options)
+        .then(res=> checkResponse<Promise<T>>(res))
+        .then(res => checkSuccess<TCheckSuccess<T>>(res))
 }
 
-export const registrationRequest = (form: IRegRequest): Promise<void | Response> => {
-    console.log(form)
+type TRegistrationForm = {
+    email: string,
+    password: string,
+    name: string,
+}
+
+export const registrationRequest = <T>(form:TRegistrationForm): Promise<T> => {
     const options = {
         headers: {
             'Content-Type': 'application/json',
@@ -21,7 +26,7 @@ export const registrationRequest = (form: IRegRequest): Promise<void | Response>
     return request(config.registerEndpoint, options)
 }
 
-export const getUserRequest = (): Promise<Response> => {
+export const getUserRequest = <T>(): Promise<T> => {
     const options = {
         method: 'GET',
         headers: {
@@ -33,12 +38,12 @@ export const getUserRequest = (): Promise<Response> => {
 }
 
 
-interface IPatchUser {
-    email?:string
-    name?:string
+type TUser = {
+    email?:string,
+    name?:string,
     password?:string
 }
-export const updateUserRequest = (user:IPatchUser) => {
+export const updateUserRequest = <T>(user:TUser): Promise<T> => {
     const options = {
         method: 'PATCH',
         headers: {
@@ -50,7 +55,12 @@ export const updateUserRequest = (user:IPatchUser) => {
     return request(config.getUserEndpoint, options)
 
 }
-export const loginRequest = (email:string, password:string) => {
+
+type TLogin = {
+    email:string,
+    password:string,
+}
+export const loginRequest = <T>({email, password}:TLogin): Promise<T> => {
     const options = {
         method: 'POST',
         headers: {
@@ -64,7 +74,7 @@ export const loginRequest = (email:string, password:string) => {
     }
     return request(config.loginEndpoint, options)
 }
-export const logoutRequest = () => {
+export const logoutRequest = <T>():Promise<T> => {
     const options = {
         method: 'POST',
         headers: {
@@ -74,13 +84,13 @@ export const logoutRequest = () => {
     }
     return request(config.logoutEndpoint, options)
 }
-export const refreshTokenRequest = () => {
+export const refreshTokenRequest = <T>():Promise<T> => {
     const options = {
         body: JSON.stringify({token: localStorage.getItem("refreshToken")})
     }
     return request(config.refreshTokenEndpoint, options)
 }
-export const forgotPasswordRequest = (email: string) => {
+export const forgotPasswordRequest = <T>(email: string): Promise<T> => {
     const options = {
         method:'POST',
         headers: {
@@ -92,11 +102,12 @@ export const forgotPasswordRequest = (email: string) => {
     return request(config.resetPasswordEndpoint, options)
 }
 
-interface ISavePasswordData {
+type TSavePasswordData = {
     email: string,
     code: string
 }
-export const savePasswordRequest = (data: ISavePasswordData) => {
+
+export const savePasswordRequest = <T>(data: TSavePasswordData):Promise<T> => {
     const options = {
         method: 'POST',
         body: JSON.stringify(data)
@@ -104,10 +115,11 @@ export const savePasswordRequest = (data: ISavePasswordData) => {
     return request(config.savePasswordEndpoint, options)
 }
 
-export const getIngredientsRequest = () => {
+export const getIngredientsRequest = <T>():Promise<T> => {
     return request(config.productsEndpoint, null)
 }
-export const makeOrderRequest = (ingredients:any) => {
+
+export const makeOrderRequest = <T>(ingredients: Array<string>):Promise<T> => {
     const options = {
         method:'POST',
         headers: {
@@ -117,11 +129,3 @@ export const makeOrderRequest = (ingredients:any) => {
     }
     return request(config.orderDetailsEndpoint, options)
 }
-
-export const request = (endpoint:string, options:any) => {
-    return fetch(`${config.baseAPIUrl}${endpoint}`, options)
-        .then(checkResponse)
-        .then(checkSuccess)
-}
-
-

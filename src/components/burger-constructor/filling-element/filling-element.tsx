@@ -2,22 +2,29 @@ import React, {FC, Key, useRef} from 'react';
 import styles from "../burger-constructor.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector} from "react-redux";
-import {useDrag, useDrop} from "react-dnd";
-import {ProductWithUUID} from "../../../interfaces/interfaces";
+import {useDrag, useDrop, XYCoord} from "react-dnd";
+import {Product, ProductWithUUID} from "../../../interfaces/interfaces";
 import {ADD_SELECTED_INGREDIENTS, INGREDIENT_MOVE} from "../../../services/actions/constructor-action";
+import {Dispatch} from "redux";
 
 interface FillingElementProps {
     ingredient: ProductWithUUID,
     index: number
 }
+
+interface DragItem {
+    id:string,
+    index:number
+}
 const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
-    const id = ingredient._id;
+    const id:string = ingredient._id;
+
     // @ts-ignore
     const {selectedIngredients} = useSelector(state => state.constructorReducer);
-    const dispatch = useDispatch();
-    const deleteItemHandler = (id:Key | null | undefined) => {
-        const updatedIngredients = selectedIngredients.ingredients.filter((ingredient: ProductWithUUID) => {
-            if(ingredient.uuid!==id){
+    const dispatch: Dispatch = useDispatch();
+    const deleteItemHandler:(id: (React.Key | null | undefined)) => void = (id) => {
+        const updatedIngredients: ProductWithUUID[] = selectedIngredients.ingredients.filter((ingredient: ProductWithUUID) => {
+            if (ingredient.uuid !== id) {
                 return ingredient
             }
         })
@@ -25,7 +32,7 @@ const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
     }
 
 
-    const ref = useRef(null)
+    const ref = useRef<HTMLDivElement>(null)
     const [{ handlerId }, drop] = useDrop({
         accept: "filling",
         collect(monitor) {
@@ -35,27 +42,29 @@ const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
         },
         hover(item, monitor) {
             if (!ref.current) {
-                return
+                return;
             }
             // @ts-ignore
             const dragIndex = item.index;
             const hoverIndex = index;
+
             if (dragIndex === hoverIndex) {
                 return;
             }
-            // @ts-ignore
-            const hoverBoundingRect = ref.current?.getBoundingClientRect();
-            const hoverMiddleY =
-                (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-            const clientOffset = monitor.getClientOffset()
-            // @ts-ignore
-            const hoverClientY = clientOffset.y - hoverBoundingRect.top
-            if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-                return;
-            }
 
-            if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-                return;
+            const hoverBoundingRect:DOMRect = ref.current?.getBoundingClientRect();
+            const hoverMiddleY:number = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
+            const clientOffset:XYCoord | null = monitor.getClientOffset()
+
+            if (clientOffset !== null) {
+                const hoverClientY: number = clientOffset.y - hoverBoundingRect.top
+                if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+                    return;
+                }
+                if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+                    return;
+                }
             }
 
             dispatch({type: INGREDIENT_MOVE, dragIndex, hoverIndex})
@@ -66,7 +75,7 @@ const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
 
     const [{ isDragging }, drag] = useDrag({
         type: "filling",
-        item: () => {
+        item: ():DragItem => {
             return { id, index }
         },
         collect: (monitor) => ({

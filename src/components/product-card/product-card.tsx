@@ -1,16 +1,17 @@
 import React, {FC, useEffect, useState} from 'react';
-import {ProductCardProps} from "../../interfaces/interfaces";
+import {Product, ProductCardProps} from "../../interfaces/interfaces";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./product-card.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {SET_CURRENT_INGREDIENT} from "../../services/actions/ingredient-details-action";
 import { useDrag } from "react-dnd";
-import {Link, useLocation} from "react-router-dom";
+import {Link, Location, useLocation} from "react-router-dom";
+import {Dispatch} from "redux";
 const ProductCard: FC<ProductCardProps> = ({product}) => {
-    const location = useLocation();
-    const ingredientId = product._id;
-    const [count, setCount] = useState(0)
-    const [{isDrag}, dragRef] = useDrag({
+    const location: Location = useLocation();
+    const ingredientId: string = product._id;
+    const [count, setCount] = useState<number>(0)
+    const [, dragRef] = useDrag({
         type: "ingredients",
         item: product,
         collect: (monitor: { isDragging: () => any; }) => ({
@@ -18,20 +19,20 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
         })
     });
 
-    const dispatch = useDispatch();
+    const dispatch: Dispatch = useDispatch();
 
     // @ts-ignore
     const {selectedIngredients} = useSelector(state => state.constructorReducer);
 
-    const toOpenModal = () => {
+    const toOpenModal:() => void = () => {
         dispatch({type: SET_CURRENT_INGREDIENT, currentIngredient: product})
     }
 
 
-    useEffect(()=> {
+    useEffect(() => {
         // @ts-ignore
-        const allIngredients = [...selectedIngredients.ingredients, ...selectedIngredients.bun];
-        const counter = allIngredients.reduce((acc, current) => {
+        const allIngredients:Product[] = [...selectedIngredients.ingredients, ...selectedIngredients.bun];
+        const counter: number = allIngredients.reduce((acc, current) => {
             return product._id === current._id ? acc + 1 : acc;
         },0)
         setCount(counter)

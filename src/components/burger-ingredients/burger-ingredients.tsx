@@ -6,8 +6,13 @@ import styles from "./burger-ingredients.module.css";
 import {useSelector} from "react-redux";
 import { useInView } from 'react-intersection-observer';
 
+enum Ingredients {
+    BUN = "bun",
+    SAUCE = "sauce",
+    MAIN = "main"
+}
 const BurgerIngredients = () => {
-    const [current, setCurrent] = useState('bun');
+    const [current, setCurrent] = useState<Ingredients>(Ingredients.BUN);
     // @ts-ignore
     const {ingredients} = useSelector(state => state.dataReducer)
     // @ts-ignore
@@ -18,9 +23,10 @@ const BurgerIngredients = () => {
         acc[product.type].push(product);
         return acc;
     }, {} as { [key: string]: Product[] });
-    const tabClickHandler = (tab:string) => {
+
+    const tabClickHandler:(tab:Ingredients) => void = (tab) => {
         setCurrent(tab);
-        const element = document.getElementById(tab);
+        const element:HTMLElement | null = document.getElementById(tab);
         if (element) element.scrollIntoView({ behavior: "smooth" });
     }
     const [bunsRef, bunsInView] = useInView({ threshold: 0 });
@@ -29,24 +35,24 @@ const BurgerIngredients = () => {
 
     useEffect(() => {
         if (bunsInView) {
-            setCurrent("bun");
+            setCurrent(Ingredients.BUN);
         } else if (saucesInView) {
-            setCurrent("sauce");
+            setCurrent(Ingredients.SAUCE);
         } else if (mainInView) {
-            setCurrent("main");
+            setCurrent(Ingredients.MAIN);
         }
     }, [bunsInView, saucesInView, mainInView]);
 
     return (
         <div>
             <div className={`${styles.tabs_wrapper }`}>
-                <Tab value="bun" active={current === 'bun'} onClick={()=>{tabClickHandler("bun")}}>
+                <Tab value={Ingredients.BUN} active={current === Ingredients.BUN} onClick={()=>{tabClickHandler(Ingredients.BUN)}}>
                     Булки
                 </Tab>
-                <Tab value="main" active={current === 'main'} onClick={()=>{tabClickHandler("main")}}>
+                <Tab value={Ingredients.SAUCE} active={current === Ingredients.SAUCE} onClick={()=>{tabClickHandler(Ingredients.SAUCE)}}>
                     Начинки
                 </Tab>
-                <Tab value="sauce" active={current === 'sauce'} onClick={()=>{tabClickHandler("sauce")}}>
+                <Tab value={Ingredients.MAIN} active={current === Ingredients.MAIN} onClick={()=>{tabClickHandler(Ingredients.MAIN)}}>
                     Соусы
                 </Tab>
             </div>
@@ -54,9 +60,9 @@ const BurgerIngredients = () => {
                 {
                     Object.entries(productList).length &&
                         <>
-                            <CategoryWrapper innerRef={bunsRef} type={"bun"} products={productList.bun}/>
-                            <CategoryWrapper innerRef={mainRef} type={"main"} products={productList.main}/>
-                            <CategoryWrapper innerRef={saucesRef} type={"sauce"} products={productList.sauce}/>
+                            <CategoryWrapper innerRef={bunsRef} type={Ingredients.BUN} products={productList.bun}/>
+                            <CategoryWrapper innerRef={mainRef} type={Ingredients.SAUCE} products={productList.main}/>
+                            <CategoryWrapper innerRef={saucesRef} type={Ingredients.MAIN} products={productList.sauce}/>
                         </>
                 }
             </div>

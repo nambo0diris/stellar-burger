@@ -1,6 +1,6 @@
-import React, {FC, ReactElement, useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {Navigate, useLocation} from "react-router-dom";
+import React, {FC, ReactElement} from 'react';
+import {useSelector} from "react-redux";
+import {Location, Navigate, useLocation} from "react-router-dom";
 
 interface ProtectedRouteProps {
     unAuth?: boolean,
@@ -11,7 +11,7 @@ interface ForUnAuthUserProps {
 }
 
 const ProtectedRoute:FC<ProtectedRouteProps> = ({unAuth= false, component}): any => {
-    const location = useLocation();
+    const location: Location = useLocation();
     // @ts-ignore
     const { user, isAuthChecked } = useSelector(state => state.userReducer);
 
@@ -33,7 +33,7 @@ const ProtectedRoute:FC<ProtectedRouteProps> = ({unAuth= false, component}): any
     return component;
 };
 
-export const ForAuthUser = ProtectedRoute;
+export const ForAuthUser: FC<ProtectedRouteProps> = ProtectedRoute;
 
 export const ForUnAuthUser: FC<ForUnAuthUserProps> = ({component}) => {
     return <ProtectedRoute unAuth={true} component={component}/>

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {FC} from 'react';
 import ResetPass from "../components/recovery-password/reset-pass/reset-pass";
 
-const ResetPassword = () => {
+const ResetPassword: FC = () => {
     return (
         <ResetPass/>
     );

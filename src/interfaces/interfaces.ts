@@ -26,7 +26,7 @@ export interface ProductCardProps {
     product: Product
 }
 export interface CategoryWrapperProps {
-    type: string,
+    type: "bun" | "sauce" | "main",
     products: Product[]
     innerRef: (node?: (Element | null | undefined)) => void
 }
