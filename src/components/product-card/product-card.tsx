@@ -3,10 +3,10 @@ import {Product, ProductCardProps} from "../../interfaces/interfaces";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./product-card.module.css"
 import {useDispatch, useSelector} from "react-redux";
-import {SET_CURRENT_INGREDIENT} from "../../services/actions/ingredient-details-action";
 import { useDrag } from "react-dnd";
 import {Link, Location, useLocation} from "react-router-dom";
 import {Dispatch} from "redux";
+import {setCurrentIngredientAction} from "../../services/actions/ingredient-details-action";
 const ProductCard: FC<ProductCardProps> = ({product}) => {
     const location: Location = useLocation();
     const ingredientId: string = product._id;
@@ -25,7 +25,7 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
     const {selectedIngredients} = useSelector(state => state.constructorReducer);
 
     const toOpenModal:() => void = () => {
-        dispatch({type: SET_CURRENT_INGREDIENT, currentIngredient: product})
+        dispatch(setCurrentIngredientAction(product))
     }
 
 

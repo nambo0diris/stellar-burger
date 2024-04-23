@@ -1,23 +1,33 @@
-import {getIngredientsRequest} from "../../utils/api";
+import { ingredientsRequest} from "../../utils/api";
+import {GET_INGREDIENTS_FAILED, GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS} from "../constants";
 
-export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
-export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
-export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
+
+
+export const getIngredientsSuccess = (data) => ({
+    type: GET_INGREDIENTS_SUCCESS,
+    ingredients: data
+});
+
+export const getIngredientsRequest = () => ({
+    type: GET_INGREDIENTS_REQUEST
+});
+
+export const getIngredientsFailed = () => ({
+    type: GET_INGREDIENTS_FAILED
+});
+
+
+
 
 export function getIngredients () {
     return function (dispatch) {
-        dispatch({
-            type: GET_INGREDIENTS_REQUEST
-        })
-        getIngredientsRequest()
+        dispatch(getIngredientsRequest())
+        ingredientsRequest()
             .then(res=> {
-                dispatch({
-                    type: GET_INGREDIENTS_SUCCESS,
-                    ingredients: res.data
-                })
+                dispatch(getIngredientsSuccess(res.data))
             })
             .catch(error => {
-                dispatch({type: GET_INGREDIENTS_FAILED})
+                dispatch(getIngredientsFailed())
                 console.log(error)
             })
     }

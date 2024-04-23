@@ -18,7 +18,7 @@ export interface ProductWithUUID extends Product {
     uuid: Key | null | undefined
 }
 
-export interface SelectedIngredients {
+export interface ISelectedIngredients {
     bun: ProductWithUUID [],
     ingredients: ProductWithUUID []
 }

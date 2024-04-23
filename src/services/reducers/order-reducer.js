@@ -1,4 +1,5 @@
-import {MAKE_ORDER_FAILED, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_RESET} from "../actions/order-action";
+import {MAKE_ORDER_FAILED, MAKE_ORDER_REQUEST, MAKE_ORDER_RESET, MAKE_ORDER_SUCCESS} from "../constants";
+
 
 const initialState = {
     makeOrderRequest: false,

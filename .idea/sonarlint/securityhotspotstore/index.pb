@@ -1,12 +1,6 @@
 
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-a
-1src/services/actions/ingredient-details-action.js,c\c\cc4f7480dbad06af59335f4b3a1cd1b759f192a8
-c
-3src/services/reducers/ingredient-details-reducer.js,9\b\9b3022ea1cec91e205d739c816ec11e0d8aa8802
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 A
 src/setupTests.ts,3\9\39129446b425a1d640160c068e4194e96639eedf
 o
@@ -15,20 +9,10 @@ c
 3src/components/product-card/product-card.module.css,9\5\9588f7402acf10b0effa9c31d90727d1ce014158
 A
 public/index.html,f\4\f43ecdf8d666ee908aacce037b4cd72159e4741b
-=
-src/index.tsx,5\a\5ab44fe33ca96299f51ad4778a73e425b92bf439
 Z
 *src/services/actions/constructor-action.js,5\1\514a5bb8d97a9510db712f0abf3c99962d97ccc8
-U
-%src/services/reducers/data-reducer.js,6\7\678cc9d384e35c9c05b1e91e44e8d9b3611e1e1c
 8
 src/.env,f\8\f8550963f8b93cc32435b4600b84f3d3def8daa7
-S
-#src/services/actions/data-action.js,2\a\2ad604134312f39b427c8648e693dd9eeef01369
-V
-&src/services/reducers/order-reducer.js,8\5\85d42994394e3a14e91fb9807a2f752e0435dbf5
-T
-$src/services/actions/order-action.js,d\b\dbef9c8a8f3dfdfc7d7299b62b8916729cb814b4
 e
 5src/components/modals/modal-overlay/modal-overlay.tsx,6\a\6a87319d323dc1c9c93de09317548061e74bb6e1
 l
@@ -49,5 +33,3 @@ c
 3src/components/sign-in-form/sign-in-form.module.css,4\6\465790f6d80506f71dd74db78cd1794fd6129869
 D
 src/hooks/useForm.js,6\3\632c5b9bf41d63688d891648cbb9cc131cd2cec9
-U
-%src/services/reducers/user-reducer.js,9\8\98af84c7de4fdc276558329a09bf016dd4fff504

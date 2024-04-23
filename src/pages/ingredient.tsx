@@ -3,8 +3,8 @@ import IngredientDetails from "../components/modals/ingredient-details/ingredien
 import {Location, Params, useLocation, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {Product} from "../interfaces/interfaces";
-import {SET_CURRENT_INGREDIENT} from "../services/actions/ingredient-details-action";
 import {Dispatch} from "redux";
+import {setCurrentIngredientAction} from "../services/actions/ingredient-details-action";
 
 const Ingredient = () => {
     // @ts-ignore
@@ -18,7 +18,7 @@ const Ingredient = () => {
     useEffect(() => {
         if (location && ingredients) {
             const currentIngredient = ingredients.find((ingredient:Product) => ingredient._id === id)
-            dispatch({type:SET_CURRENT_INGREDIENT, currentIngredient})
+            dispatch(setCurrentIngredientAction(currentIngredient))
         }
     },[location, ingredients])
 

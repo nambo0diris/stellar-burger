@@ -26,7 +26,7 @@ import {
     GET_USER_REQUEST,
     GET_USER_SUCCESS, GET_USER_FAILED,
 
-} from "../actions/user-action";
+} from "../constants/";
 
 const initialState = {
     isAuthChecked: false,

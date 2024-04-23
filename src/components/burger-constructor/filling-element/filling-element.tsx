@@ -4,8 +4,9 @@ import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger
 import {useDispatch, useSelector} from "react-redux";
 import {useDrag, useDrop, XYCoord} from "react-dnd";
 import {Product, ProductWithUUID} from "../../../interfaces/interfaces";
-import {ADD_SELECTED_INGREDIENTS, INGREDIENT_MOVE} from "../../../services/actions/constructor-action";
+import {ADD_SELECTED_INGREDIENTS, INGREDIENT_MOVE} from "../../../services/constants/index";
 import {Dispatch} from "redux";
+import {addSelectedIngredientsAction, moveIngredientsAction} from "../../../services/actions/constructor-action";
 
 interface FillingElementProps {
     ingredient: ProductWithUUID,
@@ -28,7 +29,8 @@ const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
                 return ingredient
             }
         })
-        dispatch({type:ADD_SELECTED_INGREDIENTS, selectedIngredients: {ingredients:[...updatedIngredients], bun: [...selectedIngredients.bun]}});
+        const finalIngredients = {ingredients:[...updatedIngredients], bun: [...selectedIngredients.bun]}
+        dispatch(addSelectedIngredientsAction(finalIngredients));
     }
 
 
@@ -67,7 +69,7 @@ const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
                 }
             }
 
-            dispatch({type: INGREDIENT_MOVE, dragIndex, hoverIndex})
+            dispatch(moveIngredientsAction(dragIndex, hoverIndex))
             // @ts-ignore
             item.index = hoverIndex;
         },

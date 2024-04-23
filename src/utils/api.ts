@@ -115,7 +115,7 @@ export const savePasswordRequest = <T>(data: TSavePasswordData):Promise<T> => {
     return request(config.savePasswordEndpoint, options)
 }
 
-export const getIngredientsRequest = <T>():Promise<T> => {
+export const ingredientsRequest = <T>():Promise<T> => {
     return request(config.productsEndpoint, null)
 }
 

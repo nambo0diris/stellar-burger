@@ -1,4 +1,4 @@
-import {REMOVE_CURRENT_INGREDIENT, SET_CURRENT_INGREDIENT} from "../actions/ingredient-details-action";
+import {REMOVE_CURRENT_INGREDIENT, SET_CURRENT_INGREDIENT} from "../constants";
 
 const initialState = {
     currentIngredient: null
