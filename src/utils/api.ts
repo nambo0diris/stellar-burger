@@ -9,7 +9,7 @@ export const request = <T>(endpoint:string, options:any): Promise<T> => {
         .then(res => checkSuccess<TCheckSuccess<T>>(res))
 }
 
-type TRegistrationForm = {
+export type TRegistrationForm = {
     email: string,
     password: string,
     name: string,
@@ -102,7 +102,7 @@ export const forgotPasswordRequest = <T>(email: string): Promise<T> => {
     return request(config.resetPasswordEndpoint, options)
 }
 
-type TSavePasswordData = {
+export type TSavePasswordData = {
     email: string,
     code: string
 }
@@ -125,7 +125,7 @@ export const makeOrderRequest = <T>(ingredients: Array<string>):Promise<T> => {
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify(ingredients)
+        body: JSON.stringify({ingredients})
     }
     return request(config.orderDetailsEndpoint, options)
 }

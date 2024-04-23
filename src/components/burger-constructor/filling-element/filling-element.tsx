@@ -3,7 +3,7 @@ import styles from "../burger-constructor.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrag, useDrop, XYCoord} from "react-dnd";
-import {Product, ProductWithUUID} from "../../../interfaces/interfaces";
+import {ISelectedIngredients, Product, ProductWithUUID} from "../../../interfaces/interfaces";
 import {ADD_SELECTED_INGREDIENTS, INGREDIENT_MOVE} from "../../../services/constants/index";
 import {Dispatch} from "redux";
 import {addSelectedIngredientsAction, moveIngredientsAction} from "../../../services/actions/constructor-action";
@@ -29,7 +29,7 @@ const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
                 return ingredient
             }
         })
-        const finalIngredients = {ingredients:[...updatedIngredients], bun: [...selectedIngredients.bun]}
+        const finalIngredients: ISelectedIngredients = {ingredients:[...updatedIngredients], bun: [...selectedIngredients.bun]}
         dispatch(addSelectedIngredientsAction(finalIngredients));
     }
 

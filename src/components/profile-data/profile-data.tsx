@@ -5,7 +5,7 @@ import styles from "./profile-data.module.css";
 import {updateUser} from "../../services/actions/user-action";
 import {Dispatch} from "redux";
 
-interface IUserData {
+export interface IUserData {
     name:string
     email:string
     password?:string

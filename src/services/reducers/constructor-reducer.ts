@@ -1,12 +1,20 @@
 import {ADD_SELECTED_INGREDIENTS, INGREDIENT_MOVE, REMOVE_SELECTED_INGREDIENTS} from "../constants";
+import {TConstructorActions} from "../actions/constructor-action";
+import {ISelectedIngredients} from "../../interfaces/interfaces";
 
-const initialState = {
+export type TConstructorState = {
+    dragIndex: number | null,
+    hoverIndex: number | null,
+    selectedIngredients: ISelectedIngredients,
+}
+
+const initialState:TConstructorState = {
     dragIndex: null,
     hoverIndex: null,
     selectedIngredients: {bun: [], ingredients:[]}
 }
 
-export const constructorReducer = (state= initialState, action) => {
+export const constructorReducer = (state= initialState, action: TConstructorActions) => {
     switch (action.type) {
         case ADD_SELECTED_INGREDIENTS:
             return {

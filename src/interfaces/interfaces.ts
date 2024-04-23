@@ -34,7 +34,13 @@ export interface ParsedDataProps {
     [key: string]: Product[]
 }
 
-
+export interface IMakeOrderData {
+    name: string,
+    success: boolean,
+    order: {
+        number: number
+    }
+}
 export interface ModalOverlayProps {
     children: ReactNode
     onOverlayClick:(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void

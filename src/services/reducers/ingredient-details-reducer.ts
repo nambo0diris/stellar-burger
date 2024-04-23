@@ -1,9 +1,15 @@
 import {REMOVE_CURRENT_INGREDIENT, SET_CURRENT_INGREDIENT} from "../constants";
+import {TIngredientsDetailsActions} from "../actions/ingredient-details-action";
+import {Product} from "../../interfaces/interfaces";
 
-const initialState = {
+
+export type TIngredientDetailsState = {
+    currentIngredient: Product | null
+}
+const initialState: TIngredientDetailsState = {
     currentIngredient: null
 }
-export const ingredientDetailsReducer = (state = initialState, action) => {
+export const ingredientDetailsReducer = (state = initialState, action: TIngredientsDetailsActions) => {
     switch (action.type) {
         case SET_CURRENT_INGREDIENT:
             return {

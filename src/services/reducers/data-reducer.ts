@@ -1,14 +1,23 @@
 import {GET_INGREDIENTS_FAILED, GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS} from "../constants";
+import {TDataActions} from "../actions/data-action";
+import {Product} from "../../interfaces/interfaces";
 
 
-const initialState = {
+export type TDataState = {
+    getIngredientsRequest: boolean,
+    getIngredientsSuccess: boolean,
+    getIngredientsFailed: boolean,
+    ingredients: Product[],
+}
+
+const initialState: TDataState = {
     getIngredientsRequest: false,
     getIngredientsSuccess: false,
     getIngredientsFailed: false,
     ingredients: [],
 
 }
-export const dataReducer = (state= initialState, action) => {
+export const dataReducer = (state= initialState, action: TDataActions) => {
     switch (action.type) {
         case GET_INGREDIENTS_REQUEST:
             return {

@@ -27,8 +27,51 @@ import {
     GET_USER_SUCCESS, GET_USER_FAILED,
 
 } from "../constants/";
+import {TUserActions} from "../actions/user-action";
+import {IUserData} from "../../components/profile-data/profile-data";
 
-const initialState = {
+
+export type TUserState = {
+    isAuthChecked: boolean,
+
+    user: null | IUserData,
+
+    accessToken: string,
+    refreshToken: string,
+
+    getRegistrationRequest: boolean,
+    getRegistrationSuccess: boolean,
+    getRegistrationFailed: boolean,
+
+    getUserRequest: boolean,
+    getUserSuccess: boolean,
+    getUserFailed: boolean,
+
+    userUpdateRequest: boolean,
+    userUpdateSuccess: boolean,
+    userUpdateFailed: boolean,
+
+    resetPasswordRequest: boolean,
+    resetPasswordSuccess: boolean,
+    resetPasswordFailed: boolean,
+
+    save_password_failed: boolean,
+    save_password_request: boolean,
+    save_password_success: boolean,
+
+    loginRequest: boolean,
+    loginSuccess: boolean,
+    loginFailed: boolean,
+
+    logoutRequest: boolean,
+    logoutSuccess: boolean,
+    logoutFailed: boolean,
+}
+
+
+
+
+const initialState: TUserState = {
     isAuthChecked: false,
 
     user: null,
@@ -64,7 +107,7 @@ const initialState = {
     logoutSuccess: false,
     logoutFailed: false,
 }
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action: TUserActions) => {
     switch (action.type) {
         case IS_AUTH_CHECKED:
             return {
@@ -92,7 +135,7 @@ export const userReducer = (state = initialState, action) => {
                     ...action.user
                 },
                 refreshToken: action.refreshToken,
-                accessToken: action.accessToken,
+                accessToken: action.authToken,
             };
         case GET_REGISTRATION_FAILED:
             return {

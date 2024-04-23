@@ -1,7 +1,19 @@
 import {MAKE_ORDER_FAILED, MAKE_ORDER_REQUEST, MAKE_ORDER_RESET, MAKE_ORDER_SUCCESS} from "../constants";
+import {TOrderActions} from "../actions/order-action";
 
 
-const initialState = {
+export type TOderState = {
+    makeOrderRequest: boolean,
+    makeOrderSuccess: boolean,
+    makeOrderFailed: boolean,
+    name: null | string,
+    success: null | string,
+    order: {
+        number:null|number
+    }
+}
+
+const initialState: TOderState = {
     makeOrderRequest: false,
     makeOrderSuccess: false,
     makeOrderFailed: false,
@@ -11,7 +23,7 @@ const initialState = {
         number:null
     }
 }
-export const orderReducer = (state= initialState, action) => {
+export const orderReducer = (state= initialState, action: TOrderActions) => {
     switch (action.type) {
         case MAKE_ORDER_REQUEST:
             return {
