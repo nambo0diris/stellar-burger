@@ -31,7 +31,6 @@ import {
     USER_UPDATE_SUCCESS
 } from "../constants";
 import {deleteCookie, getCookie, setCookie} from "../../utils/utils";
-import {UnknownAction} from "redux";
 import {IUserData} from "../../components/profile-data/profile-data";
 
 
@@ -143,70 +142,70 @@ export type TUserActions =
     ISavePasswordSuccessAction |
     ISavePasswordFailedAction
 
-export const loginRequestAction = (): ILoginRequestAction & UnknownAction => ({
+export const loginRequestAction = (): ILoginRequestAction => ({
     type: LOGIN_REQUEST
 })
 
-export const loginSuccessAction = (): ILoginSuccessAction & UnknownAction => ({
+export const loginSuccessAction = (): ILoginSuccessAction => ({
     type: LOGIN_SUCCESS
 })
 
-export const loginFailedAction = (): ILoginFailedAction & UnknownAction => ({
+export const loginFailedAction = (): ILoginFailedAction => ({
     type: LOGIN_FAILED
 })
 
 
-export const setUserAction = (user: IUserData | null): ISetUserAction & UnknownAction => ({
+export const setUserAction = (user: IUserData | null): ISetUserAction => ({
         type: SET_USER,
         user
 })
 
 
-export const getUserRequestAction = (): IGetUserRequestAction & UnknownAction => ({
+export const getUserRequestAction = (): IGetUserRequestAction => ({
     type: GET_USER_REQUEST,
 })
 
 
-export const getUserSuccessAction = (user: IUserData): IGetUserSuccessAction & UnknownAction => ({
+export const getUserSuccessAction = (user: IUserData): IGetUserSuccessAction => ({
     type: GET_USER_SUCCESS,
     user
 })
 
 
-export const getUserFailedAction = (): IGetUserFailedAction & UnknownAction => ({
+export const getUserFailedAction = (): IGetUserFailedAction => ({
     type: GET_USER_FAILED
 })
 
 
 
-export const authCheckedAction = (isAuthChecked: boolean): IAuthCheckedAction & UnknownAction => ({
+export const authCheckedAction = (isAuthChecked: boolean): IAuthCheckedAction => ({
     type: IS_AUTH_CHECKED,
     isAuthChecked
 })
 
 
-export const userUpdateRequestAction = (): IUserUpdateRequestAction & UnknownAction => ({
+export const userUpdateRequestAction = (): IUserUpdateRequestAction => ({
     type: USER_UPDATE_REQUEST
 })
 
 
 
-export const userUpdateSuccessAction = (user: IUserData): IUserUpdateSuccessAction & UnknownAction => ({
+export const userUpdateSuccessAction = (user: IUserData): IUserUpdateSuccessAction => ({
     type: USER_UPDATE_SUCCESS,
     user
 })
 
-export const userUpdateFailedAction = (): IUserUpdateFailedAction & UnknownAction => ({
+export const userUpdateFailedAction = (): IUserUpdateFailedAction => ({
     type: USER_UPDATE_FAILED
 })
 
 
 
-export const getRegistrationRequestAction = (): IGetRegistrationRequestAction & UnknownAction => ({
+export const getRegistrationRequestAction = (): IGetRegistrationRequestAction => ({
     type: GET_REGISTRATION_REQUEST
 })
 
-export const getRegistrationSuccessAction = (user:IUserData, refreshToken:string, authToken:string):IGetRegistrationSuccessAction & UnknownAction => ({
+export const getRegistrationSuccessAction = (user:IUserData, refreshToken:string, authToken:string):IGetRegistrationSuccessAction => ({
     type: GET_REGISTRATION_SUCCESS,
     user,
     refreshToken,
@@ -214,7 +213,7 @@ export const getRegistrationSuccessAction = (user:IUserData, refreshToken:string
 })
 
 
-export const getRegistrationFailedAction = (): IGetRegistrationFailedAction & UnknownAction => ({
+export const getRegistrationFailedAction = (): IGetRegistrationFailedAction => ({
     type: GET_REGISTRATION_FAILED
 })
 

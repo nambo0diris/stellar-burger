@@ -1,6 +1,5 @@
 import {ADD_SELECTED_INGREDIENTS, INGREDIENT_MOVE, REMOVE_SELECTED_INGREDIENTS} from "../constants";
 import {ISelectedIngredients} from "../../interfaces/interfaces";
-import {UnknownAction} from "redux";
 
 export interface IAddSelectedIngredientsAction {
     readonly type: typeof ADD_SELECTED_INGREDIENTS,
@@ -22,14 +21,14 @@ export type TConstructorActions =
     IRemoveSelectedIngredientsAction |
     IMoveIngredientsAction
 
-export const addSelectedIngredientsAction = (selectedIngredients: ISelectedIngredients): IAddSelectedIngredientsAction & UnknownAction => ({
+export const addSelectedIngredientsAction = (selectedIngredients: ISelectedIngredients): IAddSelectedIngredientsAction => ({
     type: ADD_SELECTED_INGREDIENTS,
     selectedIngredients
 })
-export const removeSelectedIngredientsAction = (): IRemoveSelectedIngredientsAction & UnknownAction => ({
+export const removeSelectedIngredientsAction = (): IRemoveSelectedIngredientsAction => ({
     type: REMOVE_SELECTED_INGREDIENTS,
 })
-export const moveIngredientsAction = (dragIndex: number, hoverIndex: number): IMoveIngredientsAction & UnknownAction => ({
+export const moveIngredientsAction = (dragIndex: number, hoverIndex: number): IMoveIngredientsAction => ({
     type: INGREDIENT_MOVE,
     dragIndex,
     hoverIndex

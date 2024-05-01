@@ -9,6 +9,7 @@ interface UrlConfig {
     logoutEndpoint: string,
     registerEndpoint: string,
     refreshTokenEndpoint: string,
+    getOrderInfoEndpoint:string
 
 }
 export const config: UrlConfig = {
@@ -22,4 +23,5 @@ export const config: UrlConfig = {
     logoutEndpoint: 'auth/logout',
     registerEndpoint: 'auth/register',
     refreshTokenEndpoint: 'auth/token',
+    getOrderInfoEndpoint: 'orders'
 }

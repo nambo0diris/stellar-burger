@@ -28,7 +28,6 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
         dispatch(setCurrentIngredientAction(product))
     }
 
-
     useEffect(() => {
         // @ts-ignore
         const allIngredients:Product[] = [...selectedIngredients.ingredients, ...selectedIngredients.bun];

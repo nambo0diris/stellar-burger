@@ -15,10 +15,10 @@ const ProfileNavigation = () => {
             <nav className={`mb-20 ${styles.nav}`} >
                 <ul className={styles.nav_list}>
                     <li className={`text text_type_main-medium ${styles.nav_item}`}>
-                        <NavLink className={({isActive}) => isActive ? styles.active_link : styles.link} to={"/profile"} >Профиль</NavLink>
+                        <NavLink className={({isActive}) => isActive ?  styles.link : styles.active_link} to={"/profile"} >Профиль</NavLink>
                     </li>
                     <li className={`text text_type_main-medium ${styles.nav_item}`}>
-                        <NavLink className={({isActive}) => isActive ? styles.active_link : styles.link} to={"/profile/orders/:number"} >История заказов</NavLink>
+                        <NavLink className={({isActive}) => isActive ? styles.link : styles.active_link} to={"/profile/orders/"} >История заказов</NavLink>
                     </li>
                     <li className={`text text_type_main-medium ${styles.nav_item}`} onClick={onLogoutHandler}>
                         Выход

@@ -14,7 +14,7 @@ const initialState:TConstructorState = {
     selectedIngredients: {bun: [], ingredients:[]}
 }
 
-export const constructorReducer = (state= initialState, action: TConstructorActions) => {
+export const constructorReducer = (state= initialState, action: TConstructorActions): TConstructorState => {
     switch (action.type) {
         case ADD_SELECTED_INGREDIENTS:
             return {

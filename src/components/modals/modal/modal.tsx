@@ -13,7 +13,7 @@ const Modal:FC<ModalProps> = ({children, title, toCloseModal}) => {
             toCloseModal();
         }
     }
-    const onOverlayClick:(event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>void = (event) => {
+    const onOverlayClick:(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void = (event) => {
         const targetElement = event.target as HTMLDivElement;
         const className = targetElement.className;
         if (typeof className !== "object"){

@@ -45,3 +45,15 @@ export interface ModalOverlayProps {
     children: ReactNode
     onOverlayClick:(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
+
+export interface IOrderTypes {
+    _id: string;
+    name: string;
+    ingredients: Array<string | null>;
+    number: number;
+    status: string;
+    visibleStatus?: boolean;
+    updatedAt: string;
+    createdAt: string;
+    page?: string;
+}

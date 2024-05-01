@@ -56,3 +56,16 @@ export type TCheckSuccess<T> = {
 export const checkSuccess = <T>(res:any):TCheckSuccess<T> => {
     return res?.success ? res : Promise.reject(`Ответ не success: ${res}`);
 }
+
+export const pastTime = (createdAt:string) => {
+    const currentDate = new Date();
+    const createdDate = new Date(createdAt);
+    const timeDifference = currentDate.getTime() - createdDate.getTime();
+    const diffDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const daysAgo = diffDays === 0 ? "Сегодня" : `${diffDays} дня назад`;
+    const time = `${createdDate.getHours().toString().length< 2 ? "0"+createdDate.getHours():createdDate.getHours()} : ${createdDate.getMinutes().toString().length< 2 ? "0"+createdDate.getMinutes():createdDate.getMinutes() }`
+    return {
+        daysAgo,
+        time
+    }
+}

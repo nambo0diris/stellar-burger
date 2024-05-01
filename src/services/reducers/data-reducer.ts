@@ -17,7 +17,7 @@ const initialState: TDataState = {
     ingredients: [],
 
 }
-export const dataReducer = (state= initialState, action: TDataActions) => {
+export const dataReducer = (state= initialState, action: TDataActions): TDataState => {
     switch (action.type) {
         case GET_INGREDIENTS_REQUEST:
             return {

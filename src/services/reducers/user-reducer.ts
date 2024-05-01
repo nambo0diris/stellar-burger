@@ -107,7 +107,7 @@ const initialState: TUserState = {
     logoutSuccess: false,
     logoutFailed: false,
 }
-export const userReducer = (state = initialState, action: TUserActions) => {
+export const userReducer = (state = initialState, action: TUserActions):TUserState => {
     switch (action.type) {
         case IS_AUTH_CHECKED:
             return {

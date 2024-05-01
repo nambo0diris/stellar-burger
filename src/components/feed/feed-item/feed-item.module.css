@@ -1,0 +1,99 @@
+
+.feedItemLink {
+    text-decoration: none;
+    color: unset;
+}
+.feedItem {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 40px;
+    background: #1C1C21;
+    cursor: pointer;
+}
+.feedItemTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.feedItemNumber {
+
+}
+.feedItemTime {
+    color: #8585AD;
+}
+.feedItemName {
+
+}
+.feedItemBottom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.feedItemIngredients {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    justify-content: flex-start;
+}
+
+.feedItemPicWrapper {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom left, #4C4CFF, #801AB2);
+
+}
+.feedItemPicWrapper:not(:last-of-type) {
+    margin-left: -20px;
+
+}
+.feedItemPicRemainsWrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+
+    z-index: 10;
+}
+.feedItemPicRemains {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    z-index: 20;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+}
+.feedItemPic {
+    background: #000;
+    position: absolute;
+    width: 62px;
+    height: 62px;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+.feedItemPic > img {
+    position: absolute;
+    width: 120px;
+    left: -28px;
+}
+.feedItemPriceWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+.feedItemPrice {
+
+}

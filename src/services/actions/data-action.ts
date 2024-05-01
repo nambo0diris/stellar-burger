@@ -5,7 +5,6 @@ import {
     GET_INGREDIENTS_SUCCESS,
 } from "../constants";
 import {Product} from "../../interfaces/interfaces";
-import {UnknownAction} from "redux";
 
 
 export interface IGetIngredientsSuccessAction {
@@ -28,16 +27,16 @@ export type TDataActions =
     IGetIngredientsFailedAction
 
 
-export const getIngredientsSuccessAction = (data: Product[]):IGetIngredientsSuccessAction & UnknownAction => ({
+export const getIngredientsSuccessAction = (data: Product[]):IGetIngredientsSuccessAction => ({
     type: GET_INGREDIENTS_SUCCESS,
     ingredients: data
 });
 
-export const getIngredientsRequestAction = (): IGetIngredientsRequestAction & UnknownAction => ({
+export const getIngredientsRequestAction = (): IGetIngredientsRequestAction => ({
     type: GET_INGREDIENTS_REQUEST
 });
 
-export const getIngredientsFailedAction = ():IGetIngredientsFailedAction & UnknownAction => ({
+export const getIngredientsFailedAction = ():IGetIngredientsFailedAction => ({
     type: GET_INGREDIENTS_FAILED
 });
 

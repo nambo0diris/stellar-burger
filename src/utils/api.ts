@@ -129,3 +129,15 @@ export const makeOrderRequest = <T>(ingredients: Array<string>):Promise<T> => {
     }
     return request(config.orderDetailsEndpoint, options)
 }
+
+export const getOrderRequest = (orderNumber:string) => {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+    }
+
+    return request(config.getOrderInfoEndpoint+ `/` + orderNumber, options)
+}
+

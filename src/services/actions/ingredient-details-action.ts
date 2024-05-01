@@ -1,6 +1,5 @@
 import {REMOVE_CURRENT_INGREDIENT, SET_CURRENT_INGREDIENT} from "../constants";
 import {Product} from "../../interfaces/interfaces";
-import {UnknownAction} from "redux";
 
 
 export interface ISetCurrentIngredientAction {
@@ -17,10 +16,10 @@ export type TIngredientsDetailsActions =
     IRemoveCurrentIngredientAction
 
 
-export const setCurrentIngredientAction = (currentIngredient: Product): ISetCurrentIngredientAction & UnknownAction => ({
+export const setCurrentIngredientAction = (currentIngredient: Product): ISetCurrentIngredientAction => ({
     type:SET_CURRENT_INGREDIENT,
     currentIngredient
 })
-export const removeCurrentIngredientAction = (): IRemoveCurrentIngredientAction & UnknownAction => ({
+export const removeCurrentIngredientAction = (): IRemoveCurrentIngredientAction => ({
     type:REMOVE_CURRENT_INGREDIENT,
 })

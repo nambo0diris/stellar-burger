@@ -1,0 +1,26 @@
+.ordersStatusWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+
+}
+.ordersStatus {
+    flex: 1;
+}
+.ordersStatusTitle {
+    margin-bottom: 24px;
+}
+.ordersList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    height: 540px;
+    flex-wrap: wrap;
+}
+.ordersStatus:first-of-type>.ordersList {
+    color: #00CCCC;
+}
+.orderItem {
+
+}
