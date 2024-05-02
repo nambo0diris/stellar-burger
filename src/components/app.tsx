@@ -5,23 +5,21 @@ import {Home, Profile, Login, Register, NotFound, Ingredient, ForgotPassword, Re
 import Layout from "./layout/layout";
 import Modal from "./modals/modal/modal";
 import {ForAuthUser, ForUnAuthUser} from "./protected-route/protected-route";
-import {useDispatch} from "react-redux";
 import {checkUserAuth} from "../services/actions/user-action";
-import {Dispatch} from "redux";
 import OrderHistory from "../pages/order-history";
 import OrderFeed from "../pages/order-feed";
 import OrderInfo from "./order-info/order-info";
+import {useDispatch} from "../services/types/store-and-thunk-types";
 
 
 function App() {
   const location: Location = useLocation();
   const navigate: NavigateFunction = useNavigate();
   const background = location.state?.background;
-  const dispatch: Dispatch = useDispatch();
+  const dispatch = useDispatch();
 
 
   useEffect((): void => {
-      // @ts-ignore
       dispatch(checkUserAuth())
   },[])
 

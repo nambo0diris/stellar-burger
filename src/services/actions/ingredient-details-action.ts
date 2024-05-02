@@ -4,7 +4,7 @@ import {Product} from "../../interfaces/interfaces";
 
 export interface ISetCurrentIngredientAction {
     readonly type: typeof SET_CURRENT_INGREDIENT,
-    readonly currentIngredient: Product
+    readonly currentIngredient: Product | null | undefined
 }
 export interface IRemoveCurrentIngredientAction {
     readonly type: typeof REMOVE_CURRENT_INGREDIENT,
@@ -16,7 +16,7 @@ export type TIngredientsDetailsActions =
     IRemoveCurrentIngredientAction
 
 
-export const setCurrentIngredientAction = (currentIngredient: Product): ISetCurrentIngredientAction => ({
+export const setCurrentIngredientAction = (currentIngredient: Product | null | undefined): ISetCurrentIngredientAction => ({
     type:SET_CURRENT_INGREDIENT,
     currentIngredient
 })

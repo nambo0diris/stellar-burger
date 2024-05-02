@@ -23,30 +23,20 @@ c
 3src/components/sign-in-form/sign-in-form.module.css,4\6\465790f6d80506f71dd74db78cd1794fd6129869
 s
 Csrc/components/recovery-password/forgot-pass/forgot-pass.module.css,7\e\7ec7d44c20ad64625af0d765545d8bc8b62ff201
-D
-src/hooks/useForm.js,6\3\632c5b9bf41d63688d891648cbb9cc131cd2cec9
 =
 tsconfig.json,6\1\61ebb9fd6e8cf9082658121d5d81e297791dacd0
 N
 src/services/constants/data.ts,4\9\492b2e62803102570718e3fb8d7c153894c5045f
 N
 src/services/constants/user.ts,6\f\6fe580024bd6549db95facf7767dbdd636b95aa5
-\
-,src/services/constants/ingredient-details.ts,d\d\dd3ca1f088699b72df42a1f0bdf3f591f0f153aa
 U
 %src/services/constants/constructor.ts,8\d\8d750342f0c01db8eb769785a9c490fca4d856de
-u
-Esrc/components/burger-constructor/filling-element/filling-element.tsx,0\e\0e67a3d0f0fc711a41f65db40b88301a137789c2
 f
 6src/components/registration-form/registration-form.tsx,c\3\c3f4b1c9d30b80c7c89677592757b674ff24d19a
-h
-8src/components/profile-navigation/profile-navigation.tsx,e\6\e6b657181e2384b82264bbac500bfcb549e07eda
 X
 (src/components/app-header/app-header.tsx,2\7\27af3c90695294e5776169887a33e0c4573240d0
 c
 3src/components/profile-data/profile-data.module.css,4\3\43f5b2fc9ede12769a0d79b1c8d310fe40201011
-o
-?src/components/modals/ingredient-details/ingredient-details.tsx,3\c\3cc2f5b50b01043f22a9adcc66fb0e0f7846a81b
 k
 ;src/components/orders-dashboard/orders-dashboard.module.css,2\9\29d80315598f29ccb7015bae4c82ce0506fdec61
 v
@@ -55,19 +45,9 @@ o
 ?src/components/orders-dashboard/orders-amount/orders-amount.tsx,b\e\bec3021529ea8576a90d6e809eaa271fc0d559d1
 M
 src/components/app.module.css,f\1\f1d0edccff0ec4a4017c9189869ec7fced188cfd
-P
- src/components/layout/layout.tsx,a\3\a3180a750a74911c24df137b0cd1b48ac05c41d4
 S
 #src/components/feed/feed.module.css,0\2\02c61c3ead9c01c1b627cdb3215a767acc67ed38
-\
-,src/components/profile-data/profile-data.tsx,1\1\117313fc8ea70d3fb436fab820ec68df78bfb771
-E
-src/pages/profile.tsx,1\7\177e3c3b29c02d77409e8f0af6382f065d82aa87
-j
-:src/components/recovery-password/reset-pass/reset-pass.tsx,2\8\28e8e62c65ba1c971981d87776ea239efcadc31f
 e
 5src/components/modals/modal-overlay/modal-overlay.tsx,6\a\6a87319d323dc1c9c93de09317548061e74bb6e1
 U
 %src/components/modals/modal/modal.tsx,9\2\92537afd10ac32b7fb5c5c1d9a640bcfd8605724
-h
-8src/components/burger-ingredients/burger-ingredients.tsx,d\8\d821413a560498f189c1686dec89f80dfe21509e

@@ -10,6 +10,7 @@ import {
 import {IMakeOrderData, IOrderTypes} from "../../interfaces/interfaces";
 import {REMOVE_CURRENT_ORDER, SET_CURRENT_ORDER} from "../constants/";
 import {Simulate} from "react-dom/test-utils";
+import {AppThunk} from "../types/store-and-thunk-types";
 
 
 export interface IMakeOrderRequestAction {
@@ -25,9 +26,7 @@ export interface IMakeOrderSuccessAction {
     readonly type: typeof MAKE_ORDER_SUCCESS,
     name: string,
     success: boolean,
-    order: {
-        number: number
-    }
+    order: IOrderTypes
 }
 export interface ISetCurrentOrderAction {
     readonly type: typeof SET_CURRENT_ORDER,
@@ -103,8 +102,8 @@ export const removeCurrentOrder = (): IRemoveCurrentOrderAction => ({
     type: REMOVE_CURRENT_ORDER,
 })
 
-export function getOrder(number:string) {
-    return function (dispatch: any) {
+export function getOrder(number:string): AppThunk {
+    return function (dispatch) {
         dispatch(getOrderRequestAction())
         getOrderRequest(number).then((res:any) => {
             dispatch(getOrderSuccessAction(res.orders[0]))
@@ -114,11 +113,12 @@ export function getOrder(number:string) {
         })
     }
 }
-export function makeOrder(ingredients: Array<string>) {
-    return function (dispatch: any) {
+export function makeOrder(ingredients: Array<string | undefined> ): AppThunk {
+    return function (dispatch) {
         dispatch(makeOrderRequestAction())
         makeOrderRequest(ingredients)
             .then((res: any) => {
+                console.log(res)
                 dispatch(makeOrderSuccessAction(res))
             })
             .catch(error => {

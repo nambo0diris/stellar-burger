@@ -8,8 +8,11 @@ export const getProductWithUUID = (product: Product): ProductWithUUID => {
     }
 }
 
-// @ts-ignore
-export const setCookie = (name, value, props) => {
+export const setCookie = (
+    name: string,
+    value: string | null,
+    props: { [key: string]: string | number | Date | boolean   } = {}
+) => {
     props = props || {};
     let exp = props.expires;
     if (typeof exp == 'number' && exp) {
@@ -17,10 +20,12 @@ export const setCookie = (name, value, props) => {
         d.setTime(d.getTime() + exp * 10000);
         exp = props.expires = d;
     }
-    if (exp && exp.toUTCString) {
+    if (exp && exp instanceof Date) {
         props.expires = exp.toUTCString();
     }
-    value = encodeURIComponent(value);
+    if (value){
+        value = encodeURIComponent(value);
+    }
     let updatedCookie = name + '=' + value;
     for (const propName in props) {
         updatedCookie += '; ' + propName;

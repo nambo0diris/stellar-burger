@@ -4,7 +4,7 @@ import {Product} from "../../interfaces/interfaces";
 
 
 export type TIngredientDetailsState = {
-    currentIngredient: Product | null
+    currentIngredient: Product | null | undefined
 }
 const initialState: TIngredientDetailsState = {
     currentIngredient: null

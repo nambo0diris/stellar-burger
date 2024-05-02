@@ -119,11 +119,12 @@ export const ingredientsRequest = <T>():Promise<T> => {
     return request(config.productsEndpoint, null)
 }
 
-export const makeOrderRequest = <T>(ingredients: Array<string>):Promise<T> => {
+export const makeOrderRequest = <T>(ingredients: Array<string | undefined>):Promise<T> => {
     const options = {
         method:'POST',
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: 'Bearer ' + getCookie('accessToken')
         },
         body: JSON.stringify({ingredients})
     }

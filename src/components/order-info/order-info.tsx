@@ -4,21 +4,22 @@ import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector} from "../../services/types/store-and-thunk-types";
 import {Product} from "../../interfaces/interfaces";
 import {pastTime} from "../../utils/utils";
-import {useLocation} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {getOrder} from "../../services/actions/order-action";
 
 
 const OrderInfo = () => {
-    const location = useLocation();
-
+    let { number } = useParams();
     const dispatch = useDispatch();
     const {ingredients} = useSelector(state => state.dataReducer)
     const {currentOrder} = useSelector((state) => state.orderReducer)
 
     useEffect(() => {
-        const orderNumber = location.pathname.split('/')[2];
-        dispatch(getOrder(orderNumber))
-    }, []);
+        if(number){
+            dispatch(getOrder(number))
+        }
+
+    }, [number]);
 
 
 

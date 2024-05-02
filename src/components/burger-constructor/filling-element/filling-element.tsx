@@ -1,11 +1,9 @@
 import React, {FC, Key, useRef} from 'react';
 import styles from "../burger-constructor.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../../services/types/store-and-thunk-types";
 import {useDrag, useDrop, XYCoord} from "react-dnd";
-import {ISelectedIngredients, Product, ProductWithUUID} from "../../../interfaces/interfaces";
-import {ADD_SELECTED_INGREDIENTS, INGREDIENT_MOVE} from "../../../services/constants/index";
-import {Dispatch} from "redux";
+import {ISelectedIngredients, ProductWithUUID} from "../../../interfaces/interfaces";
 import {addSelectedIngredientsAction, moveIngredientsAction} from "../../../services/actions/constructor-action";
 
 interface FillingElementProps {
@@ -14,15 +12,15 @@ interface FillingElementProps {
 }
 
 interface DragItem {
-    id:string,
-    index:number
+    id: string,
+    index: number
 }
 const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
-    const id:string = ingredient._id;
 
-    // @ts-ignore
+    const id: string = ingredient._id ? ingredient._id : "";
+
     const {selectedIngredients} = useSelector(state => state.constructorReducer);
-    const dispatch: Dispatch = useDispatch();
+    const dispatch = useDispatch();
     const deleteItemHandler:(id: (React.Key | null | undefined)) => void = (id) => {
         const updatedIngredients: ProductWithUUID[] = selectedIngredients.ingredients.filter((ingredient: ProductWithUUID) => {
             if (ingredient.uuid !== id) {

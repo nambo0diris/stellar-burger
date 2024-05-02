@@ -32,6 +32,7 @@ import {
 } from "../constants";
 import {deleteCookie, getCookie, setCookie} from "../../utils/utils";
 import {IUserData} from "../../components/profile-data/profile-data";
+import {AppThunk} from "../types/store-and-thunk-types";
 
 
 
@@ -269,8 +270,8 @@ export const getUser = () => {
     }
 }
 
-export const checkUserAuth = () => {
-    return function (dispatch:any) {
+export const checkUserAuth = ():AppThunk => {
+    return function (dispatch) {
         if (localStorage.getItem("refreshToken")) {
             dispatch(getUser())
                 .catch(() => {
@@ -286,8 +287,8 @@ export const checkUserAuth = () => {
     }
 }
 
-export const updateUser = (userData: IUserData) => {
-    return function (dispatch:any) {
+export const updateUser = (userData: IUserData):AppThunk => {
+    return function (dispatch) {
         dispatch(userUpdateRequestAction())
         updateUserRequest(userData).then((res:any) => {
             dispatch(userUpdateSuccessAction(res.user))
@@ -298,8 +299,8 @@ export const updateUser = (userData: IUserData) => {
     }
 }
 
-export const registration = (form: TRegistrationForm) => {
-    return function (dispatch: any) {
+export const registration = (form: TRegistrationForm): AppThunk => {
+    return function (dispatch) {
         registrationRequest(form)
             .then((res:any) => {
                 dispatch(getRegistrationRequestAction());

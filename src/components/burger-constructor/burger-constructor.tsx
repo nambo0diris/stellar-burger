@@ -3,10 +3,10 @@ import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-comp
 import styles from "./burger-constructor.module.css"
 import OrderDetails from "../modals/order-details/order-details";
 import BurgerLayer from "./burger-layer";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/types/store-and-thunk-types";
 import {makeOrder, makeOrderRequestAction} from "../../services/actions/order-action";
 import {useDrop} from "react-dnd";
-import {ADD_SELECTED_INGREDIENTS, MAKE_ORDER_RESET, REMOVE_SELECTED_INGREDIENTS} from "../../services/constants";
+import {ADD_SELECTED_INGREDIENTS} from "../../services/constants";
 import {getProductWithUUID} from "../../utils/utils";
 import {Product, ProductWithUUID} from "../../interfaces/interfaces";
 import FillingElement from "./filling-element/filling-element";
@@ -18,11 +18,8 @@ const BurgerConstructor = () => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
     const url:string = window.location.href;
-    // @ts-ignore
     const {user} = useSelector(state => state.userReducer);
-    // @ts-ignore
     const {selectedIngredients} = useSelector(state => state.constructorReducer);
-    // @ts-ignore
     const {success} = useSelector(state => state.orderReducer);
     const [isOpen, setOpen] = useState<boolean>(false);
     const [totalAmount, setTotalAmount] = useState<number>(0);
@@ -62,8 +59,9 @@ const BurgerConstructor = () => {
             navigate('/login', { state: [{ path: pathname, url, title: 'Login' }], replace: false });
         } else {
             if (selectedIngredients.bun.length) {
-                const ingredients: Product[] = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients => ingredients._id)
-                // @ts-ignore
+
+                const ingredients: (string| undefined)[]  = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients => ingredients._id)
+
                 dispatch(makeOrder(ingredients));
                 dispatch(removeSelectedIngredientsAction())
                 setOpen(true)
@@ -111,7 +109,7 @@ const BurgerConstructor = () => {
                 </Button>
             </div>
             {
-                success && isOpen &&
+                isOpen &&
                 <OrderDetails toCloseModal={toCloseModal}/>
             }
         </>

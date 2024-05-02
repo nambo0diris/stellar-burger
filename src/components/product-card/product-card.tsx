@@ -2,14 +2,14 @@ import React, {FC, useEffect, useState} from 'react';
 import {Product, ProductCardProps} from "../../interfaces/interfaces";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./product-card.module.css"
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/types/store-and-thunk-types";
 import { useDrag } from "react-dnd";
 import {Link, Location, useLocation} from "react-router-dom";
 import {Dispatch} from "redux";
 import {setCurrentIngredientAction} from "../../services/actions/ingredient-details-action";
 const ProductCard: FC<ProductCardProps> = ({product}) => {
     const location: Location = useLocation();
-    const ingredientId: string = product._id;
+    const ingredientId: string = product._id ? product._id : "";
     const [count, setCount] = useState<number>(0)
     const [, dragRef] = useDrag({
         type: "ingredients",
@@ -21,7 +21,6 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
 
     const dispatch: Dispatch = useDispatch();
 
-    // @ts-ignore
     const {selectedIngredients} = useSelector(state => state.constructorReducer);
 
     const toOpenModal:() => void = () => {
@@ -29,7 +28,6 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
     }
 
     useEffect(() => {
-        // @ts-ignore
         const allIngredients:Product[] = [...selectedIngredients.ingredients, ...selectedIngredients.bun];
         const counter: number = allIngredients.reduce((acc, current) => {
             return product._id === current._id ? acc + 1 : acc;

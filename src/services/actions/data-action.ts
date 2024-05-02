@@ -5,6 +5,7 @@ import {
     GET_INGREDIENTS_SUCCESS,
 } from "../constants";
 import {Product} from "../../interfaces/interfaces";
+import {AppThunk} from "../types/store-and-thunk-types";
 
 
 export interface IGetIngredientsSuccessAction {
@@ -43,8 +44,8 @@ export const getIngredientsFailedAction = ():IGetIngredientsFailedAction => ({
 
 
 
-export function getIngredients () {
-    return function (dispatch: any) {
+export function getIngredients (): AppThunk {
+    return function (dispatch) {
         dispatch(getIngredientsRequestAction())
         ingredientsRequest()
             .then((res:any)=> {

@@ -2,12 +2,11 @@ import React, {SyntheticEvent, useEffect, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./reset-pass.module.css";
 import {Location, NavigateFunction, NavLink, useLocation, useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
 import {savePassword} from "../../../services/actions/user-action";
-import {Dispatch} from "redux";
+import {useDispatch} from "../../../services/types/store-and-thunk-types";
 
 const ResetPass = () => {
-    const dispatch: Dispatch = useDispatch();
+    const dispatch = useDispatch();
     const [passwordValue, setPasswordValue] = React.useState<string>('')
     const [isHiddenPassword, setHiddenPassword] = useState<boolean>(true)
     const [codeValue, setCodeValue] = React.useState<string>('')
@@ -18,7 +17,6 @@ const ResetPass = () => {
     const resetRequested: true | undefined = location.state?.resetRequested;
     const navigate:NavigateFunction = useNavigate();
 
-    // @ts-ignore
     useEffect(()=>{
         if (!resetRequested) {
             navigate('/forgot-password');

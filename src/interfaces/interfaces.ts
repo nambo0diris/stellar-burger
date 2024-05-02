@@ -12,7 +12,8 @@ export interface Product {
     proteins: number
     type: string
     __v:number
-    _id: string
+    _id?: string,
+    id?:string
 }
 export interface ProductWithUUID extends Product {
     uuid: Key | null | undefined
@@ -37,9 +38,7 @@ export interface ParsedDataProps {
 export interface IMakeOrderData {
     name: string,
     success: boolean,
-    order: {
-        number: number
-    }
+    order: IOrderTypes
 }
 export interface ModalOverlayProps {
     children: ReactNode

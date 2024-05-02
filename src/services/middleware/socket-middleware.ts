@@ -13,7 +13,7 @@ interface IWSActions {
 }
 
 
-export const WSMiddleware = (WSActions: IWSActions): Middleware => {
+export const wsMiddleware = (WSActions: IWSActions): Middleware => {
     return (store: MiddlewareAPI<AppDispatch, RootState>) => {
         let socket: WebSocket | null = null;
         let wsUrl: string | null = null;

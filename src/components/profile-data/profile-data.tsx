@@ -1,9 +1,8 @@
-import React, {SyntheticEvent, useEffect, useState} from 'react';
+import React, {SyntheticEvent, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/types/store-and-thunk-types";
 import styles from "./profile-data.module.css";
 import {updateUser} from "../../services/actions/user-action";
-import {Dispatch} from "redux";
 
 export interface IUserData {
     name:string
@@ -11,7 +10,7 @@ export interface IUserData {
     password?:string
 }
 const ProfileData = () => {
-    const dispatch: Dispatch = useDispatch()
+    const dispatch = useDispatch()
     // @ts-ignore
     const {user} = useSelector(state => state.userReducer)
 
@@ -53,15 +52,17 @@ const ProfileData = () => {
 
     const onSaveHandler:(e:SyntheticEvent) => void = (e) => {
         e.preventDefault()
-        const userData: IUserData = {
-            name: nameValue ? nameValue : user.name,
-            email: emailValue ? emailValue : user.email,
+        if(user){
+            const userData: IUserData = {
+                name: nameValue ? nameValue : user.name,
+                email: emailValue ? emailValue : user.email,
+            }
+            if (passwordValue) {
+                userData.password = passwordValue
+            }
+            dispatch(updateUser(userData))
         }
-        if (passwordValue) {
-            userData.password = passwordValue
-        }
-        // @ts-ignore
-        dispatch(updateUser(userData))
+
     }
 
     const onCanceledHandler:() => void = () => {
@@ -80,7 +81,7 @@ const ProfileData = () => {
                 placeholder={'Имя'}
                 onChange={e => setNameValue(e.target.value)}
                 icon={'EditIcon'}
-                value={nameValue ? nameValue : user.name}
+                value={nameValue ? nameValue : user?.name ? user?.name : ''}
                 name={'name'}
                 error={false}
                 ref={inputNameRef}
@@ -95,7 +96,7 @@ const ProfileData = () => {
                 placeholder={'Логин'}
                 onChange={e => setEmailValue(e.target.value)}
                 icon={'EditIcon'}
-                value={emailValue ? emailValue :user.email}
+                value={emailValue ? emailValue :user?.email ? user?.email : ""}
                 name={'email'}
                 error={false}
                 ref={inputEmailRef}

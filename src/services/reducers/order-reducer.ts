@@ -25,9 +25,7 @@ export type TOderState = {
     name: null | string,
     success: null | boolean,
     currentOrder: IOrderTypes | null,
-    order: {
-        number: null|number
-    }
+    order: IOrderTypes | null
 }
 
 const initialState: TOderState = {
@@ -40,9 +38,7 @@ const initialState: TOderState = {
     name: null,
     success: null,
     currentOrder: null,
-    order: {
-        number: null
-    }
+    order: null
 }
 export const orderReducer = (state= initialState, action: TOrderActions):TOderState => {
     switch (action.type) {
@@ -50,6 +46,8 @@ export const orderReducer = (state= initialState, action: TOrderActions):TOderSt
             return {
                 ...state,
                 makeOrderRequest: true,
+                order: null,
+                name: null
             }
         case MAKE_ORDER_FAILED:
             return {
@@ -72,9 +70,7 @@ export const orderReducer = (state= initialState, action: TOrderActions):TOderSt
                ...state,
                 name: null,
                 success: null,
-                order: {
-                   number: null
-                }
+                order: null
             }
 
         case GET_ORDER_REQUEST:

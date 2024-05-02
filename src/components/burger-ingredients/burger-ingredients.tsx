@@ -3,8 +3,9 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {ParsedDataProps, Product} from "../../interfaces/interfaces";
 import CategoryWrapper from "./category-wrapper/category-wrapper";
 import styles from "./burger-ingredients.module.css";
-import {useSelector} from "react-redux";
+
 import { useInView } from 'react-intersection-observer';
+import {useSelector} from "../../services/types/store-and-thunk-types";
 
 enum Ingredients {
     BUN = "bun",
@@ -13,9 +14,9 @@ enum Ingredients {
 }
 const BurgerIngredients = () => {
     const [current, setCurrent] = useState<Ingredients>(Ingredients.BUN);
-    // @ts-ignore
+
     const {ingredients} = useSelector(state => state.dataReducer)
-    // @ts-ignore
+
     const productList: ParsedDataProps = ingredients.reduce((acc, product) => {
         if (!acc[product.type]){
             acc[product.type] = [];
