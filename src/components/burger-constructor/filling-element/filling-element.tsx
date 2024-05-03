@@ -2,7 +2,7 @@ import React, {FC, Key, useRef} from 'react';
 import styles from "../burger-constructor.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector} from "../../../services/types/store-and-thunk-types";
-import {useDrag, useDrop, XYCoord} from "react-dnd";
+import {DropTargetMonitor, useDrag, useDrop, XYCoord} from "react-dnd";
 import {ISelectedIngredients, ProductWithUUID} from "../../../interfaces/interfaces";
 import {addSelectedIngredientsAction, moveIngredientsAction} from "../../../services/actions/constructor-action";
 
@@ -15,6 +15,7 @@ interface DragItem {
     id: string,
     index: number
 }
+
 const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
 
     const id: string = ingredient._id ? ingredient._id : "";
@@ -35,16 +36,18 @@ const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
     const ref = useRef<HTMLDivElement>(null)
     const [{ handlerId }, drop] = useDrop({
         accept: "filling",
-        collect(monitor) {
+        collect(monitor:DropTargetMonitor<DragItem>) {
             return {
                 handlerId: monitor.getHandlerId(),
             }
         },
-        hover(item, monitor) {
+
+
+        hover(item: DragItem, monitor) {
             if (!ref.current) {
                 return;
             }
-            // @ts-ignore
+
             const dragIndex = item.index;
             const hoverIndex = index;
 
@@ -68,7 +71,6 @@ const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
             }
 
             dispatch(moveIngredientsAction(dragIndex, hoverIndex))
-            // @ts-ignore
             item.index = hoverIndex;
         },
     })

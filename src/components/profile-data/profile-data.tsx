@@ -11,7 +11,6 @@ export interface IUserData {
 }
 const ProfileData = () => {
     const dispatch = useDispatch()
-    // @ts-ignore
     const {user} = useSelector(state => state.userReducer)
 
     const [nameValue, setNameValue] = React.useState<string>('')

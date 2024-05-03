@@ -44,8 +44,8 @@ export const getCookie = (name:string) => {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-// @ts-ignore
-export const deleteCookie = (name) => {
+
+export const deleteCookie = (name:string) => {
     setCookie(name, null, {expires: -1});
 }
 

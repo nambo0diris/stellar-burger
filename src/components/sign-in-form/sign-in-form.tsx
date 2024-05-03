@@ -2,8 +2,8 @@ import React, {FormEvent, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./sign-in-form.module.css"
 import {NavLink} from "react-router-dom";
-import {useDispatch} from "react-redux";
 import {login} from "../../services/actions/user-action";
+import {useDispatch} from "../../services/types/store-and-thunk-types";
 const SignInForm = () => {
     const dispatch = useDispatch();
 
@@ -20,7 +20,6 @@ const SignInForm = () => {
 
     const onSubmitHandler: (e: FormEvent<HTMLFormElement>) => void = (e) => {
         e.preventDefault();
-        // @ts-ignore
         dispatch(login({email:emailValue, password: passwordValue}))
     }
 

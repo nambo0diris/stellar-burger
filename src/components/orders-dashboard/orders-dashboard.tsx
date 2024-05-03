@@ -5,7 +5,7 @@ import OrdersAmount from "./orders-amount/orders-amount";
 import {RootState, useSelector} from "../../services/types/store-and-thunk-types";
 
 const OrdersDashboard = () => {
-    const {orders,total, totalToday} = useSelector((state: RootState) => state.wsReducerGetAllOrders);
+    const {orders,total, totalToday} = useSelector((state) => state.wsReducerGetAllOrders);
     return (
         <div className={`${styles.ordersDashboard}`}>
             <OrdersStatus/>

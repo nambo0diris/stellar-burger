@@ -238,8 +238,8 @@ export const savePasswordFailedAction = (): ISavePasswordFailedAction => ({type:
 
 
 
-export const login = ({email, password}: ILoginData) => {
-    return function (dispatch:any) {
+export const login = ({email, password}: ILoginData): AppThunk => {
+    return function (dispatch) {
         dispatch(loginRequestAction())
         loginRequest({email, password})
             .then((res: any) => {
@@ -255,8 +255,8 @@ export const login = ({email, password}: ILoginData) => {
             })
     }
 }
-export const getUser = () => {
-    return async function (dispatch:any) {
+export const getUser = ():AppThunk => {
+    return async function (dispatch) {
         if (getCookie("accessToken")) {
             dispatch(getUserRequestAction());
             return await getUserRequest()
@@ -273,14 +273,14 @@ export const getUser = () => {
 export const checkUserAuth = ():AppThunk => {
     return function (dispatch) {
         if (localStorage.getItem("refreshToken")) {
-            dispatch(getUser())
-                .catch(() => {
-                    localStorage.removeItem("refreshToken")
-                    deleteCookie("accessToken")
-                    dispatch(setUserAction(null))
-                }).finally(() => {
-                    dispatch(authCheckedAction(true))
-                })
+            getUserRequest().catch(() => {
+                localStorage.removeItem("refreshToken")
+                deleteCookie("accessToken")
+                dispatch(setUserAction(null))
+            }).finally(() => {
+                dispatch(authCheckedAction(true))
+            })
+
         } else {
             dispatch(authCheckedAction(true))
         }
@@ -320,8 +320,8 @@ export const registration = (form: TRegistrationForm): AppThunk => {
     }
 }
 
-const refreshToken = () => {
-    return function (dispatch:any) {
+const refreshToken = ():AppThunk => {
+    return function (dispatch) {
         refreshTokenRequest()
             .then((res:any) => {
                 const {accessToken, refreshToken} = res;
@@ -331,8 +331,8 @@ const refreshToken = () => {
             })
     }
 }
-export const logout = () => {
-    return function (dispatch:any) {
+export const logout = ():AppThunk => {
+    return function (dispatch) {
         dispatch(logoutRequestAction())
         logoutRequest()
             .then(() => {
@@ -349,8 +349,8 @@ export const logout = () => {
 }
 
 
-export const forgotPassword = (email:string) => {
-    return function (dispatch:any) {
+export const forgotPassword = (email:string):AppThunk => {
+    return function (dispatch) {
         dispatch(resetPasswordRequestAction())
         forgotPasswordRequest(email)
             .then(() => {
@@ -365,8 +365,8 @@ export const forgotPassword = (email:string) => {
 
 
 
-export const savePassword = (data:TSavePasswordData) => {
-    return function (dispatch:any) {
+export const savePassword = (data:TSavePasswordData):AppThunk => {
+    return function (dispatch) {
         dispatch(savePasswordRequestAction())
         savePasswordRequest(data)
             .then(res => {

@@ -3,7 +3,7 @@ import styles from './orders-status.module.css';
 import {RootState, useSelector} from "../../../services/types/store-and-thunk-types";
 
 const OrdersStatus = () => {
-    const {orders} = useSelector((state: RootState) => state.wsReducerGetAllOrders);
+    const {orders} = useSelector((state) => state.wsReducerGetAllOrders);
 
     return (
         <div className={`${styles.ordersStatusWrapper}`}>

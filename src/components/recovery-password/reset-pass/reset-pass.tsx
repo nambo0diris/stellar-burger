@@ -28,7 +28,6 @@ const ResetPass = () => {
     }
     const onSubmitHandler: (e:SyntheticEvent) => void = (e) => {
         e.preventDefault()
-        // @ts-ignore
         dispatch(savePassword({password:passwordValue, code:codeValue}))
     }
     return (

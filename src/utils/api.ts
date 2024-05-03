@@ -3,7 +3,7 @@ import {checkResponse, checkSuccess, getCookie, TCheckSuccess} from "./utils";
 
 
 
-export const request = <T>(endpoint:string, options:any): Promise<T> => {
+export const request = async <T>(endpoint:string, options:any): Promise<T> => {
     return fetch(`${config.baseAPIUrl}${endpoint}`, options)
         .then(res=> checkResponse<Promise<T>>(res))
         .then(res => checkSuccess<TCheckSuccess<T>>(res))
@@ -103,7 +103,7 @@ export const forgotPasswordRequest = <T>(email: string): Promise<T> => {
 }
 
 export type TSavePasswordData = {
-    email: string,
+    password: string,
     code: string
 }
 
