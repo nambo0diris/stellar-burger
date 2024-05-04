@@ -19,7 +19,7 @@ const OrderHistory = () => {
             if (wsConnected) {
                 dispatch(closeUserOrders())
             }
-             }
+        }
     }, [])
 
     if (!user) {

@@ -11,7 +11,7 @@ const Profile: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getUser())
+        getUser()
     },[])
 
     if (!user) {

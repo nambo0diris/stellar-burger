@@ -15,8 +15,6 @@ const OrderFeed = () => {
            if (wsConnected) {
                dispatch(closeAllOrders())
            }
-
-
         }
     }, [])
     return (

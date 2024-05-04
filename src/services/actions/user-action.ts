@@ -32,7 +32,7 @@ import {
 } from "../constants";
 import {deleteCookie, getCookie, setCookie} from "../../utils/utils";
 import {IUserData} from "../../components/profile-data/profile-data";
-import {AppThunk} from "../types/store-and-thunk-types";
+import {AppDispatch, AppThunk} from "../types/store-and-thunk-types";
 
 
 
@@ -255,8 +255,8 @@ export const login = ({email, password}: ILoginData): AppThunk => {
             })
     }
 }
-export const getUser = ():AppThunk => {
-    return async function (dispatch) {
+export const getUser = ():(dispatch: AppDispatch) => Promise<void> => {
+    return async function (dispatch: AppDispatch) {
         if (getCookie("accessToken")) {
             dispatch(getUserRequestAction());
             return await getUserRequest()
@@ -273,14 +273,14 @@ export const getUser = ():AppThunk => {
 export const checkUserAuth = ():AppThunk => {
     return function (dispatch) {
         if (localStorage.getItem("refreshToken")) {
-            getUserRequest().catch(() => {
-                localStorage.removeItem("refreshToken")
-                deleteCookie("accessToken")
-                dispatch(setUserAction(null))
-            }).finally(() => {
-                dispatch(authCheckedAction(true))
-            })
-
+            dispatch(getUser())
+                .catch(() => {
+                    localStorage.removeItem("refreshToken")
+                    deleteCookie("accessToken")
+                    dispatch(setUserAction(null))
+                }).finally(() => {
+                    dispatch(authCheckedAction(true))
+                })
         } else {
             dispatch(authCheckedAction(true))
         }
