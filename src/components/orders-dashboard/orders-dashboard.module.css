@@ -1,0 +1,6 @@
+.ordersDashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 68px;
+    margin-left: 60px;
+}

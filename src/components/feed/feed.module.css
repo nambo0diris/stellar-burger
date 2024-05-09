@@ -1,0 +1,8 @@
+.feed {
+    display: flex;
+    overflow-y: scroll;
+    flex-direction: column;
+    gap: 16px;
+    height: 812px;
+    flex:1;
+}

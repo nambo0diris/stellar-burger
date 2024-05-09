@@ -11,7 +11,7 @@ const AppHeader = () => {
                     <BurgerIcon type="primary" />
                     <span className={"text text_type_main-small"}>Конструктор</span>
                 </NavLink>
-                <NavLink to={`/profile/orders`} className={`${styles.orders} pr-5 pl-5 pb-4 pt-4`}>
+                <NavLink to={`/feed/`} className={`${styles.orders} pr-5 pl-5 pb-4 pt-4`}>
                     <ListIcon type="primary" />
                     <span className={"text text_type_main-small"}>Лента заказов</span>
                 </NavLink>

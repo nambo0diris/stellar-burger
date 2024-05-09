@@ -2,11 +2,10 @@ import React, {SyntheticEvent, useRef, useState} from 'react';
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./registration-form.module.css";
 import {registration} from "../../services/actions/user-action";
-import {useDispatch} from "react-redux";
-import {Dispatch} from "redux";
+import {useDispatch} from "../../services/types/store-and-thunk-types";
 
 const RegistrationForm = () => {
-    const dispatch: Dispatch = useDispatch();
+    const dispatch = useDispatch();
     const [nameValue, setNameValue] = useState<string>('');
     const inputNameRef = useRef<HTMLInputElement>(null);
 
@@ -23,7 +22,6 @@ const RegistrationForm = () => {
 
     const onSubmitHandler: (evt:SyntheticEvent) => void = (evt) => {
         evt.preventDefault();
-        // @ts-ignore
         dispatch(registration({name: nameValue, password: passwordValue, email: emailValue}))
 
     }

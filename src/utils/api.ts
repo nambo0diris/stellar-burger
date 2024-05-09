@@ -3,13 +3,13 @@ import {checkResponse, checkSuccess, getCookie, TCheckSuccess} from "./utils";
 
 
 
-export const request = <T>(endpoint:string, options:any): Promise<T> => {
+export const request = async <T>(endpoint:string, options:any): Promise<T> => {
     return fetch(`${config.baseAPIUrl}${endpoint}`, options)
         .then(res=> checkResponse<Promise<T>>(res))
         .then(res => checkSuccess<TCheckSuccess<T>>(res))
 }
 
-type TRegistrationForm = {
+export type TRegistrationForm = {
     email: string,
     password: string,
     name: string,
@@ -102,8 +102,8 @@ export const forgotPasswordRequest = <T>(email: string): Promise<T> => {
     return request(config.resetPasswordEndpoint, options)
 }
 
-type TSavePasswordData = {
-    email: string,
+export type TSavePasswordData = {
+    password: string,
     code: string
 }
 
@@ -115,17 +115,30 @@ export const savePasswordRequest = <T>(data: TSavePasswordData):Promise<T> => {
     return request(config.savePasswordEndpoint, options)
 }
 
-export const getIngredientsRequest = <T>():Promise<T> => {
+export const ingredientsRequest = <T>():Promise<T> => {
     return request(config.productsEndpoint, null)
 }
 
-export const makeOrderRequest = <T>(ingredients: Array<string>):Promise<T> => {
+export const makeOrderRequest = <T>(ingredients: Array<string | undefined>):Promise<T> => {
     const options = {
         method:'POST',
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: 'Bearer ' + getCookie('accessToken')
         },
-        body: JSON.stringify(ingredients)
+        body: JSON.stringify({ingredients})
     }
     return request(config.orderDetailsEndpoint, options)
 }
+
+export const getOrderRequest = (orderNumber:string) => {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+    }
+
+    return request(config.getOrderInfoEndpoint+ `/` + orderNumber, options)
+}
+

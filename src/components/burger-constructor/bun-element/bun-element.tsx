@@ -2,12 +2,11 @@ import React, {FC} from 'react';
 import styles from "../burger-constructor.module.css";
 import {ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerLayer from "../burger-layer";
-import {useSelector} from "react-redux";
+import {useSelector} from "../../../services/types/store-and-thunk-types";
 export interface BunElementProps {
     type:"top" | "bottom"
 }
 const BunElement: FC<BunElementProps> = ({type}) => {
-    // @ts-ignore
     const {selectedIngredients} = useSelector(state => state.constructorReducer);
     return (
        <>

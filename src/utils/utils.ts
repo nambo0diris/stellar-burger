@@ -8,8 +8,11 @@ export const getProductWithUUID = (product: Product): ProductWithUUID => {
     }
 }
 
-// @ts-ignore
-export const setCookie = (name, value, props) => {
+export const setCookie = (
+    name: string,
+    value: string | null,
+    props: { [key: string]: string | number | Date | boolean   } = {}
+) => {
     props = props || {};
     let exp = props.expires;
     if (typeof exp == 'number' && exp) {
@@ -17,10 +20,12 @@ export const setCookie = (name, value, props) => {
         d.setTime(d.getTime() + exp * 10000);
         exp = props.expires = d;
     }
-    if (exp && exp.toUTCString) {
+    if (exp && exp instanceof Date) {
         props.expires = exp.toUTCString();
     }
-    value = encodeURIComponent(value);
+    if (value){
+        value = encodeURIComponent(value);
+    }
     let updatedCookie = name + '=' + value;
     for (const propName in props) {
         updatedCookie += '; ' + propName;
@@ -39,8 +44,8 @@ export const getCookie = (name:string) => {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-// @ts-ignore
-export const deleteCookie = (name) => {
+
+export const deleteCookie = (name:string) => {
     setCookie(name, null, {expires: -1});
 }
 
@@ -55,4 +60,17 @@ export type TCheckSuccess<T> = {
 
 export const checkSuccess = <T>(res:any):TCheckSuccess<T> => {
     return res?.success ? res : Promise.reject(`Ответ не success: ${res}`);
+}
+
+export const pastTime = (createdAt:string) => {
+    const currentDate = new Date();
+    const createdDate = new Date(createdAt);
+    const timeDifference = currentDate.getTime() - createdDate.getTime();
+    const diffDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const daysAgo = diffDays === 0 ? "Сегодня" : `${diffDays} дня назад`;
+    const time = `${createdDate.getHours().toString().length< 2 ? "0"+createdDate.getHours():createdDate.getHours()} : ${createdDate.getMinutes().toString().length< 2 ? "0"+createdDate.getMinutes():createdDate.getMinutes() }`
+    return {
+        daysAgo,
+        time
+    }
 }

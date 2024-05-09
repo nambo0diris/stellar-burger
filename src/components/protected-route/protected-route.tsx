@@ -1,6 +1,6 @@
 import React, {FC, ReactElement} from 'react';
-import {useSelector} from "react-redux";
 import {Location, Navigate, useLocation} from "react-router-dom";
+import {useSelector} from "../../services/types/store-and-thunk-types";
 
 interface ProtectedRouteProps {
     unAuth?: boolean,
@@ -12,7 +12,6 @@ interface ForUnAuthUserProps {
 
 const ProtectedRoute:FC<ProtectedRouteProps> = ({unAuth= false, component}): any => {
     const location: Location = useLocation();
-    // @ts-ignore
     const { user, isAuthChecked } = useSelector(state => state.userReducer);
 
 

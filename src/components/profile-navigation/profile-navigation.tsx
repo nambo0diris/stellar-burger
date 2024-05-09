@@ -1,13 +1,11 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
 import {logout} from "../../services/actions/user-action";
 import {NavLink} from "react-router-dom";
 import styles from "./profile-navigation.module.css"
-import {Dispatch} from "redux";
+import {useDispatch} from "../../services/types/store-and-thunk-types";
 const ProfileNavigation = () => {
-    const dispatch: Dispatch = useDispatch();
+    const dispatch = useDispatch();
     const onLogoutHandler:() => void = () => {
-        // @ts-ignore
         dispatch(logout())
     }
     return (
@@ -15,10 +13,10 @@ const ProfileNavigation = () => {
             <nav className={`mb-20 ${styles.nav}`} >
                 <ul className={styles.nav_list}>
                     <li className={`text text_type_main-medium ${styles.nav_item}`}>
-                        <NavLink className={({isActive}) => isActive ? styles.active_link : styles.link} to={"/profile"} >Профиль</NavLink>
+                        <NavLink className={({isActive}) => isActive ?  styles.link : styles.active_link} to={"/profile"} >Профиль</NavLink>
                     </li>
                     <li className={`text text_type_main-medium ${styles.nav_item}`}>
-                        <NavLink className={({isActive}) => isActive ? styles.active_link : styles.link} to={"/profile/orders/:number"} >История заказов</NavLink>
+                        <NavLink className={({isActive}) => isActive ? styles.link : styles.active_link} to={"/profile/orders/"} >История заказов</NavLink>
                     </li>
                     <li className={`text text_type_main-medium ${styles.nav_item}`} onClick={onLogoutHandler}>
                         Выход

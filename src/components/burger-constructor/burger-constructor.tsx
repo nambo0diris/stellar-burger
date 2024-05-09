@@ -3,25 +3,23 @@ import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-comp
 import styles from "./burger-constructor.module.css"
 import OrderDetails from "../modals/order-details/order-details";
 import BurgerLayer from "./burger-layer";
-import {useDispatch, useSelector} from "react-redux";
-import {MAKE_ORDER_RESET, makeOrder} from "../../services/actions/order-action";
+import {useDispatch, useSelector} from "../../services/types/store-and-thunk-types";
+import {makeOrder, makeOrderRequestAction} from "../../services/actions/order-action";
 import {useDrop} from "react-dnd";
-import {ADD_SELECTED_INGREDIENTS, REMOVE_SELECTED_INGREDIENTS} from "../../services/actions/constructor-action";
+import {ADD_SELECTED_INGREDIENTS} from "../../services/constants";
 import {getProductWithUUID} from "../../utils/utils";
 import {Product, ProductWithUUID} from "../../interfaces/interfaces";
 import FillingElement from "./filling-element/filling-element";
 import BunElement from "./bun-element/bun-element";
 import {useLocation, useNavigate} from "react-router-dom";
+import {removeSelectedIngredientsAction} from "../../services/actions/constructor-action";
 
 const BurgerConstructor = () => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
     const url:string = window.location.href;
-    // @ts-ignore
     const {user} = useSelector(state => state.userReducer);
-    // @ts-ignore
     const {selectedIngredients} = useSelector(state => state.constructorReducer);
-    // @ts-ignore
     const {success} = useSelector(state => state.orderReducer);
     const [isOpen, setOpen] = useState<boolean>(false);
     const [totalAmount, setTotalAmount] = useState<number>(0);
@@ -53,7 +51,7 @@ const BurgerConstructor = () => {
     });
     const toCloseModal:() => void = () => {
         setOpen(false)
-        dispatch({type: MAKE_ORDER_RESET})
+        dispatch(makeOrderRequestAction())
     }
 
     const makeOderHandler: () => void = () => {
@@ -61,10 +59,11 @@ const BurgerConstructor = () => {
             navigate('/login', { state: [{ path: pathname, url, title: 'Login' }], replace: false });
         } else {
             if (selectedIngredients.bun.length) {
-                const ingredients: Product[] = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients => ingredients._id)
-                // @ts-ignore
+
+                const ingredients: (string| undefined)[]  = [...selectedIngredients.bun, ...selectedIngredients.ingredients].map(ingredients => ingredients._id)
+
                 dispatch(makeOrder(ingredients));
-                dispatch({type: REMOVE_SELECTED_INGREDIENTS})
+                dispatch(removeSelectedIngredientsAction())
                 setOpen(true)
             }
         }
@@ -110,7 +109,7 @@ const BurgerConstructor = () => {
                 </Button>
             </div>
             {
-                success && isOpen &&
+                isOpen &&
                 <OrderDetails toCloseModal={toCloseModal}/>
             }
         </>

@@ -1,0 +1,52 @@
+.orderInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin: auto;
+    width: 640px;
+}
+.orderInfoNumber {
+    text-align: center;
+}
+.orderInfoTitleAndStatus {
+    margin-bottom: 20px;
+}
+.orderInfoTitle {}
+.orderInfoStatus {}
+.orderInfoIngredientsWrapper {}
+.orderInfoIngredientsTitle {}
+.orderInfoIngredients {
+    min-height: 64px;
+    max-height: 304px;
+    overflow-y: auto;
+    padding-right: 24px;
+}
+.orderInfoIngredient {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}
+.ingredientPic {}
+.ingredientName {}
+.ingredientAmountAndCost {
+    margin-left: auto;
+    white-space: nowrap;
+    align-items: center;
+    display: flex;
+    gap: 8px;
+}
+.orderInfoDateAndPrice {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.orderInfoDate {
+    color:#8585AD;
+}
+.orderInfoPrice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

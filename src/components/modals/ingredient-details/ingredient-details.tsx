@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from "./ingredient-details.module.css";
-import {useSelector} from "react-redux";
+import {useSelector} from "../../../services/types/store-and-thunk-types";
 const IngredientDetails = () => {
-    // @ts-ignore
     const {currentIngredient} = useSelector(state => state.ingredientDetailsReducer)
     return (
         <div className={styles.ingredient_wrapper}>

@@ -12,13 +12,14 @@ export interface Product {
     proteins: number
     type: string
     __v:number
-    _id: string
+    _id?: string,
+    id?:string
 }
 export interface ProductWithUUID extends Product {
     uuid: Key | null | undefined
 }
 
-export interface SelectedIngredients {
+export interface ISelectedIngredients {
     bun: ProductWithUUID [],
     ingredients: ProductWithUUID []
 }
@@ -34,8 +35,24 @@ export interface ParsedDataProps {
     [key: string]: Product[]
 }
 
-
+export interface IMakeOrderData {
+    name: string,
+    success: boolean,
+    order: IOrderTypes
+}
 export interface ModalOverlayProps {
     children: ReactNode
     onOverlayClick:(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+}
+
+export interface IOrderTypes {
+    _id: string;
+    name: string;
+    ingredients: Array<string | null>;
+    number: number;
+    status: string;
+    visibleStatus?: boolean;
+    updatedAt: string;
+    createdAt: string;
+    page?: string;
 }

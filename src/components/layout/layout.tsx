@@ -1,17 +1,15 @@
 import React, {FC, ReactNode, useEffect} from 'react';
 import styles from "../app.module.css";
 import AppHeader from "../app-header/app-header";
-import {useDispatch} from "react-redux";
 import {getIngredients} from "../../services/actions/data-action";
-import {Dispatch} from "redux";
+import {useDispatch} from "../../services/types/store-and-thunk-types";
 
 interface LayoutProps {
     children: ReactNode
 }
 const Layout: FC<LayoutProps> = ({children}) => {
-    const dispatch: Dispatch = useDispatch();
+    const dispatch = useDispatch();
     useEffect(() => {
-        // @ts-ignore
         dispatch(getIngredients())
     },[dispatch])
     return (
