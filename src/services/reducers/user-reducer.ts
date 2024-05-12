@@ -122,7 +122,7 @@ export const userReducer = (state = initialState, action: TUserActions):TUserSta
         case GET_REGISTRATION_REQUEST:
             return {
                 ...state,
-                getRegistrationSuccess: true
+                getRegistrationRequest: true
             };
         case GET_REGISTRATION_SUCCESS:
             return {
@@ -221,11 +221,22 @@ export const userReducer = (state = initialState, action: TUserActions):TUserSta
             };
 
         case LOGOUT_REQUEST:
-            return {...state, };
+            return {
+                ...state,
+                logoutRequest: true
+            };
         case LOGOUT_SUCCESS:
-            return {...state, };
+            return {
+                ...state,
+                logoutSuccess: true,
+                logoutRequest: false
+            };
         case LOGOUT_FAILED:
-            return {...state, };
+            return {
+                ...state,
+                logoutRequest: false,
+                logoutFailed: true
+            };
 
         default:
             return state;

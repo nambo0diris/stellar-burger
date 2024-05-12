@@ -77,6 +77,7 @@ const BurgerConstructor = () => {
             return acc + currentValue.price;
         },0)
         setTotalAmount(amount);
+        console.log(selectedIngredients)
     },[selectedIngredients]);
 
 

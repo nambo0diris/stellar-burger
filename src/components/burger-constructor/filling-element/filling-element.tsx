@@ -70,6 +70,7 @@ const FillingElement:FC<FillingElementProps> = ({ingredient, index}) => {
                 }
             }
 
+            console.log(dragIndex, hoverIndex)
             dispatch(moveIngredientsAction(dragIndex, hoverIndex))
             item.index = hoverIndex;
         },
