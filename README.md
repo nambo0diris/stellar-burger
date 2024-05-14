@@ -1,7 +1,7 @@
 ## Stellar burgers
 
 ### Ссылка на развернутый проект:
-[React-Stellar-Burger](https://stellar-burger.nomoredomainswork.ru/)
+[React-Stellar-Burger](https://nambo0diris.github.io/stellar-burger/index.html)
 
 ### Описание:
 
