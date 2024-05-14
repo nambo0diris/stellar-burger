@@ -67,8 +67,6 @@ b
 2src/components/feed/feed-item/feed-item.module.css,8\b\8bb17978cb34884bb4e545b82e85bfa241f2f7ce
 d
 4src/components/orders-dashboard/orders-dashboard.tsx,6\9\69bc3a30a534a50d6569f0b7e82499c83e17ff9a
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 a
 1src/services/actions/ws-get-user-orders-action.ts,4\f\4fed31afec9db3390742de747dfff3d6d92009e3
 L

@@ -79,8 +79,6 @@ L
 src/components/feed/feed.tsx,c\b\cb0308a186a84f7e3a892645e2b0621262436dd3
 [
 +src/components/feed/feed-item/feed-item.tsx,2\a\2aafb2dcf343cccca21d9f9dbb5332adba3ddf38
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 X
 (src/components/order-info/order-info.tsx,4\6\4697ed73b0a5d5a34d600143fc588bc2a0c9bea7
 a
