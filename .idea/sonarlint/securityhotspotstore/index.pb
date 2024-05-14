@@ -1,6 +1,4 @@
 
-9
-	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 A
 src/setupTests.ts,3\9\39129446b425a1d640160c068e4194e96639eedf
 o
@@ -115,8 +113,6 @@ e
 5src/components/modals/order-details/order-details.tsx,4\7\47664448a3a8f42ea9f38beac5dfb517fe26d3f8
 m
 =src/components/burger-constructor/bun-element/bun-element.tsx,5\0\5044c9d67fa79d36b50314a3278a7a05216320b3
-\
-,src/components/profile-data/profile-data.tsx,1\1\117313fc8ea70d3fb436fab820ec68df78bfb771
 b
 2src/components/protected-route/protected-route.tsx,9\d\9df375c9a0156940ef65495d4a4600d976011d7d
 j
