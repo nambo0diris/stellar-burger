@@ -6,7 +6,7 @@ import {Product} from "../../interfaces/interfaces";
 export type TIngredientDetailsState = {
     currentIngredient: Product | null | undefined
 }
-const initialState: TIngredientDetailsState = {
+export const initialState: TIngredientDetailsState = {
     currentIngredient: null
 }
 export const ingredientDetailsReducer = (state = initialState, action: TIngredientsDetailsActions):TIngredientDetailsState => {

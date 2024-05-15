@@ -1,51 +1,27 @@
-import {orderReducer} from './order-reducer';
+import {orderReducer, initialState} from './order-reducer';
 import * as types from '../constants/order';
 
 describe('OrderReducer', () => {
     it('should return the initial state', () => {
-        expect(orderReducer(undefined,{})).toEqual({
-            makeOrderRequest: false,
-            makeOrderSuccess: false,
-            makeOrderFailed: false,
-            getOrderRequest: false,
-            getOrderSuccess: false,
-            getOrderFailed: false,
-            name: null,
-            success: null,
-            currentOrder: null,
-            order: null
+        expect(orderReducer(initialState,{})).toEqual({
+            ...initialState
         })
     })
     it(`should have handle MAKE_ORDER_REQUEST`, () => {
-        expect(orderReducer(undefined, {
+        expect(orderReducer(initialState, {
             type: types.MAKE_ORDER_REQUEST
         })).toEqual({
+            ...initialState,
             makeOrderRequest: true,
-            makeOrderSuccess: false,
-            makeOrderFailed: false,
-            getOrderRequest: false,
-            getOrderSuccess: false,
-            getOrderFailed: false,
-            name: null,
-            success: null,
-            currentOrder: null,
-            order: null
         })
     })
     it(`should have handle MAKE_ORDER_FAILED`, () => {
-        expect(orderReducer(undefined, {
+        expect(orderReducer(initialState, {
             type: types.MAKE_ORDER_FAILED
         })).toEqual({
-            makeOrderRequest: false,
-            makeOrderSuccess: false,
+           ...initialState,
             makeOrderFailed: true,
-            getOrderRequest: false,
-            getOrderSuccess: false,
-            getOrderFailed: false,
-            name: null,
-            success: null,
-            currentOrder: null,
-            order: null
+
 
         })
     })
@@ -56,7 +32,7 @@ describe('OrderReducer', () => {
             success: true,
             order: {}
         }
-        expect(orderReducer(undefined, {
+        expect(orderReducer(initialState, {
             type: types.MAKE_ORDER_SUCCESS,
             ...action
         })).toEqual({
@@ -76,13 +52,7 @@ describe('OrderReducer', () => {
         expect(orderReducer(undefined, {
             type: types.MAKE_ORDER_RESET
         })).toEqual({
-            getOrderRequest: false,
-            getOrderSuccess: false,
-            getOrderFailed: false,
-            makeOrderSuccess: false,
-            makeOrderFailed: false,
-            makeOrderRequest: false,
-            currentOrder: null,
+           ...initialState,
             name: null,
             success: null,
             order: null
@@ -92,84 +62,45 @@ describe('OrderReducer', () => {
         expect(orderReducer(undefined, {
             type: types.GET_ORDER_REQUEST
         })).toEqual({
+            ...initialState,
             getOrderRequest: true,
-            getOrderSuccess: false,
-            getOrderFailed: false,
-            makeOrderSuccess: false,
-            makeOrderFailed: false,
-            makeOrderRequest: false,
-            currentOrder: null,
-            name: null,
-            success: null,
-            order: null
         })
     })
     it(`should have handle GET_ORDER_FAILED`, () => {
         expect(orderReducer(undefined, {
             type: types.GET_ORDER_FAILED,
         })).toEqual({
-            makeOrderRequest: false,
-            makeOrderSuccess: false,
-            makeOrderFailed: false,
-            getOrderRequest: false,
-            getOrderSuccess: false,
+            ...initialState,
             getOrderFailed: true,
-            name: null,
-            success: null,
-            currentOrder: null,
-            order: null
         })
     })
     it(`should have handle GET_ORDER_SUCCESS`, () => {
         const currentOrder = {}
-        expect(orderReducer(undefined, {
+        expect(orderReducer(initialState, {
             type: types.GET_ORDER_SUCCESS,
             currentOrder
         })).toEqual({
-            makeOrderRequest: false,
-            makeOrderSuccess: false,
-            makeOrderFailed: false,
-            getOrderRequest: false,
+            ...initialState,
             getOrderSuccess: true,
-            getOrderFailed: false,
-            name: null,
-            success: null,
-            currentOrder: {},
-            order: null
+            currentOrder
         })
     })
     it(`should have handle SET_CURRENT_ORDER`, () => {
         const currentOrder = {}
-        expect(orderReducer(undefined, {
+        expect(orderReducer(initialState, {
             type: types.SET_CURRENT_ORDER,
             currentOrder
         })).toEqual({
-            makeOrderRequest: false,
-            makeOrderSuccess: false,
-            makeOrderFailed: false,
-            getOrderRequest: false,
-            getOrderSuccess: false,
-            getOrderFailed: false,
-            name: null,
-            success: null,
-            currentOrder: {},
-            order: null
+            ...initialState,
+            currentOrder,
         })
     })
     it(`should have handle REMOVE_CURRENT_ORDER`, () => {
-        expect(orderReducer(undefined, {
+        expect(orderReducer(initialState, {
             type: types.REMOVE_CURRENT_ORDER
         })).toEqual({
-            makeOrderRequest: false,
-            makeOrderSuccess: false,
-            makeOrderFailed: false,
-            getOrderRequest: false,
-            getOrderSuccess: false,
-            getOrderFailed: false,
-            name: null,
-            success: null,
+            ...initialState,
             currentOrder: null,
-            order: null
         })
     })
 })

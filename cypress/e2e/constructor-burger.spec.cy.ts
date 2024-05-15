@@ -4,6 +4,7 @@ describe('burger constructor and checkout', () => {
     cy.visit('/');
     cy.setCookie('accessToken', 'test-access-token');
     window.localStorage.setItem('refreshToken', 'test-refresh-token');
+    cy.get('[class*="burger-constructor_constructor_wrapper"]').as('constructor');
   })
   afterEach(()=> {
     cy.clearLocalStorage();
@@ -14,7 +15,7 @@ describe('burger constructor and checkout', () => {
     cy.contains('Соберите бургер')
   })
   it('should drag and drop', () => {
-    cy.get('[class*="burger-constructor_constructor_wrapper"]').as('constructor');
+
     cy.get('a').contains('Флюоресцентная булка R2-D3').trigger('dragstart').trigger('dragleave');
     cy.get('@constructor').trigger('dragenter').trigger('dragover').trigger('drop').trigger('dragend');
     cy.get('a').contains('Филе Люминесцентного тетраодонтимформа').trigger('dragstart').trigger('dragleave');
@@ -25,7 +26,7 @@ describe('burger constructor and checkout', () => {
     cy.contains('Вход');
   })
   it('should login', () => {
-    cy.get('[class*="burger-constructor_constructor_wrapper"]').as('constructor');
+
     cy.get('a').contains('Флюоресцентная булка R2-D3').trigger('dragstart').trigger('dragleave');
     cy.get('@constructor').trigger('dragenter').trigger('dragover').trigger('drop').trigger('dragend');
     cy.get('a').contains('Филе Люминесцентного тетраодонтимформа').trigger('dragstart').trigger('dragleave');
@@ -40,11 +41,10 @@ describe('burger constructor and checkout', () => {
 
 
     })
-    cy.get('button').contains('Оформить заказ').click();
 
   })
   it('should make order', () => {
-    cy.get('[class*="burger-constructor_constructor_wrapper"]').as('constructor');
+
     cy.get('a').contains('Флюоресцентная булка R2-D3').trigger('dragstart').trigger('dragleave');
     cy.get('@constructor').trigger('dragenter').trigger('dragover').trigger('drop').trigger('dragend');
     cy.get('a').contains('Филе Люминесцентного тетраодонтимформа').trigger('dragstart').trigger('dragleave');

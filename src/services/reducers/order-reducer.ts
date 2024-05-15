@@ -28,7 +28,7 @@ export type TOderState = {
     order: IOrderTypes | null
 }
 
-const initialState: TOderState = {
+export const initialState: TOderState = {
     makeOrderRequest: false,
     makeOrderSuccess: false,
     makeOrderFailed: false,

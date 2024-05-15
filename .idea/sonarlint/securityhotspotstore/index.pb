@@ -24,8 +24,6 @@ c
 =
 tsconfig.json,6\1\61ebb9fd6e8cf9082658121d5d81e297791dacd0
 N
-src/services/constants/data.ts,4\9\492b2e62803102570718e3fb8d7c153894c5045f
-N
 src/services/constants/user.ts,6\f\6fe580024bd6549db95facf7767dbdd636b95aa5
 X
 (src/components/app-header/app-header.tsx,2\7\27af3c90695294e5776169887a33e0c4573240d0

@@ -1,68 +1,37 @@
 import * as types from '../constants'
-import {wsReducerGetAllOrders} from './get-all-orders'
+import {wsReducerGetAllOrders, initialState} from './get-all-orders'
 
 describe('get-all-orders-reducer', () => {
     it('should return the initial state', () => {
-        const initialState = {
-            wsConnected: false,
-            orders: null,
-            total: 0,
-            totalToday: 0,
-        }
         expect(wsReducerGetAllOrders(initialState, {})).toEqual({
-            wsConnected: false,
-            orders: null,
-            total: 0,
-            totalToday: 0,
+            ...initialState
         })
     })
     it('should have handle WS_CONNECTION__ALL_ORDERS_SUCCESS', () => {
-        const initialState = {
-            wsConnected: false,
-            orders: null,
-            total: 0,
-            totalToday: 0,
-        }
+
         expect(wsReducerGetAllOrders(initialState,{
             type: types.WS_CONNECTION__ALL_ORDERS_SUCCESS,
         })).toEqual({
+            ...initialState,
             wsConnected: true,
-            orders: null,
-            total: 0,
-            totalToday: 0,
         })
 
     })
     it('should have handle WS_CONNECTION__ALL_ORDERS_ERROR', () => {
-        const initialState = {
-            wsConnected: false,
-            orders: null,
-            total: 0,
-            totalToday: 0,
-        }
+
         expect(wsReducerGetAllOrders(initialState,{
             type: types.WS_CONNECTION__ALL_ORDERS_ERROR,
         })).toEqual({
+            ...initialState,
             wsConnected: false,
-            orders: null,
-            total: 0,
-            totalToday: 0,
+
         })
     })
     it('should have handle WS_CONNECTION__ALL_ORDERS_CLOSED', () => {
-        const initialState = {
-            wsConnected: false,
-            orders: null,
-            total: 0,
-            totalToday: 0,
-        }
         expect(wsReducerGetAllOrders(initialState,{
             type: types.WS_CONNECTION__ALL_ORDERS_CLOSED,
         })).toEqual({
-            wsConnected: false,
-            orders: null,
-            total: 0,
-            totalToday: 0,
+            ...initialState
         })
     })
     it('should have handle WS_GET_ALL_ORDERS', () => {
@@ -96,10 +65,11 @@ describe('get-all-orders-reducer', () => {
             total: 2,
             totalToday: 2,
         }
-        expect(wsReducerGetAllOrders(undefined,{
+        expect(wsReducerGetAllOrders(initialState,{
             type: types.WS_GET_ALL_ORDERS,
             payload
         })).toEqual({
+            ...initialState,
             wsConnected: false,
             orders: [
                 {

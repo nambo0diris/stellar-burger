@@ -10,7 +10,7 @@ export type TDataState = {
     ingredients: Product[],
 }
 
-const initialState: TDataState = {
+export const initialState: TDataState = {
     getIngredientsRequest: false,
     getIngredientsSuccess: false,
     getIngredientsFailed: false,
@@ -33,6 +33,7 @@ export const dataReducer = (state= initialState, action: TDataActions): TDataSta
         case GET_INGREDIENTS_SUCCESS:
             return {
                 ...state,
+                getIngredientsSuccess: true,
                 getIngredientsFailed: false,
                 getIngredientsRequest: false,
                 ingredients: action.ingredients
