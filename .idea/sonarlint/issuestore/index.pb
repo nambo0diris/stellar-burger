@@ -1,6 +1,4 @@
 
-9
-	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 A
 src/setupTests.ts,3\9\39129446b425a1d640160c068e4194e96639eedf
 o
@@ -26,11 +24,7 @@ Csrc/components/recovery-password/forgot-pass/forgot-pass.module.css,7\e\7ec7d4
 =
 tsconfig.json,6\1\61ebb9fd6e8cf9082658121d5d81e297791dacd0
 N
-src/services/constants/data.ts,4\9\492b2e62803102570718e3fb8d7c153894c5045f
-N
 src/services/constants/user.ts,6\f\6fe580024bd6549db95facf7767dbdd636b95aa5
-U
-%src/services/constants/constructor.ts,8\d\8d750342f0c01db8eb769785a9c490fca4d856de
 X
 (src/components/app-header/app-header.tsx,2\7\27af3c90695294e5776169887a33e0c4573240d0
 c
@@ -55,12 +49,8 @@ _
 src/index.tsx,5\a\5ab44fe33ca96299f51ad4778a73e425b92bf439
 B
 package(orig).json,7\6\76acdd7429862231301713460d02f1d482b6bbd1
-T
-$src/services/constants/ws-connect.ts,9\4\940d696d67e2f0ba5d44f5c1f3561a2f0c1e9adb
 P
  src/services/middleware/types.ts,b\0\b0e3527107b63cc9375cb7c177a9746c8243a7fd
-X
-(src/services/reducers/get-user-orders.ts,4\a\4a98458edf24ab926edcd4c7c9cdb9d864410532
 w
 Gsrc/components/burger-ingredients/category-wrapper/category-wrapper.tsx,3\d\3d3d33b0195cf9ab27d6b9530c35d5d79afd3f6d
 b
@@ -69,14 +59,10 @@ v
 Fsrc/components/orders-dashboard/orders-status/orders-status.module.css,f\c\fcbb53c4b6269ecc17166963bf84d2671f98933c
 B
 src/pages/home.tsx,2\0\20ae0fa9b29277fa6b24fefa1a0852a94d352469
-Z
-*src/services/actions/constructor-action.ts,0\a\0a4a6741660a0b21d7459d3344713ab8ba09fe95
 a
 1src/services/actions/ws-get-user-orders-action.ts,4\f\4fed31afec9db3390742de747dfff3d6d92009e3
 `
 0src/services/actions/ws-get-all-orders-action.ts,9\0\902a58a1e0fb032aba1346b8e5ecb9d7d5fa6446
-W
-'src/services/reducers/get-all-orders.ts,d\9\d97550bd095b3b9e28c6e09f3a890613a31562a3
 O
 src/services/constants/index.ts,6\2\62c3085f1e21b80d5eb0bf076404e2a6e1cb77c6
 d
@@ -89,20 +75,12 @@ L
 src/components/feed/feed.tsx,c\b\cb0308a186a84f7e3a892645e2b0621262436dd3
 [
 +src/components/feed/feed-item/feed-item.tsx,2\a\2aafb2dcf343cccca21d9f9dbb5332adba3ddf38
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 X
 (src/components/order-info/order-info.tsx,4\6\4697ed73b0a5d5a34d600143fc588bc2a0c9bea7
-U
-%src/services/reducers/data-reducer.ts,3\f\3fa3eca1d67107491637932935ad7c36f8cfec86
 a
 1src/services/actions/ingredient-details-action.ts,b\e\becab2e5dc68553d98474ed35d5e7162a3f772c8
-c
-3src/services/reducers/ingredient-details-reducer.ts,3\7\37370955b3d5f10a08376de47651dcfd07b9f1ee
 \
 ,src/services/constants/ingredient-details.ts,d\d\dd3ca1f088699b72df42a1f0bdf3f591f0f153aa
-\
-,src/services/reducers/constructor-reducer.ts,4\b\4bc3812af33e68cec06a808b9f4c55069104ff99
 o
 ?src/components/modals/ingredient-details/ingredient-details.tsx,3\c\3cc2f5b50b01043f22a9adcc66fb0e0f7846a81b
 \
@@ -123,14 +101,8 @@ E
 src/services/store.ts,a\a\aaa02d3a1a721a621d96c644adb62c5b6554ac03
 O
 src/services/constants/order.ts,5\f\5f788b2c1903e3820704b96e2f11aa24f0ccfef3
-U
-%src/services/reducers/user-reducer.ts,b\1\b1129dc44360467645ebf5cde24ab483dc96f2da
-N
-src/services/reducers/index.ts,d\9\d9fae1c5d74d2550add6585d5b55f69b7653b9fa
 T
 $src/services/actions/order-action.ts,f\d\fdc47b22fcb1554df5a093876092c03bc6f5d6c7
-V
-&src/services/reducers/order-reducer.ts,5\7\57c3e88c22733efbabdd45280a67470994674228
 m
 =src/components/burger-constructor/bun-element/bun-element.tsx,5\0\5044c9d67fa79d36b50314a3278a7a05216320b3
 j
@@ -143,12 +115,6 @@ l
 <src/components/recovery-password/forgot-pass/forgot-pass.tsx,3\f\3f88d9646c3f96c5f2ed4bd046e7c3566b102a4e
 e
 5src/components/modals/order-details/order-details.tsx,4\7\47664448a3a8f42ea9f38beac5dfb517fe26d3f8
-h
-8src/components/burger-constructor/burger-constructor.tsx,6\c\6c9c478c8f39cbcd768e29226801ed3fb04da370
-u
-Esrc/components/burger-constructor/filling-element/filling-element.tsx,0\e\0e67a3d0f0fc711a41f65db40b88301a137789c2
-\
-,src/components/profile-data/profile-data.tsx,1\1\117313fc8ea70d3fb436fab820ec68df78bfb771
 b
 2src/components/protected-route/protected-route.tsx,9\d\9df375c9a0156940ef65495d4a4600d976011d7d
 B

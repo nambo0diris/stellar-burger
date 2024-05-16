@@ -2,13 +2,14 @@ import {ADD_SELECTED_INGREDIENTS, INGREDIENT_MOVE, REMOVE_SELECTED_INGREDIENTS} 
 import {TConstructorActions} from "../actions/constructor-action";
 import {ISelectedIngredients} from "../../interfaces/interfaces";
 
+
 export type TConstructorState = {
     dragIndex: number | null,
     hoverIndex: number | null,
     selectedIngredients: ISelectedIngredients,
 }
 
-const initialState:TConstructorState = {
+export const initialState:TConstructorState = {
     dragIndex: null,
     hoverIndex: null,
     selectedIngredients: {bun: [], ingredients:[]}
